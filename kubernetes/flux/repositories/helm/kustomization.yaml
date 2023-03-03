@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./angelnu.yaml
   - ./bjw-s.yaml
+  - ./weave-gitops.yaml
