@@ -1,0 +1,30 @@
+# yamllint disable
+# https://github.com/k8s-at-home/template-cluster-k3s/issues/324
+apiVersion: v1
+kind: Secret
+metadata:
+    name: gitea-deploy-key
+    namespace: flux-system
+stringData:
+    identity: ENC[AES256_GCM,data:02NI5s3bUW7iaNfR9InTUrro5GcPfhNUlUzhlfD4lgLWhm0LQloX7Tp9uq5qvzEVou0gaEh0QsoMU6B7+AAMq1JbA5hDi7divoOOnyAFZJzfcGqUun75E9kBsmqB1bOeA3PMlAgGw9I5REZ/6fShfhJonpAL+fkQFGSiAQ9xuq9kbsAx74AGsxUwIqO0VxsdyUVcCkKecSBZJpsvaOWUyBwZC76KFLdK1HrhVAuKbeappMY+HztjbXNjVJcUEvBhRJEd/2bJV+hXeTI4Z5qZkMKwbdnPe7+wYJuXOBHd4ZTfGYp6CZ8nVtgHISB1W2Hln91RvnwRBkUT766Cm+0AvlfFnel48ySHv7JGUi+nM4sG9bsBSWeSumDIVDnomFYRy03ELH1QRQcLN+5gWIeIqbLOeXPkyREuMKMNKaSKtsEtNa68DsRioHmEG+2ohKvBnhMu/kIEZmDm2aioZirok3KmyhJ1TYbz9YtA5opn8SLT9CYiNKrdm9RG+lZliZVFUUneLKI8YGbogyq140d5euGzgSi1NUVt43urE1v5VNHeCXf+7QSDGSFsfaRm//VzXuszWyR6CzVIvJKF/k0blu5kVQCOlcs4TkP002t1aNDUGawJcyDazFcuOEf9xIVR/llykNeT4RKemnGLnZ074feAszQ9HzeUqpcqwpOZ1xmMxyNrN1g/D0T0N4PQ3vSd6TASNnoW5URlfNfDTy2bHIP57nkpEIXTnZqr6tOo4Tly4KH50pyTeBsIao0AXgrTLMbJIlfgYmErxnktk6dfgN19RYOHETJObnv5r5Q/Q3nunxqn2AgOQRJ5maQkN+rrY9OM9zF3o7eNjEK9tqAdhZSyRfOl8n1DEI0Dsonx7JtpXbPv6kdfVu3POB1+zhOR10C1n9ou+3NbpVdzkqKBKACcnXzsbi1E7IHa1lMRVfDHq6Z2cm5POeKwQkZvwSPOscGDtgpva7rtp1H7t/Qn,iv:Ubjqq2pVfL74ifqZ5xLuy3Vmbdq8zbLYkSlTFXCjCl4=,tag:9i0WLaxOvoRvqNxkYaTYKg==,type:str]
+    known_hosts: ENC[AES256_GCM,data:PIeGTf8oJgL0uCwYpcNBWnO9vEqYK6qoE9bKeMIGF2F3qjjIDi8LM5Y+jRr4hQvVDN2bANGnGzWpaPUTKduF9dZ1WVDnUDNrtIK1KT7JCkd7DMHEfYEJcXkQPEH50JmHgCa+Vb0zHmrCAu3ar2hBE7ZceuYsWIu7BHxUo9zzymjwM02+eIS50s0zkEgrbXDfTef2lcH+CDjN+x/nAc/kvhKg5hCEi894wNh3+swyVcd7zOUJO4zzwRLIy73c1OrAjf9aX8w=,iv:USl0N9YW4/7moiBz4WhmCuoTjA0vUSPwftTveHGTjQU=,tag:xXB4jeilXTHN+KKxGQPOyg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1zynf8jeml4f78k4xr7dg7cpgv0et0ctdwxxkn0878e5puvevyceqk3rvkw
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUcWZWYXNSV3ozZkVFU3Qr
+            MTBlekdlR3d5ZEMvSkFDMDhpY01wYklWTVg4CmRoYnBsak00RnBLSWREbWZ3Z1NL
+            Z25KdVNWdHBEWGNXeHA5aDhJdExFYzgKLS0tIGZQQ2h3UVRCQmVCVmRTakhxOXF3
+            VnkwcDBmbDJpZ0pUdXhTanJYa3JvWmcKF2B9JYp8V4x/5wN98vCcBmV1e8SbbmW7
+            aYXbEJr6hWa5NW3ylW1l+wZ2+nkrD+auoTK5Z6nFQkLMUVV0Ruxp/g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-03-03T07:24:32Z"
+    mac: ENC[AES256_GCM,data:2tbxCkaA+LQqM7knYN34HrvuYkWxLpqH+zAQymfA3AN3bWa3Ag8+e2lJOmi/bfxSx/lz3ycxpYv5bqObtxVRI+LYAdAA9B3pJerIqJ2KsOyjtlAAZVc2jf7ggH0gqyHlndg26daPDre/bQeixV60gp3EF7Dk8daZ000058vXIW4=,iv:roHU4Ojpr84gK7YjRIIKOVrXvdRTZcdZ3bORtLM8b9g=,tag:Yx5R3fjy4qGWJ/oXj2trtA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

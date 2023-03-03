@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "*.json5": "jsonc",
+        "**/cluster/**/*.sops.toml": "plaintext"
+    },
+    "material-icon-theme.folders.associations": {
+        ".taskfiles": "utils",
+        "hack": "scripts"
+    },
+    "yaml.schemas": {
+        "Kubernetes": "kubernetes/*.yaml",
+        "https://json.schemastore.org/kustomization": "file:///home/beans/1TBNVMe/projects/home_cluster/hydrogen/services/home-ops/kubernetes/flux/config/kustomization.yaml"
+    },
+    "editor.fontFamily": "FiraCode Nerd Font",
+    "editor.fontLigatures": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.hover.delay": 1500,
+    "explorer.autoReveal": false
+}
