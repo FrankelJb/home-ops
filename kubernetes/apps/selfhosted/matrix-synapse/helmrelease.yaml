@@ -9,10 +9,10 @@ spec:
   chart:
     spec:
       chart: matrix-synapse
-      version: 3.0.3
+      version: 3.1.0
       sourceRef:
         kind: HelmRepository
-        name: matrix-synapse
+        name: ananace-charts
         namespace: flux-system
       interval: 15m
   install:
