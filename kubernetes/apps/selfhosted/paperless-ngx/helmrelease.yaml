@@ -38,6 +38,9 @@ spec:
       PAPERLESS_MEDIA_ROOT: /paperless/media
       PAPERLESS_REDIS: "redis://${REDIS_HOST}"
       PAPERLESS_OCR_LANGUAGE: eng
+    envFrom:
+      - secretRef:
+          name: *app
     ingress:
       main:
         enabled: true
@@ -55,10 +58,6 @@ spec:
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 1.13@sha256:8891bca890aae67adb77ebfd6e883999168378c4735fb65d0fddda182281697f
-
-    envFrom:
-      - secretRef:
-        name: *app
     persistence:
       data:
         enabled: true

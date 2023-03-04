@@ -22,10 +22,11 @@ spec:
   upgrade:
     remediation:
       retries: 5
+
   values:
     envFrom:
       - secretRef:
-        name: *app
+          name: *app
     ingress:
       main:
         enabled: true
@@ -41,7 +42,6 @@ spec:
     image:
       repository: ghcr.io/plankanban/planka
       tag: 1.11.0@sha256:98b7a0f498ef0de9ffa97e44ba8ee37c9f171e932e15bb5f4c51717b31159351
-
     persistence:
       data:
         accessMode: ReadWriteOnce
@@ -55,7 +55,6 @@ spec:
             path: attachments
           - mountPath: /app/public/project-background-images
             path: project-background-images
-
     service:
       main:
         ports:
