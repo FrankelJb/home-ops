@@ -4,6 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   name: matrix-synapse-pvc
+  namespace: selfhosted
 spec:
   accessModes:
     - ReadWriteOnce
