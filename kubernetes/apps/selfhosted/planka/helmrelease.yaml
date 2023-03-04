@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: planka
+  name: &app planka
   namespace: selfhosted
 spec:
   interval: 15m
@@ -23,6 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
+    envFrom:
+      - secretRef:
+        name: *app
     ingress:
       main:
         enabled: true
