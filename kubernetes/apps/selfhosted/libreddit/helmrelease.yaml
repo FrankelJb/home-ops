@@ -24,20 +24,21 @@ spec:
       retries: 5
   values:
     image:
-      repository: libreddit/libreddit
-      tag: latest
+      repository: ghcr.io/auricom/libreddit
+      tag: 0.29.4@ sha256:1f67f394c5948f9f6e2882441ba6fb7536efe889e0330483f72af56732a5faf6
 
     ingress:
-      enabled: true
-      className: nginx
-      hosts:
-        - host: &host "libreddit.${ROOT_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
+      main:
+        enabled: true
+        className: nginx
+        hosts:
+          - host: &host "libreddit.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     service:
       main:
         ports:
