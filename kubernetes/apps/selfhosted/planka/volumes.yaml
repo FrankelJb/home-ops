@@ -4,6 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   name: planka-pvc
+  namespace: selfhosted
 spec:
   accessModes:
     - ReadWriteOnce
