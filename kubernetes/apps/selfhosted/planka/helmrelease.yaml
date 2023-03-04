@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: planka
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host "planka.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    image:
+      repository: ghcr.io/plankanban/planka
+      tag: 1.11.0@sha256:98b7a0f498ef0de9ffa97e44ba8ee37c9f171e932e15bb5f4c51717b31159351
+
+    persistence:
+      data:
+        accessMode: ReadWriteOnce
+        enabled: true
+        size: 10Gi
+        existingClaim: planka-pvc
+        subPath:
+          - mountPath: /app/public/user-avatars
+            path: user-avatars
+          - mountPath: /app/private/attachments
+            path: attachments
+          - mountPath: /app/public/project-background-images
+            path: project-background-images
+
+    service:
+      main:
+        ports:
+          http:
+            port: 1337

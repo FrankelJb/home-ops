@@ -1,0 +1,72 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app paperless-ngx
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+
+  values:
+    env:
+      COMPOSE_PROJECT_NAME: *app
+      PAPERLESS_CONSUMER_POLLING: 60
+      PAPERLESS_CONSUMER_DELETE_DUPLICATES: true
+      PAPERLESS_CONSUMER_RECURSIVE: true
+      PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: true
+      PAPERLESS_CONSUMPTION_DIR: /paperless/consume
+      PAPERLESS_DATA_DIR: /paperless/data
+      PAPERLESS_DBHOST: "${POSTGRESQL_HOST}"
+      PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
+      PAPERLESS_FILENAME_FORMAT_REMOVE_NONE: true
+      PAPERLESS_MEDIA_ROOT: /paperless/media
+      PAPERLESS_REDIS: "redis://${REDIS_HOST}"
+      PAPERLESS_OCR_LANGUAGE: eng
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        hosts:
+          - host: &host "paperless-ngx.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    image:
+      repository: ghcr.io/paperless-ngx/paperless-ngx
+      tag: 1.13@sha256:8891bca890aae67adb77ebfd6e883999168378c4735fb65d0fddda182281697f
+
+    envFrom:
+      - secretRef:
+        name: *app
+    persistence:
+      data:
+        enabled: true
+        mountPath: /paperless
+        path: /mnt/raid/nfs/paperless-ngx
+        type: nfs
+    service:
+      main:
+        ports:
+          http:
+            port: 8000

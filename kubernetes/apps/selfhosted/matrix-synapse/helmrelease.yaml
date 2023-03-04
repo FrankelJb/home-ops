@@ -1,0 +1,73 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app matrix-synapse
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: matrix-synapse
+      version: 3.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: matrix-synapse
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    config:
+      enableRegistration: false
+      registrationSharedSecret: ${SECRET_MATRIX_REGISTRATION_TOKEN}
+      trustedKeyServers:
+        - server_name: ""
+    extraConfig:
+      registration_requires_token: true
+      suppress_key_server_warning: true
+    image:
+      tag: v1.77.0@sha256:360ea772d3b0d74607f756bca3a130a604de075b60f4136f330605e85d983e1c
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host "matrix.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    serverName: *host
+    signingkey:
+      job:
+        enabled: false
+
+    persistence:
+      enabled: true
+      existingClaim: matrix-synapse-pvc
+    redis:
+      enabled: false
+      auth:
+        password: false
+    externalRedis:
+      host: ${REDIS_HOST}
+      existingSecret: *app
+      existingSecretPasswordKey: redis-password
+    postgresql:
+      enabled: false
+    externalPostgresql:
+      host: ${POSTGRESQL_HOST}
+      port: 5432
+      username: synapse
+      database: synapse
+      existingSecret: *app
+      existingSecretPasswordKey: postgresql-password

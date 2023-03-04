@@ -1,0 +1,52 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: whoogle
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    env:
+      WHOOGLE_DOTENV: 1
+      WHOOGLE_CONFIG_ALTS: 1
+      WHOOGLE_ALT_TW: farside.link/nitter
+      WHOOGLE_ALT_YT: farside.link/invidious
+      WHOOGLE_ALT_IG: farside.link/bibliogram/u
+      WHOOGLE_ALT_MD: farside.link/scribe
+      WHOOGLE_ALT_RD: libreddit.${ROOT_DOMAIN}
+      WHOOGLE_ALT_TL: lingva.ml
+      WHOOGLE_CONFIG_THEME: dark
+      WHOOGLE_CONFIG_STYLE: ":root {--whoogle-dark-logo: #8742a1; --whoogle-dark-page-bg: #011627; --whoogle-dark-element-bg: #040A19; --whoogle-dark-text: #24b89d; --whoogle-dark-contrast-text: #4186c6; --whoogle-dark-secondary-text: #8751a1; --whoogle-dark-result-bg: #040A19; --whoogle-dark-result-title: #4186c6; --whoogle-dark-result-url: #f48075; --whoogle-dark-result-visited: #eb3488; --whoogle-dark-divider: #4186c6; } #whoogle-w { fill: #4186c6; } #whoogle-h { fill: #eb3488; } #whoogle-o-1 { fill: #f48075; } #whoogle-o-2 { fill: #8751a1; } #whoogle-g { fill: #24b89d; } #whoogle-l { fill: #eb3488; } #whoogle-e { fill: #4186c6; }"
+    image:
+      repository: benbusby/whoogle-search
+      tag: 0.8.1@sha256:9abd04f9c5676e4e5d7dc442882534f0af4c98d8971a8969ef657f77bfc8ade2
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: whoogle.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+    service:
+      main:
+        ports:
+          http:
+            port: 5000
