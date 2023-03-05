@@ -57,11 +57,9 @@ spec:
     redis:
       enabled: false
       auth:
-        password: false
+        password: ${REDIS_PASSWORD}
     externalRedis:
       host: ${REDIS_HOST}
-      existingSecret: *app
-      existingSecretPasswordKey: redis-password
     postgresql:
       enabled: false
     externalPostgresql:
@@ -69,5 +67,5 @@ spec:
       port: 5432
       username: synapse
       database: synapse
-      existingSecret: *app
+      existingSecret: matrix-synapse-extra
       existingSecretPasswordKey: postgresql-password
