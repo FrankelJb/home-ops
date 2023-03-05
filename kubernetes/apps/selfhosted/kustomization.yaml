@@ -7,4 +7,5 @@ resources:
   - paperless-ngx
   - planka
   - rxresume
+  - vaultwarden
   - whoogle
