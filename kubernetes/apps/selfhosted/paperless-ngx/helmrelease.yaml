@@ -63,6 +63,7 @@ spec:
         enabled: true
         mountPath: /paperless
         path: /mnt/raid/nfs/paperless-ngx
+        server: ${NFS_HOST}
         type: nfs
     service:
       main:
