@@ -38,6 +38,8 @@ spec:
       PAPERLESS_MEDIA_ROOT: /paperless/media
       PAPERLESS_REDIS: "redis://:${REDIS_PASSWORD}@${REDIS_HOST}"
       PAPERLESS_OCR_LANGUAGE: eng
+      PAPERLESS_TIME_ZONE: ${TIMEZONE}
+      PAPERLESS_URL: https://paperless-ngx.${ROOT_DOMAIN}
     envFrom:
       - secretRef:
           name: *app
