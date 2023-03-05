@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./client/helmrelease.yaml
   - ./server/helmrelease.yaml
-  - ./server/secrets.sops.yaml
+  - ./server/secret.sops.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: rxresume
