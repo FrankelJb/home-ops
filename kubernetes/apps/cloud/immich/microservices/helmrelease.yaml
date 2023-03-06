@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: immich-microservices
+  namespace: cloud
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    args:
+      - ./start-microservices.sh
+    command: /bin/sh
+    controller:
+      annotations:
+        reloader.stakater.com/auto: "true"
+    envFrom:
+      - secretRef:
+          name: immich-secret
+      - configMapRef:
+          name: immich-configmap
+    image:
+      repository: ghcr.io/immich-app/immich-server
+      tag: v1.49.0
+    persistence:
+      library:
+        enabled: true
+        existingClaim: immich-pvc
+        mountPath: /usr/src/app/upload
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+      limits:
+        memory: 2000Mi
+    service:
+      main:
+        enabled: false
