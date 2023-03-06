@@ -84,7 +84,7 @@ spec:
               'lost_password_link' => 'disabled',
               'oidc_login_provider_url' => 'https://auth.${ROOT_DOMAIN}',
               'oidc_login_client_id' => 'nextcloud',
-              'oidc_login_client_secret' => getenv('OIDC_LOGIN_CLIENT_SECRET')
+              'oidc_login_client_secret' => getenv('OIDC_LOGIN_CLIENT_SECRET'),
               'oidc_login_auto_redirect' => false,
               'oidc_login_end_session_redirect' => false,
               'oidc_login_button_text' => 'Log in with Authelia',
