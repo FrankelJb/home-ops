@@ -22,7 +22,7 @@ spec:
     volumeHandle: "${NFS_HOST}${NFS_PATH}#nextcloud#"
     volumeAttributes:
       server: "${NFS_HOST}"
-      share: "${NFS_PATH}/immich/server"
+      share: "${NFS_PATH}/nextcloud/server"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
