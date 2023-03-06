@@ -8,7 +8,7 @@ resources:
   - ./secret.sops.yaml
   - ./volumes.yaml
   - ./machine-learning
-  - ./microservice
+  - ./microservices
   - ./server
   - ./web
 labels:
