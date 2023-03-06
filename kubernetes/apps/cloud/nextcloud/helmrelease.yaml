@@ -1,0 +1,143 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: cloud
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: nextcloud
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    replicaCount: 1
+    image:
+      repository: gitea.${ROOT_DOMAIN}/gitea_admin/nextcloud-supervisord
+      tag: 25.0.4
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: true
+      host: ${POSTGRESQL_HOST}
+      type: postgresql
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-secret
+        usernameKey: DB_USER
+        passwordKey: DB_PASS
+    extraEnv:
+      - name: OVERWRITEPROTOCOL
+        value: https
+      - name: PHP_MEMORY_LIMIT
+        value: 10G
+      - name: REDIS_HOST
+        value: ${REDIS_HOST}
+      - name: REDIS_HOST_PORT
+        value: "6379"
+      - name: REDIS_HOST_PASSWORD
+        value: ${REDIS_PASSWORD}
+    nextcloud:
+      configs:
+        previews.config.php: |
+          <?php
+            $CONFIG = array (
+            'preview_max_x' => 512,
+            'preview_max_y' => 512,
+            'enable_previews' => true,
+            'enabledPreviewProviders' =>
+              array (
+                0 => 'OC\\Preview\\TXT',
+                1 => 'OC\\Preview\\Image',
+                2 => 'OC\\Preview\\Movie',
+                3 => 'OC\\Preview\\MP4',
+                4 => 'OC\\Preview\\HEIC',
+              ),
+            'previewgenerator' =>
+              array (
+                'squareSizes' => 256,
+                'widthSizes' => 512,
+                'heightSizes' => 512,
+              ),
+            );
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-secret
+        usernameKey: ADMIN_USER
+        passwordKey: ADMIN_PASS
+      host: &host nextcloud.${ROOT_DOMAIN}
+    resources:
+      limits:
+        cpu: 4000m
+        memory: 16Gi
+      requests:
+        cpu: 1000m
+        memory: 4Gi
+    # this seems to be required for nextcloud initialization which takes a long time
+    startupProbe:
+      enabled: true
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 30
+      successThreshold: 1
+
+    redis:
+      enabled: false
+    persistence:
+      enabled: true
+      existingClaim: nextcloud-pvc
+
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+        nginx.ingress.kubernetes.io/proxy-buffering: "off"
+        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/server-snippet: |-
+          server_tokens off;
+          proxy_hide_header X-Powered-By;
+          rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+          location = /.well-known/carddav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /.well-known/caldav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /robots.txt {
+            allow all;
+            log_not_found off;
+            access_log off;
+          }
+          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+            deny all;
+          }
+          location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+            deny all;
+          }
+      tls:
+        - hosts:
+            - *host
+      path: /
+      pathType: Prefix
+
+  valuesFrom:
+    - kind: Secret
+      name: nextcloud-secret-config
+      valuesKey: auth.config.php
+      targetPath: nextcloud.configs.auth\.config\.php

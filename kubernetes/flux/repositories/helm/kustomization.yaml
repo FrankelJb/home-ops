@@ -7,4 +7,5 @@ resources:
   - ./angelnu.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./nextcloud.yaml
   - ./weave-gitops.yaml
