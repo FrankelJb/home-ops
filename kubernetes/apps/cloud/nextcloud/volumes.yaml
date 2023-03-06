@@ -19,10 +19,10 @@ spec:
     readOnly: false
     # volumeHandle format: {nfs-server-address}#{sub-dir-name}#{share-name}
     # make sure this value is unique for every share in the cluster
-    volumeHandle: "{{ .Values.nfs.server }}{{ .Values.nfs.path }}#nextcloud#"
+    volumeHandle: "${NFS_HOST}${NFS_PATH}#nextcloud#"
     volumeAttributes:
-      server: "{{ .Values.nfs.server }}"
-      share: "{{ .Values.nfs.path }}/nextcloud"
+      server: "${NFS_HOST}"
+      share: "${NFS_PATH}/immich/server"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
