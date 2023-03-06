@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app onlyview
+  namespace: cloud
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+
+  values:
+    envFrom:
+      - secretRef:
+          name: *app
+    image:
+      repository: viktorstrate/photoview
+      tag: 2.3.13
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+    persistence:
+      originals:
+        enabled: true
+        mountPath: /photos
+        readOnly: true
+        server: ${NFS_HOST}
+        type: nfs
+      cache:
+        enabled: true
+        mountPath: /app/cache
+        existingClaim: onlyview-cache-pvc
+
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: ORIGINALS_PATH
+      targetPath: persistence.originals.path
