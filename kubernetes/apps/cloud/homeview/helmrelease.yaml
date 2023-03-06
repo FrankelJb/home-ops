@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: homeview
+  name: &app homeview
   namespace: cloud
 spec:
   interval: 15m
@@ -25,7 +25,7 @@ spec:
   values:
     envFrom:
       - secretRef:
-          name: homeview-configmap
+          name: *app
 
     image:
       repository: viktorstrate/photoview
@@ -51,6 +51,6 @@ spec:
 
   valuesFrom:
     - kind: Secret
-      name: homeview
+      name: *app
       valuesKey: ORIGINALS_PATH
       targetPath: persistence.originals.path
