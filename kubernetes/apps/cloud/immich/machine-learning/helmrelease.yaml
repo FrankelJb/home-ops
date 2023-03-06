@@ -36,7 +36,7 @@ spec:
           name: immich-configmap
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
-      tag: v1.49.0
+      tag: v1.50.1
     persistence:
       library:
         enabled: true
