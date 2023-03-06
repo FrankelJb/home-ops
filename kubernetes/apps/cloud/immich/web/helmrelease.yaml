@@ -46,19 +46,19 @@ spec:
             rewrite /api/(.*) /$1 break;
           nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/proxy-body-size: "true"
-          hosts:
-            - host: &host immich.${ROOT_DOMAIN}
-              paths:
-                - path: /
-                  pathType: Prefix
-                - path: /api
-                  pathType: Prefix
-                  service:
-                    name: immich-server
-                    port: 3001
-          tls:
-            - hosts:
-                - *host
+        hosts:
+          - host: &host immich.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+              - path: /api
+                pathType: Prefix
+                service:
+                  name: immich-server
+                  port: 3001
+        tls:
+          - hosts:
+              - *host
     persistence:
       library:
         enabled: true
