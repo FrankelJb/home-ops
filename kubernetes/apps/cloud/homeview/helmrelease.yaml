@@ -49,8 +49,8 @@ spec:
         mountPath: /app/cache
         existingClaim: homeview-cache-pvc
 
-    valuesFrom:
-      - kind: Secret
-        name: homeview
-        valuesKey: ORIGINALS_PATH
-        targetPath: persistence.originals.path
+  valuesFrom:
+    - kind: Secret
+      name: homeview
+      valuesKey: ORIGINALS_PATH
+      targetPath: persistence.originals.path
