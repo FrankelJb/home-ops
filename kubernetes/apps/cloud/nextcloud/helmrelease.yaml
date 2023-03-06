@@ -139,8 +139,6 @@ spec:
     readinessProbe:
       enabled: false
 
-    redis:
-      enabled: false
     persistence:
       enabled: true
       existingClaim: nextcloud-pvc
