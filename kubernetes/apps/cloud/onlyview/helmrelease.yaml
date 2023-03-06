@@ -30,6 +30,18 @@ spec:
     image:
       repository: viktorstrate/photoview
       tag: 2.3.13
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host onlyview.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     service:
       main:
         ports:
