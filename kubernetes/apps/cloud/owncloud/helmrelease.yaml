@@ -33,7 +33,7 @@ spec:
       PROXY_OIDC_ACCESS_TOKEN_VERIFY_METHOD: none
       OCIS_INSECURE: true # generate self-signed certificates
       OCIS_URL: https://owncloud.${ROOT_DOMAIN}
-      OCIS_LOG_LEVEL: info
+      OCIS_LOG_LEVEL: debug
       OCIS_LOG_COLOR: true
       OCIS_LOG_PRETTY: true
       OCIS_OIDC_ISSUER: https://auth.${ROOT_DOMAIN}
