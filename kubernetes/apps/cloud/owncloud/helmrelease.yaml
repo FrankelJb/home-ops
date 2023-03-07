@@ -39,7 +39,7 @@ spec:
       OCIS_OIDC_ISSUER: https://auth.${ROOT_DOMAIN}
       WEB_OIDC_CLIENT_ID: ownCloud-web
     image:
-      repository: owncloud/ocis@ sha256:baa0b7df7aff09181b6e9dbfba3a64f931add45b8a6cf388d9b87c210a15c2f2
+      repository: owncloud/ocis@sha256:baa0b7df7aff09181b6e9dbfba3a64f931add45b8a6cf388d9b87c210a15c2f2
     ingress:
       main:
         enabled: true
