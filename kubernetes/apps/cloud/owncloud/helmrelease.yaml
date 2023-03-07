@@ -51,7 +51,7 @@ spec:
           nginx.ingress.kubernetes.io/cors-allow-origin: &host owncloud.${ROOT_DOMAIN}
           nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS"
           nginx.ingress.kubernetes.io/cors-allow-headers: "*"
-          nginx.ingress.kubernetes.io/cors-max-age: 3600
+          nginx.ingress.kubernetes.io/cors-max-age: "3600"
         hosts:
           - host: *host
             paths:
