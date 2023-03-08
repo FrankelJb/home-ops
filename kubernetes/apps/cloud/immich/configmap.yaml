@@ -6,7 +6,7 @@ data:
   REDIS_HOSTNAME: redis-master.default.svc.cluster.local
   IMMICH_SERVER_URL: http://immich-server.cloud.svc.cluster.local:3001
   IMMICH_WEB_URL: http://immich-web.cloud.svc.cluster.local:3000
-  IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.cloud.svc.cluster.local:3000
+  IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.cloud.svc.cluster.local:3003
 kind: ConfigMap
 metadata:
   creationTimestamp: null
