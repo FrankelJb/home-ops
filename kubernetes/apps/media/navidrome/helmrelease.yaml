@@ -48,13 +48,13 @@ spec:
           http:
             port: 4533
     persistence:
-      storage:
+      config:
+        enabled: true
+        path: ${NFS_PATH}/navidrome/config
+        server: ${NFS_HOST}
+        type: nfs
+      music:
         enabled: true
         path: ${NFS_PATH}/navidrome/media
         server: ${NFS_HOST}
         type: nfs
-        subPath:
-          - path: media
-            mountPath: /music
-          - path: config
-            mountPath: /config
