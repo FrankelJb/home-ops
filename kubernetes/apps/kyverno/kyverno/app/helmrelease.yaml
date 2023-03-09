@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: kyverno
-      version: v2.5.2
+      version: v2.7.0
       sourceRef:
         kind: HelmRepository
         name: kyverno
@@ -25,8 +25,7 @@ spec:
     remediation:
       retries: 3
   values:
-    crds:
-      install: true
+    installCRDs: true
     extraArgs:
       - --autogenInternals=false
       - --clientRateLimitQPS=30
