@@ -43,16 +43,18 @@ spec:
               - *host
     hostname: qbittorrent
     persistence:
-      storage:
+      config:
         enabled: true
-        path: /mnt/raid/media/qbittorrent
+        path: /mnt/raid/media/qbittorrent/config
+        mountPath: /config
         server: ${NFS_HOST}
         type: nfs
-        subPath:
-          - path: config
-            mountPath: /config
-          - path: downloads
-            mountPath: /media
+      media:
+        enabled: true
+        path: /mnt/raid/media/qbittorrent/downloads
+        mountPath: /media
+        server: ${NFS_HOST}
+        type: nfs
     podAnnotations:
       setGateway: "true"
     service:
