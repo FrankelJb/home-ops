@@ -37,7 +37,7 @@ spec:
       enabled: true
       className: nginx
       hosts:
-        - &host k8s.${EXTERNAL_DOMAIN}
+        - &host k8s.${ROOT_DOMAIN}
       tls:
         - hosts:
             - *host
