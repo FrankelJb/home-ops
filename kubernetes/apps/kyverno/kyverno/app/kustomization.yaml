@@ -6,7 +6,6 @@ namespace: kyverno
 resources:
   - ./helmrelease.yaml
   - ./rbac.yaml
-  - policies
 labels:
   - pairs:
       app.kubernetes.io/name: kyverno
