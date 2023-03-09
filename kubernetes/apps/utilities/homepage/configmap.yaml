@@ -196,9 +196,9 @@ data:
           - Reddit:
             - icon: reddit.png
               href: https://old.reddit.com
-            - Twitch:
-                - icon: twitch.png
-                  href: https://twitch.tv
+          - Twitch:
+              - icon: twitch.png
+                href: https://twitch.tv
 
   kubernetes.yaml: |
     ---

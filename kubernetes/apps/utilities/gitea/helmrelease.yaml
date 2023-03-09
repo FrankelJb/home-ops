@@ -25,7 +25,7 @@ spec:
   values:
     gitea:
       admin:
-        existingSecret: gitea-admin-secret
+        existingSecret: gitea-admin-secrets
       config:
         database:
           DB_TYPE: postgres
