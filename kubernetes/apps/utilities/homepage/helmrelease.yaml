@@ -27,6 +27,9 @@ spec:
       useExistingConfigMap: homepage-config
     # This enables the service account to access the necessary resources
     enableRbac: true
+    env:
+      TZ: ${TIMEZONE}
+      LOG_LEVEL: debug
     image:
       repository: ghcr.io/benphelps/homepage
       tag: v0.6.10@sha256:ae907f405ae8de9c805828d1684d936756ea0e933a83d184b924515ab7c01ac2
