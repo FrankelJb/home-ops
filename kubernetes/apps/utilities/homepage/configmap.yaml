@@ -192,13 +192,13 @@ data:
           - abbr: GH
             href: https://github.com/
 
-        - Social:
-          - Reddit:
-            - icon: reddit.png
-              href: https://old.reddit.com
-          - Twitch:
-              - icon: twitch.png
-                href: https://twitch.tv
+      - Social:
+        - Reddit:
+          - icon: reddit.png
+            href: https://old.reddit.com
+        - Twitch:
+          - icon: twitch.png
+            href: https://twitch.tv
 
   kubernetes.yaml: |
     ---
