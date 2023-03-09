@@ -10,7 +10,6 @@
     "yaml.schemas": {
         "Kubernetes": "kubernetes/*.yaml",
     },
-    "editor.fontFamily": "FiraCode Nerd Font",
     "editor.fontLigatures": true,
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",

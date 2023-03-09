@@ -51,7 +51,7 @@ spec:
         enabled: true
         mountPath: /photos
         readOnly: true
-        path: /mnt/raid/nfs/nextcloud/data
+        path: ${NFS_PATH}/nextcloud/data
         server: ${NFS_HOST}
         type: nfs
       cache:
