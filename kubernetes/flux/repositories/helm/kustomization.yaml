@@ -10,6 +10,7 @@ resources:
   - ./fairwinds.yaml
   - ./gitea.yaml
   - ./grafana.yaml
+  - ./homepage.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
   - ./nextcloud.yaml
