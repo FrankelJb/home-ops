@@ -1,0 +1,67 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: radarr
+  namespace: downloads
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    env:
+      TZ: ${TIMEZONE}
+      PUID: "568"
+      PGID: "568"
+    image:
+      repository: ghcr.io/onedr0p/radarr
+      tag: 4.3.2.6857@sha256:b3469dffcf665ec72fed63726ec44b65ae0963e24cd640f520c1ca07dcda3282
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host radarr.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        path: ${NFS_PATH}/arrs/radarr/config
+        server: ${NFS_HOST}
+        type: nfs
+      media:
+        enabled: true
+        path: /mnt/raid/media/qbittorrent/downloads
+        server: ${NFS_HOST}
+        type: nfs
+    podAnnotations:
+      setGateway: "true"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+    service:
+      main:
+        ports:
+          http:
+            port: 7878

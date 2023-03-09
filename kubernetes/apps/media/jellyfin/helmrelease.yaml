@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: ghcr.io/onedr0p/jellyfin
+      tag: 10.8.9@sha256:01a6497a1290b73f63251aebe6d01327c15b3413c3e1013c2a396ffe116ced4d
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host jellyfin.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    service:
+      main:
+        ports:
+          http:
+            port: 8096
+    persistence:
+      config:
+        enabled: true
+        path: ${NFS_PATH}/jellyfin/config
+        server: ${NFS_HOST}
+        type: nfs
+      media:
+        enabled: true
+        mountPath: /media
+        readOnly: true
+        path: /mnt/raid/media/qbittorrent/downloads
+        server: ${NFS_HOST}
+        type: nfs
+      audio:
+        enabled: true
+        mountPath: /mnt/audio
+        path: ${NFS_PATH}/navidrome/media
+        server: ${NFS_HOST}
+        type: nfs
