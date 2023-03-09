@@ -23,46 +23,45 @@ spec:
     remediation:
       retries: 5
   values:
-  app-template:
-  env:
-    TZ: Asia/Singapore
-    PUID: "568"
-    PGID: "568"
-  image:
-    repository: ghcr.io/onedr0p/sonarr
-    tag: 3.0.9.1549@sha256:b4241ad3bf42289157f51be0fb9d3dbbabc5dba7c808b543506a21c351bbaf9f
-  ingress:
-    main:
-      enabled: true
-      ingressClassName: nginx
-      hosts:
-        - host: &host sonarr.${ROOT_DOMAIN}
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-  persistence:
-    config:
-      enabled: true
-      path: ${NFS_PATH}/arrs/sonarr
-      server: ${NFS_HOST}
-      type: nfs
-    media:
-      enabled: true
-      path: /mnt/raid/media/qbittorrent/downloads
-      server: ${NFS_HOST}
-      type: nfs
-  podAnnotations:
-    setGateway: "true"
-  podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
-    fsGroupChangePolicy: "OnRootMismatch"
-  service:
-    main:
-      ports:
-        http:
-          port: 8989
+    env:
+      TZ: Asia/Singapore
+      PUID: "568"
+      PGID: "568"
+    image:
+      repository: ghcr.io/onedr0p/sonarr
+      tag: 3.0.9.1549@sha256:b4241ad3bf42289157f51be0fb9d3dbbabc5dba7c808b543506a21c351bbaf9f
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host sonarr.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        path: ${NFS_PATH}/arrs/sonarr
+        server: ${NFS_HOST}
+        type: nfs
+      media:
+        enabled: true
+        path: /mnt/raid/media/qbittorrent/downloads
+        server: ${NFS_HOST}
+        type: nfs
+    podAnnotations:
+      setGateway: "true"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+    service:
+      main:
+        ports:
+          http:
+            port: 8989
