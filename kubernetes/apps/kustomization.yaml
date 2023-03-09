@@ -5,6 +5,6 @@ resources:
   - cloud
   - default
   - flux-system
-  - kyverno
+  # - kyverno
   - selfhosted
   - utilities
