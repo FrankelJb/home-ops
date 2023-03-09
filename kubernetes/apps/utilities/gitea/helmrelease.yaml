@@ -27,9 +27,9 @@ spec:
       admin:
         existingSecret: gitea-admin-secret
       config:
-        additionalConfigSources:
-          - secret:
-              secretName: gitea-config-database-secret
+        database:
+          DB_TYPE: postgres
+          HOST: ${POSTGRESQL_HOST}
         server:
           LANDING_PAGE: login
           ROOT_URL: https://gitea.${ROOT_DOMAIN}
@@ -55,3 +55,16 @@ spec:
     service:
       ssh:
         port: 2222
+  valuesFrom:
+    - kind: Secret
+      name: gitea-config-database-secret
+      targetPath: gitea.config.database.NAME
+      valuesKey: NAME
+    - kind: Secret
+      name: gitea-config-database-secret
+      targetPath: gitea.config.database.PASSWD
+      valuesKey: PASSWD
+    - kind: Secret
+      name: gitea-config-database-secret
+      targetPath: gitea.config.database.USER
+      valuesKey: USER
