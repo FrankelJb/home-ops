@@ -7,5 +7,10 @@ resources:
   - ./angelnu.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./fairwinds.yaml
+  - ./gitea.yaml
+  - ./grafana.yaml
+  - ./kyverno.yaml
+  - ./kubernetes-dashboard.yaml
   - ./nextcloud.yaml
   - ./weave-gitops.yaml
