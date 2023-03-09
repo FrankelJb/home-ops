@@ -10,7 +10,9 @@ resources:
   - ./fairwinds.yaml
   - ./gitea.yaml
   - ./grafana.yaml
-  - ./kyverno.yaml
   - ./kubernetes-dashboard.yaml
+  - ./kyverno.yaml
   - ./nextcloud.yaml
+  - ./prometheus-community.yaml
+  - ./renovate.yaml
   - ./weave-gitops.yaml
