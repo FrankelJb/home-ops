@@ -4,11 +4,11 @@ kind: Kustomization
 resources:
   - gitea
   - goldilocks
-  # - grafana
+  - grafana
   - homepage
-  # - kube-prometheus-stack
+  - kube-prometheus-stack
   - kubernetes-dashboard
-  # - loki
+  - loki
   - mailrise
   - renovate
   - vpa
