@@ -63,8 +63,6 @@ spec:
             mountPath: /users
           - path: video
             mountPath: /app/video
-    podAnnotations:
-      setGateway: "true"
     service:
       main:
         ports:

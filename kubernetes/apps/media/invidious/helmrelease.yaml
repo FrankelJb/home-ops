@@ -42,8 +42,6 @@ spec:
         tls:
           - hosts:
               - *host
-    podAnnotations:
-      setGateway: "true"
     service:
       main:
         ports:

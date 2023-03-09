@@ -55,8 +55,6 @@ spec:
         mountPath: /media
         server: ${NFS_HOST}
         type: nfs
-    podAnnotations:
-      setGateway: "true"
     service:
       main:
         ports:

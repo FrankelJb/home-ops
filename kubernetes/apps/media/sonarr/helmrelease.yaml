@@ -53,8 +53,6 @@ spec:
         path: /mnt/raid/media/qbittorrent/downloads
         server: ${NFS_HOST}
         type: nfs
-    podAnnotations:
-      setGateway: "true"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568

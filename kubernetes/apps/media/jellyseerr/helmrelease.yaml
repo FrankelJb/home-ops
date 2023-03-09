@@ -50,5 +50,3 @@ spec:
         path: ${NFS_PATH}/jellyseerr
         server: ${NFS_HOST}
         type: nfs
-    podAnnotations:
-      setGateway: "true"
