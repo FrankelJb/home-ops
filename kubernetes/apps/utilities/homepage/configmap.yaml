@@ -1,0 +1,207 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  namespace: utilities
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  settings.yaml: |
+    ---
+    title: Dashboard
+    background: /images/background.jpg
+    backgroundOpacity: 0.5
+    theme: dark
+    color: slate
+    target: _self
+  widgets.yaml: |
+    ---
+    - resources:
+        backend: kubernetes
+        expanded: true
+        cpu: true
+        memory: true
+    - unifi_console:
+        url: https://unifi.carbon.${ROOT_DOMAIN}
+        username: ${USERNAME}
+        password: ${SECRET_UNIFI_PASSWORD}
+    - search:
+        provider: custom
+        target: _self
+        url: https://whoogle.${ROOT_DOMAIN}/search?q=
+    - openmeteo:
+        label: Home # optional
+        latitude: ${SECRET_LATITUDE}
+        longitude: ${SECRET_LONGITUDE}
+        units: metric # or metric
+        cache: 5 # Time in minutes to cache API responses, to stay within limits
+  services.yaml: |
+    ---
+    - Cloud:
+        - Immich:
+            href: https://immich.${ROOT_DOMAIN}
+            icon: immich.png
+            description: High performance self-hosted photo and video backup solution
+        - Nextcloud:
+            href: https://nextcloud.${ROOT_DOMAIN}
+            icon: nextcloud.png
+            description: Cloudstorage
+    - Infra:
+        - Router:
+            href: https://unifi.carbon.${ROOT_DOMAIN}
+            icon: unifi.png
+            description: Unifi console
+        - AdguardHome:
+            href: https://adguard.${ROOT_DOMAIN}
+            icon: adguard-home.png
+            description: Ad-Blocking
+            widget:
+              type: adguard
+              url: https://adguard.${ROOT_DOMAIN}
+              username: admin
+              password: {{ .Values.adguard.password }}
+        - Carbon AdguardHome:
+            href: https://adguard.carbon.${ROOT_DOMAIN}
+            icon: adguard-home.png
+            description: Pi Ad-Blocking
+            widget:
+              type: adguard
+              url: https://adguard.carbon.${ROOT_DOMAIN}
+              username: admin
+              password: {{ .Values.adguard.password }}
+    - Media:
+        - Invidious:
+            href: https://invidious.${ROOT_DOMAIN}
+            icon: invidious.png
+            description: An alternative front-end to YouTube 
+        - Jellyfin:
+            href: https://jellyfin.${ROOT_DOMAIN}
+            icon: jellyfin.png
+            description: Mediaserver
+            widget:
+              type: jellyfin
+              url: https://jellyfin.${ROOT_DOMAIN}
+              key: ${SECRET_JELLYFIN_KEY}
+        - Navidrome:
+            href: https://navidrome.${ROOT_DOMAIN}
+            icon: navidrome.png
+            description: Music Player
+            widget:
+              type: navidrome
+              url: https://navidrome.${ROOT_DOMAIN}
+              user: ${USERNAME}
+              salt: ${SECRET_NAVIDROME_SALT}
+              token: ${SECRET_NAVIDROME_TOKEN}
+    - Media Management:
+      - Jellyseerr:
+          href: https://jellyseerr.${ROOT_DOMAIN}
+          icon: jellyseerr.png
+          description: TODO
+          widget:
+            type: jellyseerr
+            url: https://jellyseerr.${ROOT_DOMAIN}
+            key: ${SECRET_JELLYSEERR_KEY}
+      - qBittorrent:
+          href: https://qbittorrent.${ROOT_DOMAIN}
+          icon: qbittorrent.png
+          description: TODO
+          widget:
+            type: qbittorrent
+            url: https://qbittorrent.${ROOT_DOMAIN}
+            username: admin
+            password: ${SECRET_QBITTORRENT_PASSWORD}
+      - Prowlarr:
+          href: https://prowlarr.${ROOT_DOMAIN}
+          icon: prowlarr.png
+          description: TODO
+          widget:
+            type: prowlarr
+            url: https://prowlarr.${ROOT_DOMAIN}
+            key: ${SECRET_PROWLARR_KEY}
+      - Radarr:
+          href: https://radarr.${ROOT_DOMAIN}
+          icon: radarr.png
+          description: TODO
+          widget:
+            type: radarr
+            url: https://radarr.${ROOT_DOMAIN}
+            key: ${SECRET_RADARR_KEY}
+      - Sonarr:
+          href: https://sonarr.${ROOT_DOMAIN}
+          icon: sonarr.png
+          description: TODO
+          widget:
+            type: sonarr
+            url: https://sonarr.${ROOT_DOMAIN}
+            key: ${SECRET_SONARR_KEY}
+    - Selfhosted:
+        - Libreddit:
+            href: https://libreddit.${ROOT_DOMAIN}
+            icon: libreddit.png
+            description: Private front-end for Reddit
+        - Paperless-ngx:
+            href: https://paperless-ngx.${ROOT_DOMAIN}
+            icon: paperless-ngx.png
+            description: Scan, index and archive all your physical documents
+        - Planka:
+            href: https://planka.${ROOT_DOMAIN}
+            icon: planka.png
+            description: Kanban board
+        - Vaultwarden:
+            href: https://vaultwarden.${ROOT_DOMAIN}
+            icon: bitwarden.png
+            description: Password tool
+        - Whoogle:
+            href: https://whoogle.${ROOT_DOMAIN}
+            icon: whooglesearch.png
+            description: Ad-free, privacy-respecting metasearch engine
+    - Utilities:
+        - Code-Server:
+            href: https://code-server.${ROOT_DOMAIN}
+            icon: vscode.png
+            description: In browser IDE
+        - Kubernetes:
+            href: https://k8s.${ROOT_DOMAIN}
+            icon: kubernetes-dashboard.png
+            description: Kubernetes Dashboard
+        - Gitea:
+            href: https://gitea.${ROOT_DOMAIN}
+            icon: gitea.png
+            description: Git with a cup of tea
+        - Gitea Carbon:
+            href: https://gitea.carbon.${ROOT_DOMAIN}
+            icon: gitea.png
+            description: Git with a cup of tea
+        - Goldilocks:
+            href: https://goldilocks.${ROOT_DOMAIN}
+            icon: https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/img/goldilocks.svg
+            description: Helps identify a starting point for resource requests and limits
+        - Grafana:
+            href: https://grafana.${ROOT_DOMAIN}
+            icon: grafana.png
+            description: Metric Monitoring
+        - Weave:
+            href: https://weave.${ROOT_DOMAIN}
+            icon: weave.png
+            description: GitOps for K8s
+  bookmarks.yaml: |
+    ---
+      - Developer:
+        - Github:
+          - abbr: GH
+            href: https://github.com/
+
+        - Social:
+          - Reddit:
+            - icon: reddit.png
+              href: https://old.reddit.com
+            - Twitch:
+                - icon: twitch.png
+                  href: https://twitch.tv
+
+  kubernetes.yaml: |
+    ---
+      mode: cluster
+  docker.yaml: |
+    ---

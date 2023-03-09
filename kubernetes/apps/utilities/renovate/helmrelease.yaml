@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: renovate
+  namespace: utilities
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: renovate
+      version: 34.152.2
+      sourceRef:
+        kind: HelmRepository
+        name: renovate
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    existingSecret: renovate-env
+    image:
+      repository: renovate/renovate
+      tag: 34.152.5
+      pullPolicy: IfNotPresent
+    cronjob:
+      schedule: "0 0 * * *"
+    renovate:
+      config: |
+        {
+            "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+            "extends": [
+                "config:base",
+                ":semanticCommits",
+                ":dependencyDashboard",
+                ":automergeDigest",
+                ":automergeBranch",
+            ],
+            "platform": "gitea",
+            "autodiscover": true,
+            "dependencyDashboard": true,
+            "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+            "dryRun": false,
+            "printConfig": true,
+            "kubernetes": {
+                "fileMatch": [
+                    ".yaml$"
+                ]
+            },
+            "major": {
+                "dependencyDashboardApproval": true
+            }
+        }
