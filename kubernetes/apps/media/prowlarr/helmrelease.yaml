@@ -45,7 +45,9 @@ spec:
     persistence:
       config:
         enabled: true
-        type: pvc
+        path: ${NFS_PATH}/arrs/prowlarr/config
+        server: ${NFS_HOST}
+        type: nfs
     podAnnotations:
       setGateway: "true"
     podSecurityContext:
