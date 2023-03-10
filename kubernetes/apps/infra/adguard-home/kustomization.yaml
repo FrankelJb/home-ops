@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: infra
 resources:
   - ./helmrelease.yaml
+  - ./configmap.yaml
   - ./unbound.yaml
 labels:
   - pairs:
