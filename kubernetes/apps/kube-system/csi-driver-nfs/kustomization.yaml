@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: default
+resources:
+  - ./helmrelease.yaml
+  - ./storage-class.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/name: csi-driver-nfs
+      app.kubernetes.io/instance: csi-driver-nfs
