@@ -7,6 +7,8 @@ resources:
   - ./angelnu.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./csi-driver-nfs.yaml
+  - ./democratic-csi.yaml
   - ./fairwinds.yaml
   - ./gitea.yaml
   - ./grafana.yaml
