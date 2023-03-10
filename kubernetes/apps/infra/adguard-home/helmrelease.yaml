@@ -23,17 +23,44 @@ spec:
     remediation:
       retries: 5
   values:
+    initContainers:
+      #   # -- Configures an initContainer that copies the configmap to the AdGuardHome conf directory
+      #   # It does NOT overwrite when the file already exists.
+      #   # @default -- See values.yaml
+      copy-configmap:
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - "sh"
+          - "-c"
+          - |
+            if [ ! -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
+              mkdir -p /opt/adguardhome/conf
+              cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+            fi
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+          - name: tmp
+            mountPath: /tmp/AdGuardHome.yaml
+            subPath: AdGuardHome.yaml
+          - name: config
+            mountPath: /opt/adguardhome/conf
+
     image:
       repository: adguard/adguardhome
       tag: v0.107.25
     persistence:
-      config-file:
+      tmp:
         enabled: true
-        type: configMap
+        mountPath: /tmp/AdGuardHome.yaml
         name: adguard-home-config
         subPath: config.yaml
+        type: configMap
+      config:
+        enabled: true
         mountPath: /opt/adguardhome/conf
-        readOnly: true
+        type: emptyDir
       data:
         accessMode: ReadWriteOnce
         enabled: true
