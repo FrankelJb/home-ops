@@ -46,7 +46,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: secret
+        type: configMap
         name: authelia-configmap
         subPath: configuration.yaml
         mountPath: /config/configuration.yaml
