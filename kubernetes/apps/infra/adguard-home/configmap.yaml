@@ -71,18 +71,18 @@ data:
       parental_cache_size: 1048576
       cache_time: 30
       rewrites:
+        - domain: hydrogen
+          answer: ${IP_1}
+        - domain: "*.${ROOT_DOMAIN}"
+          answer: ${IP_1}
         - domain: unifi
-          answer: &secondary_ip ${IP_2}
+          answer: ${IP_2}
         - domain: carbon
-          answer: *secondary_ip
+          answer: ${IP_2}
         - domain: "*.carbon.${ROOT_DOMAIN}"
-          answer: *secondary_ip
+          answer: ${IP_2}
         - domain: lithium
           answer: ${IP_3}
-        - domain: hydrogen
-          answer: &primary_ip ${IP_1}
-        - domain: "*.${ROOT_DOMAIN}"
-          answer: *primary_ip
       blocked_services: []
       local_domain_name: lan
       resolve_clients: true
