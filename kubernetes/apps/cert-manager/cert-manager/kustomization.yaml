@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: infra
+resources:
+  - ./helmrelease.yaml
+  - ./carbon-certificate.yaml
+  - ./letsencrypt-prod-clusterissuer.yaml
+  - ./letsencrypt-staging-clusterissuer.yaml
+  - ./secret.sops.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/instance: cert-manager

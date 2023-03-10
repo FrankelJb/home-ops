@@ -13,6 +13,7 @@ resources:
   - ./gitea.yaml
   - ./grafana.yaml
   - ./homepage.yaml
+  - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
