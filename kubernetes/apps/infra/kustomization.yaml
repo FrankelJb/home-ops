@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   - adguard-home
   - k8s-gateway
+  - glauth
   - pod-gateway
