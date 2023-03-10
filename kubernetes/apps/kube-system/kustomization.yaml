@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - csi-driver-nfs
   - democratic-csi-local-hostpath
+  - ingress-nginx
