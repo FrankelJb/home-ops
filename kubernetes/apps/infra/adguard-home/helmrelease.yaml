@@ -30,7 +30,7 @@ spec:
       config-file:
         enabled: true
         type: configMap
-        name: adguard-home-configmap
+        name: adguard-home-config
         subPath: config.yaml
         mountPath: /opt/adguardhome/conf
         readOnly: true
