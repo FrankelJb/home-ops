@@ -38,8 +38,3 @@ spec:
       securityContext:
         runAsUser: 1000
         fsGroup: 0
-  valuesFrom:
-    - kind: Secret
-      name: mariadb-init
-      valuesKey: initdbScripts
-      targetPath: initdbScripts
