@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: default
 resources:
   - ./helmrelease.yaml
-  - ./secret.sops.yaml
   - ./volumes.yaml
 labels:
   - pairs:
