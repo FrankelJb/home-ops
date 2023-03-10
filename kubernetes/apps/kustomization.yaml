@@ -5,6 +5,7 @@ resources:
   - cloud
   - default
   - flux-system
+  - kube-system
   - kyverno
   - media
   - selfhosted
