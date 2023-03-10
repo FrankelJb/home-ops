@@ -46,7 +46,17 @@ spec:
             subPath: AdGuardHome.yaml
           - name: config
             mountPath: /opt/adguardhome/conf
-
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: &host adguard.${ROOT_DOMAIN}
+            paths:
+              - pathType: Prefix
+                path: /
+        tls:
+          - hosts:
+              - *host
     image:
       repository: adguard/adguardhome
       tag: v0.107.25
