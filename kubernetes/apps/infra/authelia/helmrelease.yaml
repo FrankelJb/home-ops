@@ -27,18 +27,18 @@ spec:
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
-      ingress:
-        main:
-          enabled: true
-          ingressClassName: nginx
-          hosts:
-            - host: &host auth.${ROOT_DOMAIN}
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - *host
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host auth.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     envFrom:
       - secretRef:
           name: authelia-secret
