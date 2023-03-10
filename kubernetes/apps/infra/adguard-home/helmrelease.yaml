@@ -55,7 +55,7 @@ spec:
         enabled: true
         mountPath: /tmp/AdGuardHome.yaml
         name: adguard-home-config
-        subPath: config.yaml
+        subPath: AdGuardHome.yaml
         type: configMap
       config:
         enabled: true

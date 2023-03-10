@@ -13,7 +13,7 @@ labels:
 configMapGenerator:
   - name: adguard-home-config
     files:
-      - config.yaml=./config/config.yaml
+      - AdGuardHome.yaml=./config/config.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
