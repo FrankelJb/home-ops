@@ -5,6 +5,7 @@ resources:
   - cloud
   - default
   - flux-system
+  - infra
   - kube-system
   - kyverno
   - media
