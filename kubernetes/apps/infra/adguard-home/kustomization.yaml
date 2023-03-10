@@ -1,4 +1,3 @@
-
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -11,3 +10,7 @@ labels:
   - pairs:
       app.kubernetes.io/name: adguard-home
       app.kubernetes.io/instance: adguard-home
+configMapGenerator:
+  - name: adguard-home-config
+    files:
+      - config.yaml=./config/config.yaml
