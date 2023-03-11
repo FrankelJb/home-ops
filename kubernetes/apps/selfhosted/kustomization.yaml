@@ -5,6 +5,7 @@ resources:
   - libreddit
   - matrix-synapse
   - paperless-ngx
+  - pairdrop
   - planka
   - rxresume
   - vaultwarden
