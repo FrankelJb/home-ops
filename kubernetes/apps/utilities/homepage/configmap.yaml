@@ -141,7 +141,7 @@ data:
             key: ${SECRET_SONARR_KEY}
       - YouTubeDL-Material:
           href: https://ytdl.${ROOT_DOMAIN}
-          icon: ytdl.png
+          icon: /icons/ytdl.png
           description: Material Design frontend for youtube-dl
     - Selfhosted:
         - Libreddit:
@@ -154,7 +154,7 @@ data:
             description: Scan, index and archive all your physical documents
         - PairDrop:
             href: https://pairdrop.${ROOT_DOMAIN}
-            icon: snaprop.png
+            icon: /icons/pairdrop.png
             description: Sublime alternative to AirDrop that works on all platforms
         - Planka:
             href: https://planka.${ROOT_DOMAIN}
