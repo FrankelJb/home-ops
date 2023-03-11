@@ -42,7 +42,7 @@ spec:
                 ":automergeBranch",
             ],
             "platform": "gitea",
-            "autodiscover": true,
+            "autodiscover": false,
             "dependencyDashboard": true,
             "dependencyDashboardTitle": "Renovate Dashboard 🤖",
             "dryRun": false,
@@ -54,5 +54,6 @@ spec:
             },
             "major": {
                 "dependencyDashboardApproval": true
-            }
+            },
+            repositories: ["gitea_admin/home-ops"]
         }
