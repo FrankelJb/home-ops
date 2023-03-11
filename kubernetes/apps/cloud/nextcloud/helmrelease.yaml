@@ -23,7 +23,7 @@ spec:
     remediation:
       retries: 5
   values:
-    replicaCount: 1
+    replicaCount: 0
     image:
       repository: gitea.${ROOT_DOMAIN}/gitea_admin/nextcloud-supervisord
       tag: 25.0.4
@@ -54,6 +54,13 @@ spec:
         value: "6379"
       - name: REDIS_HOST_PASSWORD
         value: ${REDIS_PASSWORD}
+    extraVolumes:
+      - name: previews
+        persistentVolumeClaim:
+          claimName: nextcloud-previews-pvc
+    extraVolumeMounts:
+      - name: previews
+        mountPath: "/var/www/html/data/appdata_oc16gnntk93o/preview"
     nextcloud:
       configs:
         previews.config.php: |

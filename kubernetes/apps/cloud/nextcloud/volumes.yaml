@@ -37,3 +37,16 @@ spec:
       storage: 1Ti
   storageClassName: nfs-csi
   volumeName: nextcloud-pv-nfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-previews-pvc
+  namespace: cloud
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: local-hostpath
