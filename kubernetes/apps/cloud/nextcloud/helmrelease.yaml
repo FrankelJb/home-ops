@@ -38,29 +38,7 @@ spec:
         secretName: nextcloud-secret
         usernameKey: DB_USER
         passwordKey: DB_PASS
-    extraEnv:
-      - name: OVERWRITEPROTOCOL
-        value: https
-      - name: OIDC_LOGIN_CLIENT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: nextcloud-secret
-            key: OIDC_LOGIN_CLIENT_SECRET
-      - name: PHP_MEMORY_LIMIT
-        value: 10G
-      - name: REDIS_HOST
-        value: ${REDIS_HOST}
-      - name: REDIS_HOST_PORT
-        value: "6379"
-      - name: REDIS_HOST_PASSWORD
-        value: ${REDIS_PASSWORD}
-    extraVolumes:
-      - name: previews
-        persistentVolumeClaim:
-          claimName: nextcloud-previews-pvc
-    extraVolumeMounts:
-      - name: previews
-        mountPath: "/var/www/html/data/appdata_oc16gnntk93o/preview"
+
     nextcloud:
       configs:
         previews.config.php: |
@@ -125,6 +103,29 @@ spec:
         secretName: nextcloud-secret
         usernameKey: ADMIN_USER
         passwordKey: ADMIN_PASS
+      extraEnv:
+        - name: OVERWRITEPROTOCOL
+          value: https
+        - name: OIDC_LOGIN_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-secret
+              key: OIDC_LOGIN_CLIENT_SECRET
+        - name: PHP_MEMORY_LIMIT
+          value: 10G
+        - name: REDIS_HOST
+          value: ${REDIS_HOST}
+        - name: REDIS_HOST_PORT
+          value: "6379"
+        - name: REDIS_HOST_PASSWORD
+          value: ${REDIS_PASSWORD}
+      extraVolumes:
+        - name: previews
+          persistentVolumeClaim:
+            claimName: nextcloud-previews-pvc
+      extraVolumeMounts:
+        - name: previews
+          mountPath: "/var/www/html/data/appdata_oc16gnntk93o/preview"
       host: &host nextcloud.${ROOT_DOMAIN}
     resources:
       limits:
