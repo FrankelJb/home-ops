@@ -11,4 +11,5 @@ resources:
   - loki
   - mailrise
   - renovate
+  - theme-park
   - vpa
