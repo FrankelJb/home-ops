@@ -23,6 +23,8 @@ spec:
     remediation:
       retries: 5
   values:
+    env:
+      LOG_LEVEL: debug
     existingSecret: renovate-env
     image:
       repository: renovate/renovate
