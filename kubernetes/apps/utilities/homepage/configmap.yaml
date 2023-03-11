@@ -47,6 +47,10 @@ data:
             href: https://nextcloud.${ROOT_DOMAIN}
             icon: nextcloud.png
             description: Cloudstorage
+        - Photoview:
+            href: https://photoview.${ROOT_DOMAIN}
+            icon: photoview.png
+            description: Simple and user-friendly photo gallery
     - Infra:
         - Router:
             href: https://unifi.carbon.${ROOT_DOMAIN}
@@ -60,7 +64,7 @@ data:
               type: adguard
               url: https://adguard.${ROOT_DOMAIN}
               username: admin
-              password: {{ .Values.adguard.password }}
+              password: ${SECRET_ADGUARD_PASSWORD}
         - Carbon AdguardHome:
             href: https://adguard.carbon.${ROOT_DOMAIN}
             icon: adguard-home.png
@@ -69,7 +73,7 @@ data:
               type: adguard
               url: https://adguard.carbon.${ROOT_DOMAIN}
               username: admin
-              password: {{ .Values.adguard.password }}
+              password: ${SECRET_ADGUARD_PASSWORD}
     - Media:
         - Invidious:
             href: https://invidious.${ROOT_DOMAIN}
@@ -135,6 +139,10 @@ data:
             type: sonarr
             url: https://sonarr.${ROOT_DOMAIN}
             key: ${SECRET_SONARR_KEY}
+      - YouTubeDL-Material:
+          href: https://ytdl.${ROOT_DOMAIN}
+          icon: ytdl.png
+          description: Material Design frontend for youtube-dl
     - Selfhosted:
         - Libreddit:
             href: https://libreddit.${ROOT_DOMAIN}
@@ -142,12 +150,20 @@ data:
             description: Private front-end for Reddit
         - Paperless-ngx:
             href: https://paperless-ngx.${ROOT_DOMAIN}
-            icon: paperless-ngx.png
+            icon: /icons/paperless-ngx.svg
             description: Scan, index and archive all your physical documents
+        - PairDrop:
+            href: https://pairdrop.${ROOT_DOMAIN}
+            icon: snaprop.png
+            description: Sublime alternative to AirDrop that works on all platforms
         - Planka:
             href: https://planka.${ROOT_DOMAIN}
             icon: planka.png
             description: Kanban board
+        - RxResume:
+            href: https://rxresume.${ROOT_DOMAIN}
+            icon: /icons/rxresume.png
+            description: Resume Builder
         - Vaultwarden:
             href: https://vaultwarden.${ROOT_DOMAIN}
             icon: bitwarden.png

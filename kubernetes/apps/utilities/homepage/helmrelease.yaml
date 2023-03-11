@@ -58,3 +58,9 @@ spec:
         path: ${NFS_PATH}/homepage/images
         server: ${NFS_HOST}
         type: nfs
+      logos:
+        enabled: true
+        mountPath: /app/public/icons
+        path: ${NFS_PATH}/homepage/icons
+        server: ${NFS_HOST}
+        type: nfs
