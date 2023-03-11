@@ -29,11 +29,6 @@ spec:
     image:
       repository: ghcr.io/onedr0p/theme-park
       tag: 1.13.5@sha256:f0ceff335f36d2bfaf5a641be7c00b45ad6d841512659b12c3c8bb04899319d8
-    service:
-      main:
-        ports:
-          http:
-            port: 8080
     ingress:
       main:
         enabled: true
@@ -46,3 +41,8 @@ spec:
         tls:
           - hosts:
               - *host
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
