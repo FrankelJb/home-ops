@@ -23,7 +23,7 @@ spec:
     remediation:
       retries: 5
   values:
-    replicaCount: 0
+    replicaCount: 1
     image:
       repository: gitea.${ROOT_DOMAIN}/gitea_admin/nextcloud-supervisord
       tag: 25.0.4
