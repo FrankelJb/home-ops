@@ -11,4 +11,5 @@ resources:
   - kyverno
   - media
   - selfhosted
+  - theme-park
   - utilities
