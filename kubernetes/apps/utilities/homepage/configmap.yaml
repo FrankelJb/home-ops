@@ -51,11 +51,42 @@ data:
             href: https://photoview.${ROOT_DOMAIN}
             icon: photoview.png
             description: Simple and user-friendly photo gallery
-    - Infra:
-        - Router:
+    - Carbon:
+        - AdguardHome Carbon:
+            href: https://adguard.carbon.${ROOT_DOMAIN}
+            icon: adguard-home.png
+            description: Pi Ad-Blocking
+            widget:
+              type: adguard
+              url: https://adguard.carbon.${ROOT_DOMAIN}
+              username: admin
+              password: ${SECRET_ADGUARD_PASSWORD}
+        - Gitea Carbon:
+            href: https://gitea.carbon.${ROOT_DOMAIN}
+            icon: gitea.png
+            description: Git with a cup of tea
+        - Portainer:
+            href: https://portainer.carbon.${ROOT_DOMAIN}
+            icon: portainer.png
+            description: Deploy, configure, troubleshoot and secure containers
+            widget:
+              type: portainer
+              url: https://portainer.carbon.${ROOT_DOMAIN}
+              env: 1
+              key: ptr_tlvYdMMK73cYGVMeQW0VpA5hlztXgrnTi3lwQ98porw=
+        - Unifi:
             href: https://unifi.carbon.${ROOT_DOMAIN}
             icon: unifi.png
             description: Unifi console
+        - wg-access-server:
+            href: https://vpn.carbon.${ROOT_DOMAIN}
+            icon: wireguard.png
+            description: WireGuard VPN server and a web user interface
+        - Whoogle Carbon:
+            href: https://whoogle.carbon.${ROOT_DOMAIN}
+            icon: whooglesearch.png
+            description: Ad-free, privacy-respecting metasearch engine
+    - Infra:
         - AdguardHome:
             href: https://adguard.${ROOT_DOMAIN}
             icon: adguard-home.png
@@ -63,15 +94,6 @@ data:
             widget:
               type: adguard
               url: https://adguard.${ROOT_DOMAIN}
-              username: admin
-              password: ${SECRET_ADGUARD_PASSWORD}
-        - Carbon AdguardHome:
-            href: https://adguard.carbon.${ROOT_DOMAIN}
-            icon: adguard-home.png
-            description: Pi Ad-Blocking
-            widget:
-              type: adguard
-              url: https://adguard.carbon.${ROOT_DOMAIN}
               username: admin
               password: ${SECRET_ADGUARD_PASSWORD}
     - Media:
@@ -183,10 +205,6 @@ data:
             description: Kubernetes Dashboard
         - Gitea:
             href: https://gitea.${ROOT_DOMAIN}
-            icon: gitea.png
-            description: Git with a cup of tea
-        - Gitea Carbon:
-            href: https://gitea.carbon.${ROOT_DOMAIN}
             icon: gitea.png
             description: Git with a cup of tea
         - Goldilocks:
