@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: libreddit
+  name: huntly
   namespace: selfhosted
 spec:
   interval: 15m
@@ -24,9 +24,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/auricom/libreddit
-      tag: 0.29.4@sha256:7547a18d80dc8f97e981a30594b166f6671c9e899efe739f55940ab295c3a079
-
+      repository: lcomplete/huntly
+      tag: 0.1.0@sha256:bf04aa6e520d801ee09822369a22d04f5e489ab8fcc0c6dd405453da77dec275
     ingress:
       main:
         enabled: true
@@ -39,6 +38,12 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      data:
+        enabled: true
+        path: ${NFS_PATH}/huntly
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:

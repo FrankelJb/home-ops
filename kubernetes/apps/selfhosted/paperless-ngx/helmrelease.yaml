@@ -50,7 +50,7 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
         hosts:
-          - host: &host "paperless-ngx.${ROOT_DOMAIN}"
+          - host: &host "libreddit.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix

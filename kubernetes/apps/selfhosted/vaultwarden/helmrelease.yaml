@@ -41,7 +41,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: &host vaultwarden.${ROOT_DOMAIN}
+          - host: &host "rxresume.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
