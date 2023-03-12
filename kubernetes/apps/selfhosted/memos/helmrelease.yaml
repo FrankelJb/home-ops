@@ -42,8 +42,7 @@ spec:
     persistence:
       memos:
         enabled: true
-        mountPath: /var/ops/memos
-        readOnly: true
+        mountPath: /var/opt/memos
         path: ${NFS_PATH}/memos
         server: ${NFS_HOST}
         type: nfs
