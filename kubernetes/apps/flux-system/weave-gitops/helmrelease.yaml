@@ -29,6 +29,7 @@ spec:
   values:
     adminUser:
       create: true
+      createClusterRole: true
       username: admin
     oidcSecret:
       create: true
