@@ -29,7 +29,7 @@ spec:
       PGID: "568"
     image:
       repository: ghcr.io/onedr0p/sonarr
-      tag: 3.0.9.1549@sha256:b4241ad3bf42289157f51be0fb9d3dbbabc5dba7c808b543506a21c351bbaf9f
+      tag: 3.0.9.1549@sha256:c713e52a6e71d29dcdd38741a4b92384c2911a63a378af1b8e0ebf9f954a0498
     ingress:
       main:
         enabled: true
