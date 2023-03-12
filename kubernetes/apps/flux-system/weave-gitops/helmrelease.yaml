@@ -59,7 +59,7 @@ spec:
     rbac:
       create: true
       impersonationResourceNames: ["wego-admin", "admin"]
-      impersonationResources: ["users", "groups"]
+      impersonationResources: ["groups"]
   valuesFrom:
     - kind: Secret
       name: weave-gitops-secret
