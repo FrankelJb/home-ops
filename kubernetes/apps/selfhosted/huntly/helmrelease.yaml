@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: lcomplete/huntly
-      tag: 0.1.0@sha256:bf04aa6e520d801ee09822369a22d04f5e489ab8fcc0c6dd405453da77dec275
+      tag: 0.1.0@sha256:64e4e569ecc695543adefc24346e6a898dc3b57d70aa434d00d6c3afaeb080a8
     ingress:
       main:
         enabled: true
