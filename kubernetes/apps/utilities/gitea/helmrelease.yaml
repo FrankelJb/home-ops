@@ -30,6 +30,8 @@ spec:
         database:
           DB_TYPE: postgres
           HOST: ${POSTGRESQL_HOST}
+        migrations:
+          ALLOWED_DOMAINS: gitea.carbon.${ROOT_DOMAIN}
         server:
           LANDING_PAGE: login
           ROOT_URL: https://gitea.${ROOT_DOMAIN}

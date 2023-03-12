@@ -38,19 +38,6 @@ data:
         cache: 5 # Time in minutes to cache API responses, to stay within limits
   services.yaml: |
     ---
-    - Cloud:
-        - Immich:
-            href: https://immich.${ROOT_DOMAIN}
-            icon: immich.png
-            description: High performance self-hosted photo and video backup solution
-        - Nextcloud:
-            href: https://nextcloud.${ROOT_DOMAIN}
-            icon: nextcloud.png
-            description: Cloudstorage
-        - Photoview:
-            href: https://photoview.${ROOT_DOMAIN}
-            icon: photoview.png
-            description: Simple and user-friendly photo gallery
     - Carbon:
         - AdguardHome Carbon:
             href: https://adguard.carbon.${ROOT_DOMAIN}
@@ -86,6 +73,19 @@ data:
             href: https://whoogle.carbon.${ROOT_DOMAIN}
             icon: whooglesearch.png
             description: Ad-free, privacy-respecting metasearch engine
+    - Cloud:
+        - Immich:
+            href: https://immich.${ROOT_DOMAIN}
+            icon: immich.png
+            description: High performance self-hosted photo and video backup solution
+        - Nextcloud:
+            href: https://nextcloud.${ROOT_DOMAIN}
+            icon: nextcloud.png
+            description: Cloudstorage
+        - Photoview:
+            href: https://photoview.${ROOT_DOMAIN}
+            icon: photoview.png
+            description: Simple and user-friendly photo gallery
     - Infra:
         - AdguardHome:
             href: https://adguard.${ROOT_DOMAIN}
