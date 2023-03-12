@@ -72,7 +72,7 @@ data:
             widget:
               type: portainer
               url: https://portainer.carbon.${ROOT_DOMAIN}
-              env: 1
+              env: 2
               key: ptr_tlvYdMMK73cYGVMeQW0VpA5hlztXgrnTi3lwQ98porw=
         - Unifi:
             href: https://unifi.carbon.${ROOT_DOMAIN}
@@ -217,7 +217,7 @@ data:
             description: Metric Monitoring
         - Weave:
             href: https://weave.${ROOT_DOMAIN}
-            icon: weave.png
+            icon: /icons/weave.png
             description: GitOps for K8s
   bookmarks.yaml: |
     ---
