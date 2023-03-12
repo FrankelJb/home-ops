@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - libreddit
   - matrix-synapse
+  - memos
   - paperless-ngx
   - pairdrop
   - planka
