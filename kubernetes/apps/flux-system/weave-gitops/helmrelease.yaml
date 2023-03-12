@@ -39,6 +39,9 @@ spec:
     ingress:
       enabled: true
       className: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-buffer-size: 24k
+        nginx.ingress.kubernetes.io/proxy-buffers-number: "32"
       hosts:
         - host: &host "weave.${ROOT_DOMAIN}"
           paths:
