@@ -39,6 +39,14 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      memos:
+        enabled: true
+        mountPath: /var/ops/memos
+        readOnly: true
+        path: ${NFS_PATH}/memos
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:
