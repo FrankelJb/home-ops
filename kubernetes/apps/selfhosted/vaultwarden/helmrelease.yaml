@@ -41,7 +41,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: &host "rxresume.${ROOT_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix

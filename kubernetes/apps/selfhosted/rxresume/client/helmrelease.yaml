@@ -35,7 +35,7 @@ spec:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             rewrite /api/(.*) /$1 break;
         hosts:
-          - host: &host "planka.${ROOT_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
