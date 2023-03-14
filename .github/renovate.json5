@@ -4,6 +4,7 @@
         "config:base",
         ":semanticCommits",
         ":dependencyDashboard",
+        ":disableRateLimiting",
         ":automergeDigest",
         ":automergeBranch",
         "local>gitea_admin/home-ops//.github/renovate/autoMerge.json5",
