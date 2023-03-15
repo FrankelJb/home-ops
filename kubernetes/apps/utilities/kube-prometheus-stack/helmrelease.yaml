@@ -38,6 +38,15 @@ spec:
               - prometheus.${ROOT_DOMAIN}
 
       prometheusSpec:
+        additionalScrapeConfigs:
+          - job_name: "uptime"
+            scrape_interval: 30s
+            scheme: http
+            static_configs:
+              - targets: ["uptime.${ROOT_DOMAIN}"]
+            basic_auth:
+              username: ${USERNAME}
+              password: ${SECRET_UPTIME_PASSWORD}
         retention: 2d
         retentionSize: 6GB
         enableAdminAPI: true
