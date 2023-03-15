@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: uptime-kuma
+  namespace: utilities
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    env:
+      TZ: "${TIMEZONE}"
+    # Waiting on rootless image first:
+    # https://github.com/louislam/uptime-kuma/issues/2113
+    # https://github.com/louislam/uptime-kuma/pull/2086
+    # podSecurityContext:
+    #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
+    #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
+    image:
+      repository: docker.io/louislam/uptime-kuma
+      tag: 1.20.2@sha256:e15da2d215d837e8830afdb2de5ed01ba120fa1275fcbb4c68cde447601e1bd7
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host "uptime.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        mountPath: /app/data
+        existingClaim: uptime-kuma-pvc
+    service:
+      main:
+        ports:
+          http:
+            port: 3001

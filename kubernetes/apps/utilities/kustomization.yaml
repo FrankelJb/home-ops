@@ -12,4 +12,5 @@ resources:
   - mailrise
   - renovate
   - theme-park
+  - uptime-kuma
   - vpa
