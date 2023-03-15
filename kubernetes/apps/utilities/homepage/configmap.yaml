@@ -26,7 +26,7 @@ data:
         url: https://unifi.carbon.${ROOT_DOMAIN}
         username: ${USERNAME}
         password: ${SECRET_UNIFI_PASSWORD}
-    widget:
+    - widget:
         type: uptimekuma
         url: https://uptime.${ROOT_DOMAIN}
         slug: up
