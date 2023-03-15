@@ -26,10 +26,6 @@ data:
         url: https://unifi.carbon.${ROOT_DOMAIN}
         username: ${USERNAME}
         password: ${SECRET_UNIFI_PASSWORD}
-    - widget:
-        type: uptimekuma
-        url: https://uptime.${ROOT_DOMAIN}
-        slug: up
     - search:
         provider: custom
         target: _self
@@ -64,7 +60,7 @@ data:
               type: portainer
               url: https://portainer.carbon.${ROOT_DOMAIN}
               env: 2
-              key: ptr_tlvYdMMK73cYGVMeQW0VpA5hlztXgrnTi3lwQ98porw=
+              key: ${SECRET_PORTAINER_KEY}
         - Unifi:
             href: https://unifi.carbon.${ROOT_DOMAIN}
             icon: unifi.png
