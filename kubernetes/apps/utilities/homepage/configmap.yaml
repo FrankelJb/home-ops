@@ -78,6 +78,14 @@ data:
             href: https://immich.${ROOT_DOMAIN}
             icon: immich.png
             description: High performance self-hosted photo and video backup solution
+            namespace: cloud
+            podSelector: >-
+              app.kubernetes.io/instance in (
+                  immich-machine-learning,
+                  immich-microservices,
+                  immich-server,
+                  immich-web
+              )
         - Nextcloud:
             href: https://nextcloud.${ROOT_DOMAIN}
             icon: nextcloud.png
