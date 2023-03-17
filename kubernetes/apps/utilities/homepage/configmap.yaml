@@ -24,16 +24,12 @@ data:
           memory: true
           showLabel: true
           label: "cluster"
-        nodes:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
     - resources:
         backend: kubernetes
         expanded: true
         cpu: true
         memory: true
+        label: "hydrogen"
     - unifi_console:
         url: https://unifi.carbon.${ROOT_DOMAIN}
         username: ${USERNAME}
@@ -91,6 +87,7 @@ data:
             icon: immich.png
             description: High performance self-hosted photo and video backup solution
             namespace: cloud
+            app: immich
             podSelector: >-
               app.kubernetes.io/instance in (
                   immich-machine-learning,
