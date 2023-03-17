@@ -100,6 +100,10 @@ data:
                   immich-server,
                   immich-web
               )
+            widget:
+              type: immich
+              url: https://immich.${ROOT_DOMAIN}
+              key: ${SECRET_IMMICH_KEY}
         - Nextcloud:
             href: https://nextcloud.${ROOT_DOMAIN}
             icon: nextcloud.png
@@ -243,6 +247,14 @@ data:
             href: https://weave.${ROOT_DOMAIN}
             icon: /icons/weave.svg
             description: GitOps for K8s
+        - Uptime Kuma:
+            href: https://uptime.${ROOT_DOMAIN}
+            icon: uptime-kuma.svg
+            description: A fancy self-hosted monitoring tool 
+            widget:
+              type: uptimekuma
+              url: https://uptime.${ROOT_DOMAIN}
+              slug: up
   bookmarks.yaml: |
     ---
       - Developer:
