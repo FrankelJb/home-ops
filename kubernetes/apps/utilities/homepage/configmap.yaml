@@ -17,6 +17,18 @@ data:
     target: _self
   widgets.yaml: |
     ---
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "cluster"
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
     - resources:
         backend: kubernetes
         expanded: true
@@ -90,6 +102,8 @@ data:
             href: https://nextcloud.${ROOT_DOMAIN}
             icon: nextcloud.png
             description: Cloudstorage
+            namespace: cloud
+            app: nextcloud
         - Photoview:
             href: https://photoview.${ROOT_DOMAIN}
             icon: photoview.png
@@ -225,7 +239,7 @@ data:
             description: Metric Monitoring
         - Weave:
             href: https://weave.${ROOT_DOMAIN}
-            icon: /icons/weave.png
+            icon: /icons/weave.svg
             description: GitOps for K8s
   bookmarks.yaml: |
     ---
