@@ -7,6 +7,10 @@ data:
   IMMICH_SERVER_URL: http://immich-server.cloud.svc.cluster.local:3001
   IMMICH_WEB_URL: http://immich-web.cloud.svc.cluster.local:3000
   IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.cloud.svc.cluster.local:3003
+  TYPESENSE_HOST: immich-typesense.default.svc.cluster.local
+  TYPESENSE_PORT: "8108"
+  TYPESENSE_PROTOCOL: http
+  TYPESENSE_DATA_DIR: /config
 kind: ConfigMap
 metadata:
   creationTimestamp: null
