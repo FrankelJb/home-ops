@@ -36,7 +36,7 @@ spec:
           name: immich-configmap
     image:
       repository: ghcr.io/immich-app/immich-server
-      tag: v1.51.1
+      tag: v1.51.2
     persistence:
       library:
         enabled: true
@@ -46,8 +46,6 @@ spec:
       requests:
         cpu: 10m
         memory: 100Mi
-      limits:
-        memory: 500Mi
     service:
       main:
         ports:
