@@ -41,9 +41,7 @@ spec:
         mountPath: /usr/src/app/upload
       cache:
         enabled: true
-        accessMode: ReadWriteOnce
-        size: 10Gi
-        storageClass: local-hostpath
+        existingClaim: immich-machine-learning-pvc
     service:
       main:
         ports:

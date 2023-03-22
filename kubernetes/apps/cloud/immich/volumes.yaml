@@ -76,3 +76,16 @@ spec:
       storage: 1Gi
   storageClassName: nfs-csi
   volumeName: immich-typesense-pv-nfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  name: immich-machine-learning-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: local-hostpath
