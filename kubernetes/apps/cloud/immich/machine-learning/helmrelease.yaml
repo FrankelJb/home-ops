@@ -23,12 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
-    args:
-      - src/main.py
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
-    command: python
     envFrom:
       - secretRef:
           name: immich-secret
@@ -42,9 +39,9 @@ spec:
         enabled: true
         existingClaim: immich-pvc
         mountPath: /usr/src/app/upload
-      model-cache:
+      cache:
         enabled: true
-        type: emptyDir
+        existingClaim: immich-machine-learning-pvc
     service:
       main:
         ports:
@@ -53,6 +50,6 @@ spec:
     resources:
       requests:
         cpu: 100m
-        memory: 250Mi
+        memory: 1000Mi
       limits:
         memory: 2000Mi
