@@ -23,12 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
-    args:
-      - src/main.py
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
-    command: python
     envFrom:
       - secretRef:
           name: immich-secret
