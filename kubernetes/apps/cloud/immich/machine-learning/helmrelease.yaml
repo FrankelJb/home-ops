@@ -41,7 +41,9 @@ spec:
         mountPath: /usr/src/app/upload
       cache:
         enabled: true
-        type: emptyDir
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        storageClass: local-hostpath
     service:
       main:
         ports:
