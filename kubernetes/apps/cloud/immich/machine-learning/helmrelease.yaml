@@ -42,7 +42,7 @@ spec:
         enabled: true
         existingClaim: immich-pvc
         mountPath: /usr/src/app/upload
-      model-cache:
+      cache:
         enabled: true
         type: emptyDir
     service:
