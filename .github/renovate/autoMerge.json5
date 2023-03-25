@@ -3,12 +3,21 @@
   "packageRules": [
     {
       "description": "Auto merge container digests",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker",
+        "helm"
+      ],
       "automerge": true,
       "automergeType": "branch",
       "ignoreTests": true,
-      "matchUpdateTypes": ["digest", "patch"],
-      "matchPackagePattern": ["ghcr.io/onedr0p", "renovate/renovate"]
+      "matchUpdateTypes": [
+        "digest",
+        "patch"
+      ],
+      "matchPackagePattern": [
+        "ghcr.io/onedr0p",
+        "renovate/renovate"
+      ]
     },
   ]
 }
