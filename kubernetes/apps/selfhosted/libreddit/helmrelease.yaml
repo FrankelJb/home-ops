@@ -23,6 +23,8 @@ spec:
     remediation:
       retries: 5
   values:
+    env:
+      LIBREDDIT_DEFAULT_SHOW_NSFW: "on"
     image:
       repository: ghcr.io/auricom/libreddit
       tag: 0.30.1@sha256:4f6d3755c772dbfee7cdb7262c4894a64052cc01933c085676bf40edf0303e1c
