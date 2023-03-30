@@ -5,6 +5,7 @@ resources:
   - libreddit
   - matrix-synapse
   - memos
+  - openspeedtest
   - paperless-ngx
   - pairdrop
   - planka
