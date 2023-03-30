@@ -27,7 +27,7 @@ spec:
       LIBREDDIT_DEFAULT_SHOW_NSFW: "on"
     image:
       repository: ghcr.io/auricom/libreddit
-      tag: 0.30.1@sha256:d1f6399c1a6b5e65c964c5e1834353e0011978098c7bfec42a37199f5a812a77
+      tag: 0.30.1@sha256:b09bf6433dfdc72f351f133bcf5b1399047f1058d779f64b3e4bd10e918e7971
 
     ingress:
       main:
