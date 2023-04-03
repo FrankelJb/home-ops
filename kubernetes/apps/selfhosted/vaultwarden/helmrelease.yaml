@@ -60,7 +60,7 @@ spec:
               - *host
     image:
       repository: vaultwarden/server
-      tag: 1.28.0
+      tag: 1.28.1
     persistence:
       config:
         enabled: true
