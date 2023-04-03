@@ -7,4 +7,3 @@ resources:
   - authelia
   - k8s-gateway
   - glauth
-  - pod-gateway
