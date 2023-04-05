@@ -1,0 +1,11 @@
+---
+- name: Configure K8S nodes
+  hosts: k8s_cluster
+  become: true
+
+  tasks:
+    - name: Run k8s-node role
+      ansible.builtin.include_role:
+        name: k8s-node
+      tags:
+        - debug

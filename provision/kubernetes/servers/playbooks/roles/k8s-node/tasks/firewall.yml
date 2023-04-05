@@ -1,0 +1,23 @@
+---
+- name: Get POD CIDR range
+  ansible.builtin.shell:
+    cmd: /var/lib/rancher/rke2/bin/kubectl --kubeconfig=/etc/rancher/rke2/rke2.yaml get nodes -o jsonpath='{.items[*].spec.podCIDR}' > /tmp/pod_cidr
+    creates: /tmp/pod_cidr
+
+- name: Read POD CIDR
+  ansible.builtin.command:
+    cmd: cat /tmp/pod_cidr
+  register: pod_cidr
+
+- name: Ensure kubernetes_pod zone exists
+  ansible.posix.firewalld:
+    zone: kubernetes_pods
+    permanent: true
+    state: present
+
+- name: Ensure correct firewall rule is in place
+  ansible.posix.firewalld:
+    zone: kubernetes_pods
+    source: "{{ pod_cidr.stdout }}"
+    permanent: true
+    state: enabled

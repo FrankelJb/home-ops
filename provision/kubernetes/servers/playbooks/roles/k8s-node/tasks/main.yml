@@ -1,0 +1,12 @@
+---
+# tasks file for k8s-node
+
+- name: Run RKE2 role
+  ansible.builtin.include_role:
+    name: lablabs.rke2
+  vars:
+    rke2_version: v1.26.3+rke2r1
+    rke2_download_kubeconf: true
+# - include_tasks: firewall.yml
+#   tags:
+#     - debug

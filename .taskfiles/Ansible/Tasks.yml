@@ -1,0 +1,19 @@
+---
+version: "3"
+
+tasks:
+  deps:
+    desc: Install/update ansible dependencies
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - echo "{{.ANSIBLE_DIR}}"
+      - ansible-galaxy install -r requirements.yml --roles-path $HOME/.ansible/roles --force
+      - ansible-galaxy collection install -r requirements.yml --collections-path ~/.ansible/collections --force
+    preconditions:
+      - test -f "{{.ANSIBLE_DIR}}/requirements.yml"
+
+  execute:
+    desc: Run ansible playbook on the nodes
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook playbooks/main.yml -i inventory.ini -u "{{.SSH_USERNAME}}" --ask-become-pass
