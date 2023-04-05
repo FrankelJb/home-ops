@@ -32,7 +32,7 @@ spec:
       LOG_LEVEL: debug
     image:
       repository: ghcr.io/benphelps/homepage
-      tag: v0.6.11@sha256:f228671390757f7de51636fb8bc82fd0725322357eb6f68a57fd9626f5a672ed
+      tag: v0.6.14@sha256:de5d1f6430c55d38c76906f863e89cc6f3f61f9b5a5c21061bea8cb4e87b7d80
     ingress:
       main:
         enabled: true
