@@ -59,7 +59,7 @@ spec:
               - *host
     image:
       repository: adguard/adguardhome
-      tag: v0.107.26
+      tag: v0.107.27
     persistence:
       tmp:
         enabled: true
