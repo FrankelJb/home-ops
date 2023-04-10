@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: amruthpillai/reactive-resume
-      tag: client-3.6.18@sha256:1f6026475b54138820de02140eae3db469a7ce0d6507d8ba0bce10938432ff16
+      tag: client-3.7.18@sha256:60a4d03950887a52192135f701d86ea9f9847595fddd308e2df75f6411dac621
 
     ingress:
       main:
