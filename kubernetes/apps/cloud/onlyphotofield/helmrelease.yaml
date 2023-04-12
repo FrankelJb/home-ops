@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: onlyphotofield
+  name: &app onlyphotofield
   namespace: cloud
 spec:
   interval: 15m
@@ -62,3 +62,9 @@ spec:
         readOnly: true
         server: ${NFS_HOST}
         type: nfs
+
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: PHOTOS_PATH
+      targetPath: persistence.photos.path
