@@ -35,8 +35,8 @@ spec:
       WHOOGLE_CONFIG_THEME: dark
       WHOOGLE_CONFIG_STYLE: ":root {--whoogle-dark-logo: #8742a1; --whoogle-dark-page-bg: #011627; --whoogle-dark-element-bg: #040A19; --whoogle-dark-text: #24b89d; --whoogle-dark-contrast-text: #4186c6; --whoogle-dark-secondary-text: #8751a1; --whoogle-dark-result-bg: #040A19; --whoogle-dark-result-title: #4186c6; --whoogle-dark-result-url: #f48075; --whoogle-dark-result-visited: #eb3488; --whoogle-dark-divider: #4186c6; } #whoogle-w { fill: #4186c6; } #whoogle-h { fill: #eb3488; } #whoogle-o-1 { fill: #f48075; } #whoogle-o-2 { fill: #8751a1; } #whoogle-g { fill: #24b89d; } #whoogle-l { fill: #eb3488; } #whoogle-e { fill: #4186c6; }"
     image:
-      repository: benbusby/whoogle-search
-      tag: 0.8.2@sha256:f361bf921f066dce330c3d9b87859b08c000a04b4aa810b174e825abd4423e44
+      repository: gchr.io/benbusby/whoogle-search
+      tag: 0.8.2@sha256:e0a89cad73317e78bf0156ed2f98bbda6988329a0d9b9805259eb3bb4461e601
     ingress:
       main:
         enabled: true
