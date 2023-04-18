@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: cert-manager
 resources:
   - ./helmrelease.yaml
+  - ./certificate.yaml
   - ./carbon-certificate.yaml
   - ./letsencrypt-prod-clusterissuer.yaml
   - ./letsencrypt-staging-clusterissuer.yaml
