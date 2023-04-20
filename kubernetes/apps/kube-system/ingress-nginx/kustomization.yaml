@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./helmchartconfig.yaml
-  - ./certificate.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: ingress-nginx
