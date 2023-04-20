@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: renovate
-      version: 35.41.0
+      version: 35.53.0
       sourceRef:
         kind: HelmRepository
         name: renovate
@@ -28,7 +28,7 @@ spec:
     existingSecret: renovate-env
     image:
       repository: renovate/renovate
-      tag: 35.46.0
+      tag: 35.54.0
       pullPolicy: IfNotPresent
     cronjob:
       schedule: "0 0 * * *"
