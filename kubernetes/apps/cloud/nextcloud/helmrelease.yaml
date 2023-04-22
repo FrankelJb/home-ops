@@ -26,7 +26,7 @@ spec:
     replicaCount: 1
     image:
       repository: gitea.${ROOT_DOMAIN}/gitea_admin/nextcloud-supervisord
-      tag: 25.0.6
+      tag: 26.0.1
     internalDatabase:
       enabled: false
     externalDatabase:
