@@ -7,3 +7,4 @@ vars:
 
 includes:
   pv: .taskfiles/Ansible/Tasks.yml
+  fx: .taskfiles/Flux/Tasks.yml
