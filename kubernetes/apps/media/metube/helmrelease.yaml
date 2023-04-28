@@ -25,8 +25,6 @@ spec:
   values:
     env:
       TZ: "${TIMEZONE}"
-      DOWNLOAD_DIR: "/downloads/videos"
-      STATE_DIR: "/downloads/videos/.metube"
     image:
       repository: ghcr.io/alexta69/metube
       tag: latest
@@ -56,9 +54,9 @@ spec:
       supplementalGroups:
         - 100
     persistence:
-      storage:
+      downloads:
         enabled: true
-        path: /mnt/raid/media/youtubedl-material
+        path: /mnt/raid/media/metube
         server: ${NFS_HOST}
         type: nfs
         readOnly: false
