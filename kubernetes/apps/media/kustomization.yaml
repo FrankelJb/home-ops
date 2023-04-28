@@ -6,9 +6,9 @@ resources:
   - invidious
   - jellyfin
   - jellyseerr
+  - metube
   - navidrome
   - prowlarr
   - qbittorrent
   - radarr
   - sonarr
-  - youtubedl-material

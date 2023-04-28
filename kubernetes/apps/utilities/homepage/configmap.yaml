@@ -156,6 +156,10 @@ data:
             type: jellyseerr
             url: https://jellyseerr.${ROOT_DOMAIN}
             key: ${SECRET_JELLYSEERR_KEY}
+      - Metube:
+          href: https://metube.${ROOT_DOMAIN}
+          icon: metube.svg
+          description: Web GUI for youtube-dl
       - qBittorrent:
           href: https://qbittorrent.${ROOT_DOMAIN}
           icon: qbittorrent.png
@@ -189,10 +193,6 @@ data:
             type: sonarr
             url: https://sonarr.${ROOT_DOMAIN}
             key: ${SECRET_SONARR_KEY}
-      - YouTubeDL-Material:
-          href: https://ytdl.${ROOT_DOMAIN}
-          icon: /icons/ytdl.png
-          description: Material Design frontend for youtube-dl
     - Selfhosted:
         - Libreddit:
             href: https://libreddit.${ROOT_DOMAIN}
