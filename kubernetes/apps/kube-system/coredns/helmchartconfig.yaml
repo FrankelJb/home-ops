@@ -43,7 +43,7 @@ spec:
       plugins:
       - name: errors
       - name: forward
-        parameters: . 192.168.1.1
+        parameters: . 192.168.1.200
       - name: cache
         parameters: 30
       - name: reload
@@ -53,6 +53,6 @@ spec:
       plugins:
       - name: errors
       - name: forward
-        parameters: . 192.168.1.1
+        parameters: . 192.168.1.200
       - name: cache
         parameters: 30
