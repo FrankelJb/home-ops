@@ -60,7 +60,7 @@ spec:
     postgresql:
       enabled: false
     redis:
-      enabled: false
+      enabled: true
       auth:
         password: ${REDIS_PASSWORD}
     serverName: *host

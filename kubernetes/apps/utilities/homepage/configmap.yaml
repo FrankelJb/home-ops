@@ -261,7 +261,7 @@ data:
         - Github:
           - icon: github.png
             href: https://github.com/
-        - Mullvad
+        - Mullvad:
           - icon: mullvad.png
             href: https://mullvad.net/en/check
 
