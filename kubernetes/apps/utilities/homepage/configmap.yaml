@@ -158,7 +158,7 @@ data:
             key: ${SECRET_JELLYSEERR_KEY}
       - Metube:
           href: https://metube.${ROOT_DOMAIN}
-          icon: metube.svg
+          icon: metube.png
           description: Web GUI for youtube-dl
       - qBittorrent:
           href: https://qbittorrent.${ROOT_DOMAIN}
@@ -249,7 +249,7 @@ data:
             description: GitOps for K8s
         - Uptime Kuma:
             href: https://uptime.${ROOT_DOMAIN}
-            icon: uptime-kuma.svg
+            icon: uptime-kuma.png
             description: A fancy self-hosted monitoring tool 
             widget:
               type: uptimekuma
@@ -259,8 +259,12 @@ data:
     ---
       - Developer:
         - Github:
-          - abbr: GH
+          - icon: github.png
             href: https://github.com/
+        - Mullvad
+          - icon: mullvad.png
+            href: https://mullvad.net/en/check
+
 
       - Social:
         - Reddit:
