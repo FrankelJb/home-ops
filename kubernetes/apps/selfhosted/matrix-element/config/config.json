@@ -1,8 +1,8 @@
 {
     "default_server_config": {
         "m.homeserver": {
-            "base_url": "https://synapse.${ROOT_DOMAIN}",
-            "server_name": "synapse.${ROOT_DOMAIN}"
+            "base_url": "https://matrix.${ROOT_DOMAIN}",
+            "server_name": "matrix.${ROOT_DOMAIN}"
         },
         "m.identity_server": {
             "base_url": "https://vector.im"

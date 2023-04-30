@@ -47,7 +47,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: &host "synapse.${ROOT_DOMAIN}"
+          - host: &host "matrix.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
