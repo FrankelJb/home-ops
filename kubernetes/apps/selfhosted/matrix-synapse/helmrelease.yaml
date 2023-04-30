@@ -33,6 +33,7 @@ spec:
       suppress_key_server_warning: true
     externalRedis:
       host: ${REDIS_HOST}
+      password: ${REDIS_PASSWORD}
     externalPostgresql:
       host: ${POSTGRESQL_HOST}
       port: 5432
@@ -60,9 +61,7 @@ spec:
     postgresql:
       enabled: false
     redis:
-      enabled: true
-      auth:
-        password: ${REDIS_PASSWORD}
+      enabled: false
     serverName: *host
     signingkey:
       job:
