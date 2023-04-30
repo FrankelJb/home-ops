@@ -41,7 +41,7 @@ spec:
             add_header X-XSS-Protection "1; mode=block";
             add_header Content-Security-Policy "frame-ancestors 'none'";
         hosts:
-          - host: &host element.${ROOT_DOMAIN}
+          - host: &host "element.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
