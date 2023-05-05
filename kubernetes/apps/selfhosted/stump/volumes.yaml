@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: nfs.csi.k8s.io
+  name: stump-pv-nfs
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-csi
+  mountOptions:
+    - nfsvers=4.2
+  csi:
+    driver: nfs.csi.k8s.io
+    readOnly: false
+    # volumeHandle format: {nfs-server-address}#{sub-dir-name}#{share-name}
+    # make sure this value is unique for every share in the cluster
+    volumeHandle: "${NFS_HOST}${NFS_PATH}#stump#"
+    volumeAttributes:
+      server: "${NFS_HOST}"
+      share: "${NFS_PATH}/stump"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stump-pvc
+  namespace: selfhosted
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: nfs-csi
+  volumeName: stump-pv-nfs

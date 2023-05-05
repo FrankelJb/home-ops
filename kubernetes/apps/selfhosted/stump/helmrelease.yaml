@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: prowlarr
-  namespace: downloads
+  name: stump
+  namespace: selfhosted
 spec:
   interval: 15m
   chart:
@@ -24,37 +24,31 @@ spec:
       retries: 5
   values:
     env:
-      TZ: Asia/Singapore
-      PUID: "568"
-      PGID: "568"
+      PUID: 1000
+      PGID: 1000
     image:
-      repository: ghcr.io/onedr0p/prowlarr-nightly
-      tag: 1.5.0.3292@sha256:dbe6e713d6259736d5f773e72c0289957b2a9cdc2c5f752498091459358c5e28
+      repository: aaronleopold/stump
+      tag: nightly@sha256:72d7d15c6fe6c523512eb7d204ebd8227d5de7e688c684f3028a643a64cf16d3
+      pullPolicy: IfNotPresent
+    persistence:
+      data:
+        enabled: true
+        existingClaim: stump-pvc
+        type: pvc
     ingress:
       main:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: &host prowlarr.${ROOT_DOMAIN}
+          - host: &host stump.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
-    persistence:
-      config:
-        enabled: true
-        path: ${NFS_PATH}/arrs/prowlarr/config
-        server: ${NFS_HOST}
-        type: nfs
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
     service:
       main:
         ports:
           http:
-            port: 9696
+            port: 10801
