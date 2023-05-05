@@ -1,0 +1,57 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: stump
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    env:
+      PUID: 1000
+      PGID: 1000
+    image:
+      repository: aaronleopold/stump
+      tag: nightly@sha256:72d7d15c6fe6c523512eb7d204ebd8227d5de7e688c684f3028a643a64cf16d3
+      pullPolicy: IfNotPresent
+    persistence:
+      config:
+        enabled: true
+        type: emptyDir
+      data:
+        enabled: true
+        existingClaim: stump-pvc
+        type: pvc
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host stump.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    service:
+      main:
+        ports:
+          http:
+            port: 10801
