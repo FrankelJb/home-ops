@@ -28,7 +28,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: stump-pvc
-  namespace: cloud
+  namespace: selfhosted
 spec:
   accessModes:
     - ReadWriteMany
