@@ -31,9 +31,6 @@ spec:
       tag: nightly@sha256:72d7d15c6fe6c523512eb7d204ebd8227d5de7e688c684f3028a643a64cf16d3
       pullPolicy: IfNotPresent
     persistence:
-      config:
-        enabled: true
-        type: emptyDir
       data:
         enabled: true
         existingClaim: stump-pvc
