@@ -26,6 +26,7 @@ spec:
     env:
       PUID: 1000
       PGID: 1000
+      STUMP_PORT: 10801
     image:
       repository: aaronleopold/stump
       tag: nightly@sha256:bd13147a264b53d804c5d4cc459506b5c30edcdd2651e62ba449877883f0dad0
