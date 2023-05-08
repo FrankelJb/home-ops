@@ -1,0 +1,88 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: readarr
+  namespace: downloads
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    env:
+      READARR__INSTANCE_NAME: Readarr
+      READARR__PORT: &port 8787
+      READARR__APPLICATION_URL: "https://readarr.${ROOT_DOMAIN}"
+      READARR__LOG_LEVEL: info
+      READARR__API_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: readarr-secrets
+            key: api_key
+      TZ: ${TIMEZONE}
+      PUID: "568"
+      PGID: "568"
+    image:
+      repository: ghcr.io/onedr0p/readarr-develop
+      tag: 0.1.4.1596@sha256:afd5b40e56e75f2173ed683f7a20011faf5a4af78b115fcf9cb72bd6bab82545
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: &host readarr.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    podAnnotations:
+      secret.reloader.stakater.com/reload: readarr-secrets
+
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+
+    persistence:
+      config:
+        enabled: true
+        path: ${NFS_PATH}/arrs/readarr/config
+        server: ${NFS_HOST}
+        type: nfs
+      media:
+        enabled: true
+        path: /mnt/raid/media/qbittorrent/downloads
+        server: ${NFS_HOST}
+        type: nfs
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 224M
+      limits:
+        memory: 224M
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
