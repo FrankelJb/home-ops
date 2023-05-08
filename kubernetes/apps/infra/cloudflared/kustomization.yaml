@@ -11,7 +11,7 @@ labels:
       app.kubernetes.io/name: cloudflared
       app.kubernetes.io/instance: cloudflared
 configMapGenerator:
-  - name: cloudflare-tunnel
+  - name: cloudflared-tunnel
     files:
       - ./config/config.yaml
 generatorOptions:
