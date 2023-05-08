@@ -2,8 +2,6 @@ tunnel: ${ROOT_DOMAIN/./-}
 
 ingress:
   # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
-  - hostname: "*.${ROOT_DOMAIN}"
-    service: https://rke2-ingress-nginx-controller-admission.kube-system:443
-    originRequest:
-      originServerName: "ingress.${ROOT_DOMAIN}"
+  - hostname: photoview.${ROOT_DOMAIN}
+    service: https://photoview.${ROOT_DOMAIN}
   - service: http_status:404
