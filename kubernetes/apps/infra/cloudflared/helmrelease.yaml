@@ -30,7 +30,8 @@ spec:
       tag: 2023.5.0
     env:
       NO_AUTOUPDATE: "true"
-      TUNNEL_CRED_FILE: /etc/cloudflared/creds/cred.json
+      TUNNEL_CRED_FILE: /etc/cloudflared/secrets/cred.json
+      TUNNEL_ORIGIN_CERT: /etc/cloudflared/secrets/cert.pem
       TUNNEL_TRANSPORT_PROTOCOL: auto
     args:
       - tunnel
@@ -53,11 +54,11 @@ spec:
         subPath: config.yaml
         mountPath: /etc/cloudflared/config/config.yaml
         readOnly: true
-      creds:
+      secrets:
         enabled: true
         type: secret
-        name: &secret cloudflared-tunnel
-        mountPath: /etc/cloudflared/creds/cred.json
+        name: cloudflared-tunnel
+        mountPath: /etc/cloudflared/secrets
         readOnly: true
     resources:
       requests:
