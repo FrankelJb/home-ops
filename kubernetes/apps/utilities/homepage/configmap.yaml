@@ -124,15 +124,6 @@ data:
               url: https://adguard.${ROOT_DOMAIN}
               username: admin
               password: ${SECRET_ADGUARD_PASSWORD}
-        - AdguardHome:
-            href: https://opnsense.${ROOT_DOMAIN}
-            icon: opnsens.png
-            description: Firewall and routing software
-            widget:
-                type: opnsense
-                url: https://opnsense.${ROOT_DOMAIN}
-                username: ${SECRET_OPNSENSE_USERNAME}
-                password: ${SECRET_OPNSENSE_PASSWORD}
     - Media:
         - Invidious:
             href: https://invidious.${ROOT_DOMAIN}

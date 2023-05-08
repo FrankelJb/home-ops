@@ -1,0 +1,7 @@
+tunnel: ${ROOT_DOMAIN/./-}
+
+ingress:
+  # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
+  - hostname: immich.${ROOT_DOMAIN}
+    service: https://immich.${ROOT_DOMAIN}
+  - service: http_status:404
