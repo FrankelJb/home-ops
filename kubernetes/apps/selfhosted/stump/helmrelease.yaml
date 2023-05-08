@@ -28,7 +28,7 @@ spec:
       PGID: 1000
     image:
       repository: aaronleopold/stump
-      tag: nightly@sha256:72d7d15c6fe6c523512eb7d204ebd8227d5de7e688c684f3028a643a64cf16d3
+      tag: nightly@sha256:bd13147a264b53d804c5d4cc459506b5c30edcdd2651e62ba449877883f0dad0
       pullPolicy: IfNotPresent
     persistence:
       data:
