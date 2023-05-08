@@ -53,11 +53,11 @@ spec:
         subPath: config.yaml
         mountPath: /etc/cloudflared/config/config.yaml
         readOnly: true
-      secret:
+      creds:
         enabled: true
         type: secret
         name: cloudflared-tunnel
-        mountPath: /etc/cloudflared/creds
+        mountPath: /etc/cloudflared/creds/cred.json
         readOnly: true
     resources:
       requests:
