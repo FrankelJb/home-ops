@@ -57,7 +57,7 @@ spec:
       secrets:
         enabled: true
         type: secret
-        name: cloudflared-tunnel
+        name: &secret cloudflared-tunnel
         mountPath: /etc/cloudflared/secrets
         readOnly: true
     resources:
