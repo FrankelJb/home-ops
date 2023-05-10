@@ -34,8 +34,9 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: stump-pvc
-        type: pvc
+        path: /mnt/raid/media/books
+        server: ${NFS_HOST}
+        type: nfs
     ingress:
       main:
         enabled: true
