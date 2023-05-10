@@ -28,16 +28,6 @@ spec:
     image:
       repository: kizaing/kavita
       tag: 0.7.2@sha256:5ff555007ad7fd38ea1d0e59f5b35140bd4a5f2975c2bca5d58c40940fcc9484
-    persistence:
-      config:
-        enabled: true
-        server: ${NFS_HOST}/kavita/config
-        type: nfs
-      books:
-        enabled: true
-        path: /mnt/raid/media/books
-        server: ${NFS_HOST}
-        type: nfs
     ingress:
       main:
         enabled: true
@@ -50,6 +40,17 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      config:
+        enabled: true
+        path: ${NFS_PATH}/jellyseerr
+        server: ${NFS_HOST}
+        type: nfs
+      books:
+        enabled: true
+        path: /mnt/raid/media/books
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:
