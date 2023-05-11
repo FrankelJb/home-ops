@@ -3,8 +3,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./secret/secret.sops.yaml
   - ./client/helmrelease.yaml
+  - ./server/secret.sops.yaml
   - ./server/helmrelease.yaml
 labels:
   - pairs:
