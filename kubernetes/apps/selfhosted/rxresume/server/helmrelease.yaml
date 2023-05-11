@@ -28,7 +28,7 @@ spec:
           name: *app
     image:
       repository: amruthpillai/reactive-resume
-      tag: server-3.7.18@sha256:7cb80052608896bb9f55b9293d0a8251e64f4c2bd39f7e027052e3c761a98ba1
+      tag: server-3.7.2@sha256:5794bfe8729a6660f321b5c3525c7bcd354cc0e80b2bfbc23b566a7aacf055be
 
     service:
       main:
