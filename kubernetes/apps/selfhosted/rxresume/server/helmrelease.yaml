@@ -23,8 +23,8 @@ spec:
     remediation:
       retries: 5
   values:
-    envfrom:
-      - secretref:
+    envFrom:
+      - secretRef:
           name: rxresume
     image:
       repository: amruthpillai/reactive-resume
