@@ -23,10 +23,12 @@ spec:
     remediation:
       retries: 5
   values:
+    envfrom:
+      - secretref:
+          name: rxresume
     image:
       repository: amruthpillai/reactive-resume
       tag: client-3.7.2@sha256:04b561446fb40852e72ce62fd15340424c73cde86a0df4b6e0b7888bf5e53102
-
     ingress:
       main:
         enabled: true

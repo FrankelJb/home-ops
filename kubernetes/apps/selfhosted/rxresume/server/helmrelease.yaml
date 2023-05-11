@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app rxresume-server
+  name: rxresume-server
   namespace: selfhosted
 spec:
   interval: 15m
@@ -23,9 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
-    envFrom:
-      - secretRef:
-          name: *app
+    envfrom:
+      - secretref:
+          name: rxresume
     image:
       repository: amruthpillai/reactive-resume
       tag: server-3.7.2@sha256:5794bfe8729a6660f321b5c3525c7bcd354cc0e80b2bfbc23b566a7aacf055be
