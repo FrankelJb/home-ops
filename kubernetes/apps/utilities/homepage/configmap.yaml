@@ -137,6 +137,10 @@ data:
               type: jellyfin
               url: https://jellyfin.${ROOT_DOMAIN}
               key: ${SECRET_JELLYFIN_KEY}
+        - Kavita:
+            href: https://kavita.${ROOT_DOMAIN}
+            icon: kavita.png
+            description: Kavita is a fast, feature rich, cross platform reading server
         - Navidrome:
             href: https://navidrome.${ROOT_DOMAIN}
             icon: navidrome.png
@@ -147,6 +151,10 @@ data:
               user: ${USERNAME}
               salt: ${SECRET_NAVIDROME_SALT}
               token: ${SECRET_NAVIDROME_TOKEN}
+        - Stump:
+            href: https://stump.${ROOT_DOMAIN}
+            icon: stump.png
+            description: An alternative front-end to YouTube 
     - Media Management:
       - Jellyseerr:
           href: https://jellyseerr.${ROOT_DOMAIN}
@@ -194,6 +202,10 @@ data:
             url: https://sonarr.${ROOT_DOMAIN}
             key: ${SECRET_SONARR_KEY}
     - Selfhosted:
+        - Kavita:
+            href: https://kavita.${ROOT_DOMAIN}
+            icon: kavita.png
+            description: Cross platform reading server
         - Libreddit:
             href: https://libreddit.${ROOT_DOMAIN}
             icon: libreddit.png
@@ -214,6 +226,14 @@ data:
             href: https://rxresume.${ROOT_DOMAIN}
             icon: /icons/rxresume.png
             description: Resume Builder
+        - Stirling-PDF:
+            href: https://stirling-pdf.${ROOT_DOMAIN}
+            icon: /icons/stirling.png
+            description: PDF manipulation tool
+        - Stump:
+            href: https://stump.${ROOT_DOMAIN}
+            icon: /icons/stump.png
+            description: Comics, manga and digital book server
         - Vaultwarden:
             href: https://vaultwarden.${ROOT_DOMAIN}
             icon: bitwarden.png
