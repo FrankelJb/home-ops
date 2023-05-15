@@ -124,6 +124,15 @@ data:
               url: https://adguard.${ROOT_DOMAIN}
               username: admin
               password: ${SECRET_ADGUARD_PASSWORD}
+        - AdguardHome:
+            href: https://192.168.1.1
+            icon: opnsense.png
+            description: Fireall and router
+            widget:
+              type: opnsense
+              url: https://192.168.1.1
+              username: ${SECRET_OPNSENSE_USERNAME}
+              password: ${SECRET_OPNSENSE_PASSWORD}
     - Media:
         - Invidious:
             href: https://invidious.${ROOT_DOMAIN}
@@ -153,8 +162,8 @@ data:
               token: ${SECRET_NAVIDROME_TOKEN}
         - Stump:
             href: https://stump.${ROOT_DOMAIN}
-            icon: stump.png
-            description: An alternative front-end to YouTube 
+            icon: i/icons/stump.png
+            description: Comics, manga and digital book server
     - Media Management:
       - Jellyseerr:
           href: https://jellyseerr.${ROOT_DOMAIN}
@@ -202,10 +211,6 @@ data:
             url: https://sonarr.${ROOT_DOMAIN}
             key: ${SECRET_SONARR_KEY}
     - Selfhosted:
-        - Kavita:
-            href: https://kavita.${ROOT_DOMAIN}
-            icon: kavita.png
-            description: Cross platform reading server
         - Libreddit:
             href: https://libreddit.${ROOT_DOMAIN}
             icon: libreddit.png
@@ -230,10 +235,6 @@ data:
             href: https://stirling-pdf.${ROOT_DOMAIN}
             icon: /icons/stirling.png
             description: PDF manipulation tool
-        - Stump:
-            href: https://stump.${ROOT_DOMAIN}
-            icon: /icons/stump.png
-            description: Comics, manga and digital book server
         - Vaultwarden:
             href: https://vaultwarden.${ROOT_DOMAIN}
             icon: bitwarden.png
