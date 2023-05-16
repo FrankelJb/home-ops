@@ -124,10 +124,10 @@ data:
               url: https://adguard.${ROOT_DOMAIN}
               username: admin
               password: ${SECRET_ADGUARD_PASSWORD}
-        - AdguardHome:
+        - OPNSense:
             href: https://192.168.1.1
             icon: opnsense.png
-            description: Fireall and router
+            description: Firewall and router
             widget:
               type: opnsense
               url: https://192.168.1.1
@@ -162,7 +162,7 @@ data:
               token: ${SECRET_NAVIDROME_TOKEN}
         - Stump:
             href: https://stump.${ROOT_DOMAIN}
-            icon: i/icons/stump.png
+            icon: /icons/stump.png
             description: Comics, manga and digital book server
     - Media Management:
       - Jellyseerr:
