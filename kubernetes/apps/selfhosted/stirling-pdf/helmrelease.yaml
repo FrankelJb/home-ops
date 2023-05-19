@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/frooodle/s-pdf
-      tag: 0.8.2@sha256:c908a9bdd9e096ac5df349d3a2b15ab5ab10d3259715b1ee4288c0aa7b0464cf
+      tag: 0.8.2@sha256:46ef5b63f7a3070c96743ed7535cb33935b6e57f9bec861f000f2fb5c5dd69e0
     ingress:
       main:
         enabled: true
