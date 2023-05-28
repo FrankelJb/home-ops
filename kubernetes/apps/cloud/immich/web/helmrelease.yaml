@@ -23,9 +23,6 @@ spec:
     remediation:
       retries: 5
   values:
-    args:
-      - ./entrypoint.sh
-    command: /bin/sh
     controller:
       annotations:
         reloader.stakater.com/auto: "true"

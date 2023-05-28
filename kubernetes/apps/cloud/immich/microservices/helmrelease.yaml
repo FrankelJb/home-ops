@@ -24,8 +24,7 @@ spec:
       retries: 5
   values:
     args:
-      - ./start-microservices.sh
-    command: /bin/sh
+      - start-microservices.sh
     controller:
       annotations:
         reloader.stakater.com/auto: "true"

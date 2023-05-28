@@ -24,7 +24,7 @@ spec:
       retries: 5
   values:
     command:
-      - ./start-server.sh
+      - start-server.sh
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
