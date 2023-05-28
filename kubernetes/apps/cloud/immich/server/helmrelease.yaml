@@ -23,9 +23,8 @@ spec:
     remediation:
       retries: 5
   values:
-    args:
+    command:
       - ./start-server.sh
-    command: /bin/sh
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
