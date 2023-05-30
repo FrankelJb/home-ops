@@ -31,7 +31,7 @@ spec:
       tag: 35.102.10
       pullPolicy: IfNotPresent
     cronjob:
-      schedule: "0 0 * * *"
+      schedule: "0 */6 * * *"
     renovate:
       config: |
         {
