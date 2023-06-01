@@ -28,7 +28,7 @@ spec:
     existingSecret: renovate-env
     image:
       repository: renovate/renovate
-      tag: 35.105.4
+      tag: 35.105.5
       pullPolicy: IfNotPresent
     cronjob:
       schedule: "0 */6 * * *"
