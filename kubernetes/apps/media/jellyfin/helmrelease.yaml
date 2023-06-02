@@ -62,3 +62,9 @@ spec:
         path: ${NFS_PATH}/navidrome/media
         server: ${NFS_HOST}
         type: nfs
+      metube:
+        enabled: true
+        mountPath: /mnt/metube
+        path: /mnt/raid/media/metube
+        server: ${NFS_HOST}
+        type: nfs
