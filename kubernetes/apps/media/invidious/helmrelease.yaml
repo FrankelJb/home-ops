@@ -29,7 +29,7 @@ spec:
           name: invidious
     image:
       repository: quay.io/invidious/invidious
-      tag: latest@sha256:d8d40148965610cd0442fba66e8e5e2b9b50558feceb4fbe303acdbada31bd69
+      tag: latest@sha256:92abc6c8511d4c020fa160a361766975ce8bd4b1d17f54758e08b61a8f4331ea
     ingress:
       main:
         enabled: true
