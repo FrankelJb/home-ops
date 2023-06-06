@@ -24,6 +24,7 @@ spec:
       retries: 3
   values:
     env:
+      AUDIO_DOWNLOAD_DIR: /audio
       TZ: "${TIMEZONE}"
     image:
       repository: ghcr.io/alexta69/metube
@@ -54,6 +55,12 @@ spec:
       supplementalGroups:
         - 100
     persistence:
+      audio:
+        enabled: true
+        path: ${NFS_PATH}/navidrome/media/ytdl
+        server: ${NFS_HOST}
+        type: nfs
+        readOnly: false
       downloads:
         enabled: true
         path: /mnt/raid/media/metube
