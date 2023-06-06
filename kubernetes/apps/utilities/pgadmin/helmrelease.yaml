@@ -23,6 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
+    env:
+      email: admin@${ROOT_DOMAIN}
+    existingSecret: pgadmin-secrets
     image:
       registry: docker.io
       repository: dpage/pgadmin4
