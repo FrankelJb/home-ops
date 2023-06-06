@@ -22,7 +22,7 @@ spec:
     volumeHandle: "${NFS_HOST}${NFS_PATH}#pgadmin#"
     volumeAttributes:
       server: "${NFS_HOST}"
-      share: "${NFS_PATH}/postgresql"
+      share: "${NFS_PATH}/pgadmin"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
