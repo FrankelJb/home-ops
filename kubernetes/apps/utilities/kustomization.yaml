@@ -11,7 +11,6 @@ resources:
   - loki
   - mailrise
   - renovate
-  - pgadmin
   - theme-park
   - uptime-kuma
   - vpa
