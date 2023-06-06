@@ -21,4 +21,5 @@ resources:
   - ./pod-gateway.yaml
   - ./prometheus-community.yaml
   - ./renovate.yaml
+  - ./runix.yaml
   - ./weave-gitops.yaml
