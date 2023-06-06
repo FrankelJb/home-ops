@@ -28,17 +28,16 @@ spec:
       repository: dpage/pgadmin4
       tag: 6.21@sha256:ab5907625160a1b178de3e2f495c8ad0a17712f3bac2214614ec02b5db809fa4
     ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: &host "pgadmin.${ROOT_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - host: &host "pgadmin.${ROOT_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
     persistentVolume:
       enabled: true
       existingClaim: pgadmin-pvc
