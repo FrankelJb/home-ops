@@ -45,7 +45,7 @@ spec:
         any:
           - resources:
               annotations:
-                kyverno.home.arpa/disabled: "true"
+                whitelist-source-range.home.arpa/disabled: "true"
       mutate:
         patchStrategicMerge:
           metadata:
