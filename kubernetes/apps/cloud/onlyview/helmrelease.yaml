@@ -34,6 +34,8 @@ spec:
       main:
         enabled: true
         ingressClassName: nginx
+        annotations:
+          whitelist-source-range.home.arpa/disabled: "true"
         hosts:
           - host: &host onlyview.${ROOT_DOMAIN}
             paths:
