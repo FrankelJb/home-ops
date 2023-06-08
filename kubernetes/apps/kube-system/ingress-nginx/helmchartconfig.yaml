@@ -34,7 +34,11 @@ spec:
           cert-manager/${ROOT_DOMAIN/./-}-tls
     tcp:
       2222: "utilities/gitea-ssh:2222"
-      53: "infra/adguard-home-dns-tcp:53"
-      465: "utilities/mailrise:8025"
-    udp:
-      53: "infra/adguard-home-dns-udp:53"
+    defaultBackend:
+      enabled: true
+      image:
+        repository: ghcr.io/tarampampam/error-pages
+        tag: 2.24.0
+      extraEnvs:
+        - { name: TEMPLATE_NAME, value: lost-in-space }
+        - { name: SHOW_DETAILS, value: "false" }
