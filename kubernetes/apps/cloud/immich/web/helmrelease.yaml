@@ -45,6 +45,7 @@ spec:
             rewrite /api/(.*) /$1 break;
           nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          whitelist-source-range.home.arpa/disabled: "true"
         hosts:
           - host: &host immich.${ROOT_DOMAIN}
             paths:
