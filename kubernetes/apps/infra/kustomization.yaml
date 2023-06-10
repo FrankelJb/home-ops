@@ -5,6 +5,6 @@ resources:
   - ./namespace.yaml
   - adguard-home
   - authelia
-  - cloudflared
+  - external-dns
   - glauth
   - k8s-gateway
