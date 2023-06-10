@@ -36,7 +36,7 @@ spec:
         ingressClassName: nginx
         annotations:
           whitelist-source-range.home.arpa/disabled: "true"
-          external-dns.home.arpa/disabled: "true"
+          external-dns.home.arpa/enabled: "true"
         hosts:
           - host: &host onlyview.${ROOT_DOMAIN}
             paths:
