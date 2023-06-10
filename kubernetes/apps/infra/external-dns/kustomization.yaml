@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: infra
 resources:
   - ./helmrelease.yaml
+  - ./secret.sops.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: external-dns
