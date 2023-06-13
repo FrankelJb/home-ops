@@ -1,0 +1,67 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sharry
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: eikek0/sharry
+      tag: v1.12.1@sha256:a842c68ae215fd3407a33732d9588d56915e2fee2b1fc92cd310fe26e979122c
+    args:
+      - "/opt/sharry.conf"
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: sharry
+        mountPath: /opt/sharry.conf
+        subPath: sharry.conf
+      data:
+        enabled: true
+        path: /mnt/raid/sharry
+        server: ${NFS_HOST}
+        type: nfs
+    resources:
+      requests:
+        cpu: 50m
+        memory: 250Mi
+      limits:
+        memory: 1Gi
+    service:
+      main:
+        ports:
+          http:
+            port: 9090
