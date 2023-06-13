@@ -52,7 +52,7 @@ spec:
         subPath: sharry.conf
       data:
         enabled: true
-        path: /mnt/raid/sharry
+        path: /mnt/raid/media/sharry
         server: ${NFS_HOST}
         type: nfs
     resources:
