@@ -215,6 +215,14 @@ data:
             href: https://libreddit.${ROOT_DOMAIN}
             icon: libreddit.png
             description: Private front-end for Reddit
+        - Memos:
+            href: https://memos.${ROOT_DOMAIN}
+            icon: memos.png
+            description: A lightweight, self-hosted memo hub
+        - OpenSpeedTest:
+            href: https://openspeedtest.${ROOT_DOMAIN}
+            icon: openspeedtest.png
+            description: HTML5 Network Performance Estimation Tool
         - Paperless-ngx:
             href: https://paperless-ngx.${ROOT_DOMAIN}
             icon: /icons/paperless-ngx.svg
@@ -231,6 +239,10 @@ data:
             href: https://rxresume.${ROOT_DOMAIN}
             icon: /icons/rxresume.png
             description: Resume Builder
+        - Sharry:
+            href: https://sharry.${ROOT_DOMAIN}
+            icon: /icons/sharry.png
+            description: Share files with others in a simple way
         - Stirling-PDF:
             href: https://stirling-pdf.${ROOT_DOMAIN}
             icon: /icons/stirling.png
@@ -244,6 +256,10 @@ data:
             icon: whooglesearch.png
             description: Ad-free, privacy-respecting metasearch engine
     - Utilities:
+        - Element Web:
+            href: https://element.${ROOT_DOMAIN}
+            icon: element.png
+            description: Element is a Matrix-based end-to-end encrypted messenger and secure collaboration app
         - Kubernetes:
             href: https://k8s.${ROOT_DOMAIN}
             icon: kubernetes-dashboard.png
