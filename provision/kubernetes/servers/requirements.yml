@@ -11,4 +11,4 @@ collections:
 roles:
   - name: lablabs.rke2
     src: https://github.com/lablabs/ansible-role-rke2.git
-    version: 1.22.3
+    version: 1.23.0
