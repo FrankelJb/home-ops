@@ -70,7 +70,8 @@ identity_providers:
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://sharry.${ROOT_DOMAIN}/app/login"]
+        redirect_uris:
+          ["https://sharry.${ROOT_DOMAIN}/api/v2/open/auth/oauth/authelia"]
         userinfo_signing_algorithm: none
       - id: weave-gitops
         description: Weave GitOps
