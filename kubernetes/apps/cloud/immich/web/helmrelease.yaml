@@ -33,7 +33,7 @@ spec:
           name: immich-configmap
     image:
       repository: ghcr.io/immich-app/immich-web
-      tag: v1.61.0
+      tag: v1.62.1@sha256:8a84ddbaaedeee9ee21a712e4c65f600367d5dd21eb65581d0be7cff7fcd9ada
     ingress:
       main:
         enabled: true

@@ -35,7 +35,7 @@ spec:
           name: immich-configmap
     image:
       repository: ghcr.io/immich-app/immich-server
-      tag: v1.61.0
+      tag: v1.62.1@sha256:e4832b0bdb5d92dded775b185ecbe9a34f69cf8b1e0843a5c4251aea867d3746
     persistence:
       library:
         enabled: true
