@@ -10,6 +10,7 @@ resources:
   - kubernetes-dashboard
   - loki
   - mailrise
+  - reloader
   - renovate
   - pgadmin
   - theme-park
