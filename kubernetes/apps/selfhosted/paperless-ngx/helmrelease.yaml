@@ -59,7 +59,7 @@ spec:
               - *host
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
-      tag: 1.16@sha256:c59bbc864fdef67cb13febc042f0f250d2fe746026d55097ab39140946d2e012
+      tag: 1.16@sha256:b9edc3ef6e1d0b5e1974ef16c257db804b2549ab7c4296f56ba398385c64c7ec
     persistence:
       data:
         enabled: true
