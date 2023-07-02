@@ -43,6 +43,7 @@ spec:
       auth:
         signout_redirect_url: https://auth.${ROOT_DOMAIN}/logout
         oauth_auto_login: true
+        oauth_allow_insecure_email_lookup: true
       auth.basic:
         disable_login_form: false
       auth.generic_oauth:
