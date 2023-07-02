@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/aeharding/wefwef
-      tag: 0.9.1@sha256:95730e5d45a9eae4a80ff007e40b7236bd0e8904cb71c31e53a85e7bda459df1
+      tag: 0.10.3@sha256:ebc4627c7465324eba3aa6bd50230b1d3beef3a1e3c7c96674b6fc6ba07e0d06
     ingress:
       main:
         enabled: true
