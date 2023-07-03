@@ -40,6 +40,7 @@ spec:
         root_url: https://grafana.${ROOT_DOMAIN}
       analytics:
         check_for_updates: false
+        reporting_enabled: false
       auth:
         signout_redirect_url: https://auth.${ROOT_DOMAIN}/logout
         oauth_auto_login: true
