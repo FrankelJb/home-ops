@@ -42,7 +42,8 @@ spec:
       existingSecret: matrix-synapse-extra
       existingSecretPasswordKey: postgresql-password
     image:
-      tag: v1.77.0@sha256:360ea772d3b0d74607f756bca3a130a604de075b60f4136f330605e85d983e1c
+      repository: ghcr.io/matrix-org/synapse
+      tag: v1.86.0@sha256:a9a7c93cedaaf07d9802bcfffc2b0be11bb3b74f10f7a5d02ff042bef0ce845f
     ingress:
       main:
         enabled: true

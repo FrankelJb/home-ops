@@ -26,8 +26,8 @@ spec:
     env:
       TZ: ${TIMEZONE}
     image:
-      repository: kizaing/kavita
-      tag: 0.7.3@sha256:d9dce54f23b7a8017ec2a6abb95737eb0e0b478d48d2328323f6dfa4a9bb900b
+      repository: ghcr.io/kareadita/kavita
+      tag: 0.7.3@sha256:7b106d70ca46c0eca55e749d6029a5da608d82fb39eb8f689fdab688b701b5e4
     ingress:
       main:
         enabled: true

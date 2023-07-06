@@ -25,8 +25,8 @@ spec:
   values:
     enableServiceLinks: false
     image:
-      repository: neosmemo/memos
-      tag: 0.13.2@sha256:f9a3da1e407faca986f08e2ad39ed6c124e60926be2e2cb45791f8560bf914cd
+      repository: ghcr.io/usememos/memos
+      tag: 0.13.2@sha256:5af1c7eb73e708e6fd3fbab713524bb1f0aa1dd052829f1d223242b65e2a51cd
 
     ingress:
       main:
