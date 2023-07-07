@@ -28,7 +28,7 @@ spec:
     existingSecret: renovate-env
     image:
       repository: ghcr.io/renovatebot/renovate
-      tag: 36.1.11@sha256:f718581cbd75f15b75beff4c6ccdfe92fe3a0e914d3a1513f35be88b2b06f34b
+      tag: 36.1.16@sha256:b3a50fe423ddbfd5c3c16f6d6c14e52f8b9e0468a481b46f86955398de76b941
       pullPolicy: IfNotPresent
     cronjob:
       schedule: "0 */6 * * *"
