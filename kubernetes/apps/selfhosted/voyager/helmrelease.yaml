@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: wefwef
+  name: voyager
   namespace: selfhosted
 spec:
   interval: 15m
@@ -24,13 +24,13 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/aeharding/wefwef
-      tag: 0.16.1@sha256:949d4c85fb02bc306b3dcd0206f19e96f4e5c71bc5bb9280601c0908f3a62257
+      repository: ghcr.io/aeharding/voyager
+      tag: 0.18.2@sha256:41ec936624fac548d77471b54819bac1e75e3b17c516c1a4d980b857a4a9cbf6
     ingress:
       main:
         enabled: true
         hosts:
-          - host: &host wefwef.${ROOT_DOMAIN}
+          - host: &host voyager.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
