@@ -19,6 +19,7 @@ resources:
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
   - ./nextcloud.yaml
+  - ./olivetin.yaml
   - ./pod-gateway.yaml
   - ./prometheus-community.yaml
   - ./renovate.yaml
