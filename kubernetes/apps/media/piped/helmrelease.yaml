@@ -30,7 +30,7 @@ spec:
       config:
         PORT: 8080
         NUM_WORKERS: 2
-        PROXY_PART: https://ytproxy.{ROOT_DOMAIN}
+        PROXY_PART: https://ytproxy.${ROOT_DOMAIN}
 
     ingress:
       main:
