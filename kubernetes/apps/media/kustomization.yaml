@@ -9,6 +9,7 @@ resources:
   - jellyseerr
   - metube
   - navidrome
+  - piped
   - prowlarr
   - qbittorrent
   - radarr
