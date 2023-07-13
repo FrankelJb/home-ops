@@ -31,7 +31,6 @@ spec:
         PORT: 8080
         NUM_WORKERS: 2
         PROXY_PART: https://ytproxy.{ROOT_DOMAIN}
-        DISABLE_REGISTRATION: true
 
     ingress:
       main:
@@ -55,8 +54,7 @@ spec:
               - path: "/"
         tls:
           - hosts:
-             - *pipedapi
-
+              - *pipedapi
 
       ytproxy:
         enabled: true
