@@ -35,7 +35,7 @@ spec:
         NUM_WORKERS: 2
         PROXY_PART: https://ytproxy.${ROOT_DOMAIN}
         database:
-          connection_url: jdbc:postgresql://{POSTGRESQL_HOST}:5432/piped
+          connection_url: jdbc:postgresql://${POSTGRESQL_HOST}:5432/piped
           secret: *app
 
     ingress:
