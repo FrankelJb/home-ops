@@ -38,7 +38,6 @@ spec:
           connection_url: jdbc:postgresql://${POSTGRESQL_HOST}:5432/piped
           driver_class: org.postgresql.Driver
           dialect: org.hibernate.dialect.PostgreSQLDialect
-          secret: *app
 
     ingress:
       main:
@@ -74,3 +73,13 @@ spec:
         tls:
           - hosts:
               - *proxy
+
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: database.password
+      targetPath: backend.config.database.password
+    - kind: Secret
+      name: *app
+      valuesKey: database.username
+      targetPath: backend.config.database.username
