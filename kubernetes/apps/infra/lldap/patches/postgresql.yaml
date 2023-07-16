@@ -1,0 +1,20 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lldap
+  namespace: infra
+spec:
+  values:
+    initContainers:
+      init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        envFrom:
+          - secretRef:
+              name: lldap-secret
+        env:
+          - name: INIT_POSTGRES_SUPER_PASS
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: postgres-password
