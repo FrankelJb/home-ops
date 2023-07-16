@@ -35,27 +35,107 @@ spec:
     renovate:
       config: |
         {
-            "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-            "extends": [
-                "config:base",
-                ":semanticCommits",
-                ":dependencyDashboard",
-                ":automergeDigest",
-                ":automergeBranch",
-            ],
-            "platform": "gitea",
-            "autodiscover": false,
-            "dependencyDashboard": true,
-            "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-            "dryRun": false,
-            "printConfig": true,
-            "kubernetes": {
-                "fileMatch": [
-                    ".yaml$"
-                ]
-            },
-            "major": {
-                "dependencyDashboardApproval": true
-            },
-            repositories: ["gitea_admin/home-ops"]
+          "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+          "extends": [
+              "config:base",
+              "config:recommended",
+              ":semanticCommits",
+              ":dependencyDashboard",
+              ":disableRateLimiting",
+              ":automergeDigest",
+              ":automergeBranch",
+              "local>gitea_admin/home-ops//.github/renovate/autoMerge.json5",
+              "local>gitea_admin/home-ops//.github/renovate/commitMessage.json5",
+              "local>gitea_admin/home-ops//.github/renovate/labels.json5",
+              "local>gitea_admin/home-ops//.github/renovate/semanticCommits.json5",
+          ],
+          "platform": "gitea",
+          "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+          "dependencyDashboard": true,
+          "printConfig": true,
+          "major": {
+              "dependencyDashboardApproval": true
+          },
+          "repositories": [
+              "gitea_admin/home-ops"
+          ],
+          "flux": {
+              "fileMatch": [
+                  "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+              ]
+          },
+          "helm-values": {
+              "fileMatch": [
+                  "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+              ]
+          },
+          "kubernetes": {
+              "fileMatch": [
+                  "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+              ]
+          },
+          "regexManagers": [
+              {
+                  "description": [
+                      "Process CRD dependencies - Chart and Github Release are the same version"
+                  ],
+                  "fileMatch": [
+                      "kubernetes/.+\\.ya?ml$"
+                  ],
+                  "matchStrings": [
+                      "# renovate: registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
+                  ],
+                  "datasourceTemplate": "helm"
+              },
+              {
+                  "description": [
+                      "Generic Docker image Regex manager"
+                  ],
+                  "fileMatch": [
+                      "infrastructure/.+\\.ya?ml$",
+                      "infrastructure/.+\\.tf$"
+                  ],
+                  "matchStrings": [
+                      "# renovate: docker-image( versioning=(?<versioning>.*=?))?\n .*[:|=] \"?(?<depName>.*?):(?<currentValue>[^\"\n]*=?)\"?",
+                  ],
+                  "datasourceTemplate": "docker",
+                  "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+              },
+              {
+                  "description": [
+                      "Raw GitHub URL Regex manager"
+                  ],
+                  "fileMatch": [
+                      "infrastructure/.+\\.ya?ml$",
+                      "kubernetes/.+\\.ya?ml$"
+                  ],
+                  "matchStrings": [
+                      "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*",
+                  ],
+                  "datasourceTemplate": "github-releases",
+                  "versioningTemplate": "semver"
+              }
+          ],
+          "packageRules": [
+              {
+                  "description": "Use custom versioning for reactive-resume server",
+                  "matchDatasources": [
+                      "docker"
+                  ],
+                  "versioning": "regex:^server-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+                  "matchPackagePatterns": [
+                      "rxresume-server"
+                  ]
+              },
+              {
+                  "description": "Use custom versioning for reactive-resume client",
+                  "matchDatasources": [
+                      "docker"
+                  ],
+                  "versioning": "regex:^client-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+                  "matchPackagePatterns": [
+                      "rxresume-client"
+                  ]
+              }
+          ]
         }
