@@ -10,5 +10,5 @@ labels:
   - pairs:
       app.kubernetes.io/name: lldap
       app.kubernetes.io/instance: lldap
-patches:
+patchesStrategicMerge:
   - patches/postgresql.yaml
