@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-dashboard
-      version: 7.0.2
+      version: 6.0.8
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
@@ -44,6 +44,8 @@ spec:
     metricsScraper:
       enabled: true
     serviceMonitor:
+      enabled: false
+    metrics-server:
       enabled: false
     cert-manager:
       enabled: false
