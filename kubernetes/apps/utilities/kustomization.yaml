@@ -7,7 +7,6 @@ resources:
   - grafana
   - homepage
   - kube-prometheus-stack
-  - kubernetes-dashboard
   - loki
   - mailrise
   - reloader

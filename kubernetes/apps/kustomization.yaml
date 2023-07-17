@@ -8,6 +8,7 @@ resources:
   - flux-system
   - infra
   - kube-system
+  - kubernetes-dashboard
   - kyverno
   - media
   - selfhosted
