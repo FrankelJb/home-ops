@@ -2,11 +2,11 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: utilities
+namespace: kubernetes-dashboard
 resources:
   - ./helmrelease.yaml
   - ./rbac.yaml
 labels:
   - pairs:
-      app.kubernetes.io/name: kuberneres-dashboard
-      app.kubernetes.io/instance: kuberneres-dashboard
+      app.kubernetes.io/name: kubernetes-dashboard
+      app.kubernetes.io/instance: kubernetes-dashboard
