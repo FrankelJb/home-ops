@@ -26,21 +26,23 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    env:
-      TZ: ${TIMEZONE}
-    extraArgs:
-      - --enable-skip-login
-      - --disable-settings-authorizer
-      - --enable-insecure-login
-      - --token-ttl=43200
-    ingress:
-      enabled: true
-      className: nginx
-      hosts:
-        - &host k8s.${ROOT_DOMAIN}
-      tls:
-        - hosts:
-            - *host
+    app:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - &host k8s.${ROOT_DOMAIN}
+        secretName: null
+        tls:
+          - hosts:
+              - *host
+    api:
+      containers:
+        args:
+          - --enable-skip-login
+          - --disable-settings-authorizer
+          - --enable-insecure-login
+          - --token-ttl=43200
     metricsScraper:
       enabled: true
     serviceMonitor:
