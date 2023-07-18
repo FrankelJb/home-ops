@@ -65,10 +65,12 @@ spec:
         existingClaim: filebrowser-pvc
       originals:
         enabled: true
+        mountPath: /srv/originals
         server: ${NFS_HOST}
         type: nfs
       cyberdrop:
         enabled: true
+        mountPath: /srv/cyberdrop
         server: ${NFS_HOST}
         type: nfs
       filebrowser:

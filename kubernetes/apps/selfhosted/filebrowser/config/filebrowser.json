@@ -4,7 +4,7 @@
   "address": "",
   "log": "stdout",
   "database": "/config/database.db",
-  "root": "/media",
+  "root": "/srv",
   "auth": {
     "method": "proxy",
     "header": "Remote-User"
