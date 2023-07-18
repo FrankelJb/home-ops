@@ -25,6 +25,7 @@ spec:
   values:
     csiDriver:
       name: "org.democratic-csi.local-hostpath"
+      attachRequired: false
       storageCapacity: true
       fsGroupPolicy: File
 
@@ -38,6 +39,8 @@ spec:
     controller:
       enabled: true
       strategy: node
+      externalAttacher:
+        enabled: false
       externalProvisioner:
         extraArgs:
           - --leader-election=false
