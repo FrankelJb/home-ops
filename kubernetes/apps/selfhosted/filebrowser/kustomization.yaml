@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: selfhosted
+resources:
+  - ./helmrelease.yaml
+  - ./secret.sops.yaml
+  - ./volumes.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/name: filebrowser
+      app.kubernetes.io/instance: filebrowser
+configMapGenerator:
+  - name: filebrowser-config
+    files:
+      - ./config/filebrowser.json
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
