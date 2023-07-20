@@ -51,6 +51,8 @@ spec:
             - *host
     postgresql:
       enabled: false
+    postgresql-ha:
+      enabled: false
     persistence:
       enabled: true
       existingClaim: gitea-pvc
