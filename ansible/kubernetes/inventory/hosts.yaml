@@ -1,0 +1,10 @@
+---
+kubernetes:
+  vars:
+    ansible_user: beans
+    ansible_ssh_port: 22
+  children:
+    master:
+      hosts:
+        k8s-0:
+          ansible_host: 192.168.122.243
