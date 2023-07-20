@@ -28,7 +28,7 @@ spec:
 
     image:
       repository: vectorim/element-web
-      tag: v1.11.35
+      tag: v1.11.36
 
     ingress:
       main:
