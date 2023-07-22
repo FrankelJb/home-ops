@@ -24,6 +24,14 @@ spec:
       retries: 5
   values:
     replicaCount: 1
+    cronjob:
+      annotations: {}
+      curlInsecure: false
+      enabled: true
+      failedJobsHistoryLimit: 5
+      image: {}
+      schedule: "*/5 * * * *"
+      successfulJobsHistoryLimit: 2
     image:
       repository: nextcloud
       tag: 27.0.1@sha256:333c397a561efcb9079bab1dd5d35653338dba6b277ba561d8ad460bdae55609
