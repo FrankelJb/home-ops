@@ -28,7 +28,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: docker.io/yoryan/mailrise
-      tag: 1.3.0@sha256:6fdf5b361918a1f645c8f63d5d8a123c27e8e5ae79887e7a7c969c9aeee9bfd6
+      tag: 1.4.0@sha256:1bb4c3d336444f5579d08c8647920d74bf33d235b871a1551fcfea8faf3fe55c
     ingress:
       main:
         enabled: true
