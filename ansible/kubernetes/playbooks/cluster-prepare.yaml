@@ -41,16 +41,17 @@
               gnupg,hdparm,htop,iperf3,iptables,iputils-ping,ipvsadm,
               libseccomp2,lm-sensors,neofetch,net-tools,nfs-common,nvme-cli,open-iscsi,parted,psmisc,python3,
               python3-apt,python3-openshift,python3-kubernetes,python3-yaml,smartmontools,socat,software-properties-common,
-              unzip,util-linux
+              unzip,util-linux,nvidia-container-runtime,cuda-drivers-fabricmanager-515,nvidia-headless-515-server
             install_recommends: false
         - name: "Install botttom"
           ansible.builtin.apt:
             deb: "https://github.com/ClementTsang/bottom/releases/download/0.9.3/bottom_0.9.3_amd64.deb"
             state: "present"
         - name: "Install SOPS"
-          ansible.builtin.apt:
-            deb: "https://github.com/getsops/sops/releases/download/v3.7.3/sops_3.7.3_amd64.deb"
-            state: "present"
+          ansible.builtin.include_role:
+            name: community.sops.install
+          vars:
+            sops_version: 3.7.3
 
     - name: User Configuration
       block:
@@ -95,13 +96,25 @@
             content: neofetch --config none
         - name: User Configuration | Fish shell (3)
           ansible.builtin.copy:
-            dest: "{{ '/home/' + ansible_user if ansible_user != 'root' else '/root' }}/.config/fish/functions/k.fish"
+            dest: "{{ '/home/' + ansible_user if ansible_user != 'root' else '/root' }}/.config/fish/config.fish"
             owner: "{{ ansible_user }}"
             group: "{{ ansible_user }}"
             mode: "0755"
             content: |
-              function k --wraps=kubectl --description 'kubectl shorthand'
-                  kubectl $argv
+              if status is-interactive
+                starship init fish | source
+                abbr --add --global -- cat 'bat'
+                abbr --add --global -- diff 'delta -s'
+                abbr --add --global -- hse 'helm secrets edit'
+                abbr --add --global -- k 'kubectl'
+                abbr --add --global -- ka 'kubectl apply -f'
+                abbr --add --global -- kd 'kubectl delete'
+                abbr --add --global -- ke 'kubectl exec -it'
+                abbr --add --global -- l 'exa'
+                abbr --add --global -- less 'bat'
+                abbr --add --global -- lll 'exa -la'
+                abbr --add --global -- ls 'exa'
+                abbr --add --global -- pip 'pip3'
               end
 
     - name: Network Configuration
