@@ -116,12 +116,12 @@ data:
                 description: Simple and user-friendly photo gallery
         - Infra:
             - OPNSense:
-                href: https://192.168.1.1
+                href: https://dashboard.oxygen.${ROOT_DOMAIN}
                 icon: opnsense.png
                 description: Firewall and router
                 widget:
                   type: opnsense
-                  url: https://192.168.1.1
+                  url: https://dashboard.oxygen.${ROOT_DOMAIN}
                   username: ${SECRET_OPNSENSE_USERNAME}
                   password: ${SECRET_OPNSENSE_PASSWORD}
         - Media:
