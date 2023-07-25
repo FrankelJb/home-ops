@@ -5,6 +5,5 @@ resources:
   - ./namespace.yaml
   - authelia
   - external-dns
-  - glauth
   - k8s-gateway
   - lldap
