@@ -43,6 +43,7 @@
               python3-apt,python3-openshift,python3-kubernetes,python3-yaml,smartmontools,socat,software-properties-common,
               unzip,util-linux,nvidia-container-runtime,cuda-drivers-fabricmanager-515,nvidia-headless-515-server
             install_recommends: false
+            update_cache: true
         - name: "Install botttom"
           ansible.builtin.apt:
             deb: "https://github.com/ClementTsang/bottom/releases/download/0.9.3/bottom_0.9.3_amd64.deb"

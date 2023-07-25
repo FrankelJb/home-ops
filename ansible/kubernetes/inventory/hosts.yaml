@@ -6,5 +6,5 @@ kubernetes:
   children:
     master:
       hosts:
-        k8s-0:
-          ansible_host: 192.168.122.243
+        uranium:
+          ansible_host: 192.168.122.60

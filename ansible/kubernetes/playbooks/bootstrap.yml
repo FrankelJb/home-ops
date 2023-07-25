@@ -8,8 +8,6 @@
     base_dir: "/opt/k8s"
     repo_local_dir: "home-ops"
     key_dir: "keys"
-    gitkey: "gitkey_ed25519"
-    agekey: "keys.txt"
 
   tasks:
     - name: Load encrypted vars
@@ -18,6 +16,10 @@
         expressions: ignore
     - name: Create base directory
       file:
+        path: "{{ base_dir }}"
+        state: directory
+    - name: Create repo dirs
+      file:
         path: "{{ base_dir }}/{{ item }}"
         state: directory
       loop:
@@ -25,21 +27,22 @@
         - "{{  key_dir }}"
     - name: Copy ssh key
       copy:
-        src: "{{ '/home/' + ansible_user }}/.ssh/{{ gitkey }}"
-        dest: "{{ base_dir }}/{{ key_dir }}/{{ gitkey }}"
+        dest: "{{ base_dir }}/{{ key_dir }}/gitkey_ed25519"
+        src: "/home/{{ ansible_user }}/.ssh/gitkey_ed25519"
         mode: 0400
+        owner: "{{ ansible_user }}"
     - name: Copy age key
       copy:
-        src: "{{ '/home/' + ansible_user }}/.config/sops/age/server_keys.txt"
-        dest: "{{ base_dir }}/{{ key_dir }}/{{ agekey }}"
+        dest: "{{ base_dir }}/{{ key_dir }}/keys.txt"
         mode: 0400
+        content: "{{ agekey }}"
     - name: "Bootstrap :: Ensure repo is checked out"
       ansible.builtin.git:
         accept_newhostkey: true
         repo: "ssh://git@gitea.carbon.{{ root_domain }}:2222/gitea_admin/home-ops.git"
 
         dest: "{{ base_dir }}/{{ repo_local_dir }}"
-        key_file: "{{ base_dir }}/{{ key_dir }}/{{ gitkey }}"
+        key_file: "{{ base_dir }}/{{ key_dir }}/gitkey_ed25519"
         version: "main"
 
     # "TODO: avoid using shell"
