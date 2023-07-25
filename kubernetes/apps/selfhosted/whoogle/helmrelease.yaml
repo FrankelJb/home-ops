@@ -25,6 +25,7 @@ spec:
   values:
     env:
       WHOOGLE_DOTENV: 1
+      WHOOGLE_CONFIG_ALTS: 1
       WHOOGLE_ALT_TW: farside.link/nitter
       WHOOGLE_ALT_YT: farside.link/invidious
       WHOOGLE_ALT_IG: farside.link/bibliogram/u
