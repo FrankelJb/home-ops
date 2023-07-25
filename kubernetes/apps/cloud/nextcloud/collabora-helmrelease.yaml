@@ -27,7 +27,7 @@ spec:
       extra_params: --o:ssl.termination=true --o:ssl.enable=false
     image:
       repository: collabora/code
-      tag: 23.05.2.1.1@sha256:a7648066bce8c50b83c12ca253ff2862082d5f2bc79897d59c66f3c6fae8bed2
+      tag: 23.05.2.2.1@sha256:c741a16f6a315039fc221e3279dae30fc923c4b4ef7ef57b15aa99b1c7024c6f
     ingress:
       main:
         enabled: true
