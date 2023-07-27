@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/aeharding/voyager
-      tag: 0.28.1@sha256:0da3dbf22c0d1cc0231127ad44cf950e9457e33d6d6b69a40840ce7a4e8b42a8
+      tag: 1.0.0@sha256:7e956dd196380080d7abebfaee162081e17f2a9bfad7849cc205c69b11c69809
     ingress:
       main:
         enabled: true
