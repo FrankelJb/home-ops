@@ -26,3 +26,6 @@ spec:
     loki:
       enabled: true
       isDefault: false
+      structuredConfig:
+        analytics:
+          reporting_enabled: false
