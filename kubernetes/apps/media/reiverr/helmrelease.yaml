@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: reiverr
+  name: &app reiverr
   namespace: media
 spec:
   interval: 15m
@@ -23,6 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
+    envFrom:
+      - secretRef:
+          name: *app
     image:
       repository: ghcr.io/aleksilassila/reiverr
       tag: v0.3.0@sha256:e44903021ca78456ecd4f0d0b8c2a3a0de219315fcbc8a4c363d015af76972a5
