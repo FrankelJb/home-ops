@@ -28,7 +28,7 @@ spec:
           name: *app
     image:
       repository: ghcr.io/aleksilassila/reiverr
-      tag: v0.4.0@sha256:a465600a2630291b95014fb20c598cc465a58a3feba80b932a8315f7589794e1
+      tag: v0.5.1@sha256:5888bcc83d8e530b148c848acdf1d1438c46e612876cbec9f7984c868f93b687
     ingress:
       main:
         enabled: true
