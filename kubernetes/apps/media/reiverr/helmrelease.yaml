@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: stump
-  namespace: selfhosted
+  name: &app reiverr
+  namespace: media
 spec:
   interval: 15m
   chart:
@@ -23,26 +23,18 @@ spec:
     remediation:
       retries: 5
   values:
-    env:
-      PUID: 1000
-      PGID: 1000
-      STUMP_PORT: 10801
+    envFrom:
+      - secretRef:
+          name: *app
     image:
-      repository: aaronleopold/stump
-      tag: nightly@sha256:62eb0bd29ffe29d70b8756eaa712e700dd753d1185824d0d5d4018169f7c3024
-      pullPolicy: IfNotPresent
-    persistence:
-      data:
-        enabled: true
-        path: /mnt/raid/media/books
-        server: ${NFS_HOST}
-        type: nfs
+      repository: ghcr.io/aleksilassila/reiverr
+      tag: v0.6.1@sha256:f5c4232cf269f877b944b2211c0280e323ca4959e83588613bdcf40c70ea2b6a
     ingress:
       main:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: &host stump.${ROOT_DOMAIN}
+          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -53,4 +45,4 @@ spec:
       main:
         ports:
           http:
-            port: 10801
+            port: 9494

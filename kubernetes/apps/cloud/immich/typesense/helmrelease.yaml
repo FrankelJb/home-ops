@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -33,7 +32,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: docker.io/typesense/typesense
-      tag: 0.24.1@sha256:9bcff2b829f12074426ca044b56160ca9d777a0c488303469143dd9f8259d4dd
+      tag: 0.25.0@sha256:f6b9c639662e8f76a4e8e30b70398b21af265bdf821f43a2cce4b9023efda21c
     envFrom:
       - secretRef:
           name: immich-secret

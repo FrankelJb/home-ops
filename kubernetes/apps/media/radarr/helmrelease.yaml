@@ -29,7 +29,7 @@ spec:
       PGID: "568"
     image:
       repository: ghcr.io/onedr0p/radarr
-      tag: 4.6.4.7568@sha256:9f60b50471dd019da1d3823ae817ecbae0701bb5168ee57cb21ccd18f065f3fe
+      tag: 4.7.5.7809@sha256:47bd13f1d29e6ac57540f0cd95bda79dfb1492765e6209f80dd0b04d00046bf3
     ingress:
       main:
         enabled: true

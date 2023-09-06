@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: matrix-synapse
-      version: 3.6.1
+      version: 3.7.0
       sourceRef:
         kind: HelmRepository
         name: ananace
@@ -43,7 +43,7 @@ spec:
       existingSecretPasswordKey: postgresql-password
     image:
       repository: ghcr.io/matrix-org/synapse
-      tag: v1.89.0@sha256:1cb4a7b49d03a42c542bfd95e8d496f8c5f6ad198c7240a6ea82f8699912cab4
+      tag: v1.91.1@sha256:d4779025d5b9a378b3cd5cf5d640215df0f5b025396c0d039014c810646619ee
     ingress:
       main:
         enabled: true
