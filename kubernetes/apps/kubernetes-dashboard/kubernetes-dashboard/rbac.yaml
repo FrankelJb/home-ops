@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   annotations:
     meta.helm.sh/release-name: kubernetes-dashboard
-    meta.helm.sh/release-namespace: utilities
+    meta.helm.sh/release-namespace: kubernetes-dashboard
 secrets:
   - name: kubernetes-dashboard
 ---
@@ -22,7 +22,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   annotations:
     meta.helm.sh/release-name: kubernetes-dashboard
-    meta.helm.sh/release-namespace: utilities
+    meta.helm.sh/release-namespace: kubernetes-dashboard
     kubernetes.io/service-account.name: kubernetes-dashboard
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -37,4 +37,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: kubernetes-dashboard
-    namespace: utilities
+    namespace: kubernetes-dashboard
