@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgresql-dev
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: postgresql
+      version: 12.12.4
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    global:
+      postgresql:
+        auth:
+          postgresPassword: postgresql-dev
+    image:
+      tag: 15.4.0
+    primary:
+      initdb:
+        scriptsSecret: postgresql-dev-init
+      persistence:
+        enabled: true
+        existingClaim: postgresql-dev-pvc
+    volumePermissions:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 0

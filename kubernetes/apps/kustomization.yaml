@@ -5,6 +5,7 @@ resources:
   - cert-manager
   - cloud
   - default
+  - dev
   - flux-system
   - infra
   - kube-system
