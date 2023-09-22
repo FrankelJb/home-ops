@@ -26,7 +26,7 @@ spec:
     enableServiceLinks: false
     image:
       repository: ghcr.io/usememos/memos
-      tag: 0.14.4@sha256:d7407fedcc05ec22416f0797a54aeef13494858248a8c20316b22efbf0117b94
+      tag: 0.15.1@sha256:1609e47ead37ecbcd775d7f0ae5ae0bfacd0a107b54da34084e232c2c7cea44f
 
     ingress:
       main:

@@ -33,7 +33,7 @@ spec:
     #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
     image:
       repository: docker.io/louislam/uptime-kuma
-      tag: 1.23.1@sha256:68b21d3f057ac2bfa12192c2606741da8ed713238a0406cdaecffd465de18637
+      tag: 1.23.2@sha256:273cde543a31b1b765ca47f7003f8e1f0f7fa8f35f5812201c6f527e770a7c71
     ingress:
       main:
         enabled: true
