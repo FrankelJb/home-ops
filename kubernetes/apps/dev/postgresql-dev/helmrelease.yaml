@@ -28,7 +28,7 @@ spec:
         auth:
           postgresPassword: postgresql-dev
     image:
-      tag: 15.4.0
+      tag: 14.9.0
     primary:
       initdb:
         scriptsSecret: postgresql-dev-init
