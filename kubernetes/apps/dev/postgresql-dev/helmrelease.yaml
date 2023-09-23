@@ -26,7 +26,7 @@ spec:
     global:
       postgresql:
         auth:
-          postgresPassword: postgresql-dev
+          postgresPassword: ${POSTGRESQL_PASSWORD}
     image:
       tag: 14.9.0
       debug: true
