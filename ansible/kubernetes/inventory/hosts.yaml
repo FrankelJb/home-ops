@@ -7,4 +7,4 @@ kubernetes:
     master:
       hosts:
         uranium:
-          ansible_host: 192.168.122.60
+          ansible_host: 192.168.122.117
