@@ -37,11 +37,11 @@
         - name: Packages | Install
           ansible.builtin.apt:
             name:
-              apt-transport-https,bat,ca-certificates,conntrack,curl,dirmngr,exa,fd-find,fish,fzf,gdisk,git,
+              apt-transport-https,bat,ca-certificates,conntrack,curl,dirmngr,exa,starship,fd-find,fish,fzf,gdisk,git,
               gnupg,hdparm,htop,iperf3,iptables,iputils-ping,ipvsadm,
               libseccomp2,lm-sensors,neofetch,net-tools,nfs-common,nvme-cli,open-iscsi,parted,psmisc,python3,
               python3-apt,python3-openshift,python3-kubernetes,python3-yaml,smartmontools,socat,software-properties-common,
-              unzip,util-linux,nvidia-container-runtime,cuda-drivers-fabricmanager-515,nvidia-headless-515-server
+              unzip,util-linux
             install_recommends: false
             update_cache: true
         - name: "Install botttom"
@@ -104,7 +104,7 @@
             content: |
               if status is-interactive
                 starship init fish | source
-                abbr --add --global -- cat 'bat'
+                abbr --add --global -- cat 'batcat'
                 abbr --add --global -- diff 'delta -s'
                 abbr --add --global -- hse 'helm secrets edit'
                 abbr --add --global -- k 'kubectl'
@@ -112,7 +112,7 @@
                 abbr --add --global -- kd 'kubectl delete'
                 abbr --add --global -- ke 'kubectl exec -it'
                 abbr --add --global -- l 'exa'
-                abbr --add --global -- less 'bat'
+                abbr --add --global -- less 'batcat'
                 abbr --add --global -- lll 'exa -la'
                 abbr --add --global -- ls 'exa'
                 abbr --add --global -- pip 'pip3'
