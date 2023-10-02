@@ -33,7 +33,7 @@ spec:
           name: immich-configmap
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
-      tag: v1.79.1@sha256:7d94cbad82f1c82f2faba366f3ed0011e72c0a67760f3e032ff847745280871c
+      tag: v1.80.0@sha256:9ab4bda98abb81d1a7cff2342e87b2bcecc780ce468fed1a873f7a144d5f3d76
     persistence:
       library:
         enabled: true
