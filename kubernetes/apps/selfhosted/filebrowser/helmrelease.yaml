@@ -73,6 +73,12 @@ spec:
         mountPath: /srv/cyberdrop
         server: ${NFS_HOST}
         type: nfs
+      qbittorrent:
+        enabled: true
+        mountPath: /srv/qbittorrent
+        server: ${NFS_HOST}
+        path: /mnt/raid/media/qbittorrent/downloads
+        type: nfs
       filebrowser:
         enabled: true
         type: configMap
