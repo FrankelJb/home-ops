@@ -34,7 +34,7 @@ spec:
       successfulJobsHistoryLimit: 2
     image:
       repository: nextcloud
-      tag: 27.1.1@sha256:eac49486297576bb3a9e8ae80cbdadfe18f7829e22fc4683a818ed12791cc313
+      tag: 27.1.1@sha256:e5acd4e197e7fcb277db0638bdf146933477a2b5bd914eda3ac6b9daae68c96b
     internalDatabase:
       enabled: false
     externalDatabase:
