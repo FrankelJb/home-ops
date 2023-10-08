@@ -28,7 +28,7 @@ spec:
       TZ: "${TIMEZONE}"
     image:
       repository: ghcr.io/alexta69/metube
-      tag: latest@sha256:ced8b77adf0029d1f53028719f0f3cae889e0d99da7627095d3a19e62dd7659e
+      tag: latest@sha256:e3692511fe691064b16cbbe9c0e7a0fbaaeb29feadc23856602938cb6cca1e9d
       imagePullPolicy: Always
     ingress:
       main:
