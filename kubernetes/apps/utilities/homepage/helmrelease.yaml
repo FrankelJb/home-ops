@@ -31,7 +31,7 @@ spec:
       TZ: ${TIMEZONE}
       LOG_LEVEL: debug
     image:
-      repository: ghcr.io/benphelps/homepage
+      repository: ghcr.io/gethomepage/homepage
       tag: v0.7.1@sha256:941898727d84ea3169f083e339217910a6ab0d67e58afb58f042b0f8e9f1c178
     ingress:
       main:
