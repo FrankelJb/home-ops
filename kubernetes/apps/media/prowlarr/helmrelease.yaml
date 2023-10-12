@@ -29,7 +29,7 @@ spec:
       PGID: "568"
     image:
       repository: ghcr.io/onedr0p/prowlarr-nightly
-      tag: 1.9.4.4018@sha256:46d21fbb488d64797254d0e46687654f44833293e29f0b5e2f7330c1f9ef9177
+      tag: 1.9.4.4024@sha256:137bb1e12268596973ca148f452155d04ee85372cef8eef6da6011fc79c43e6a
     ingress:
       main:
         enabled: true
