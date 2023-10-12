@@ -34,9 +34,6 @@ spec:
           cert-manager/${ROOT_DOMAIN/./-}-tls
     tcp:
       2222: "utilities/gitea-ssh:2222"
-      53: "infra/adguard-home-dns-tcp:53"
-    udp:
-      53: "infra/adguard-home-dns-udp:53"    
     defaultBackend:
       enabled: true
       image:
