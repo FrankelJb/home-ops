@@ -41,7 +41,7 @@ spec:
               - *host
     image:
       repository: ghcr.io/plankanban/planka
-      tag: 1.13.0@sha256:14c190743122a2f18a313804b5672c4e89bf6146f47f7d72b1a88ed81d795766
+      tag: 1.13.1@sha256:ce6f4ff3749efc1f2e91cb2bd549f3267b2dfba97a34c811cc8e2c88771d7588
     persistence:
       data:
         accessMode: ReadWriteOnce
