@@ -24,7 +24,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: jesec/flood
+      repository: ghcr.io/onedr0p/flood
+      tag: 4.7.0@sha256:2cb7bc81ea185f3043a4ff8c2409a49011220dd51fc147271dcac5d3099a02dd  
     ingress:
       main:
         enabled: true
@@ -38,6 +39,12 @@ spec:
           - hosts:
               - *host
     persistence:
+      config:
+        enabled: true
+        path: /mnt/raid/media/flood/config
+        mountPath: /config
+        server: ${NFS_HOST}
+        type: nfs
       data:
         enabled: true
         path: /mnt/raid/media/flood/data
