@@ -24,23 +24,17 @@ spec:
       retries: 5
   values:
     env:
+      PUID: 568
+      PGID: 568
       TZ: ${TIMEZONE}
       QBITTORRENT__BT_PORT: &port-bt 56304
     image:
-      repository: ghcr.io/onedr0p/qbittorrent
-      tag: 4.5.5@sha256:f4a1a5eece13beed61e579172d2a54b1fc2e7ff2bbdbd7ef22a4d9f6fc36e198
+      repository: ghcr.io/hotio/qbittorrent
+      tag:  4.5.5@sha256:f4a1a5eece13beed61e579172d2a54b1fc2e7ff2bbdbd7ef22a4d9f6fc36e198
     ingress:
       main:
         enabled: true
         ingressClassName: nginx
-        annotations:
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            proxy_hide_header "x-webkit-csp";
-            proxy_hide_header "content-security-policy";
-            proxy_hide_header "X-Frame-Options";
-            proxy_set_header Accept-Encoding "";
-            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.${ROOT_DOMAIN}/css/base/qbittorrent/nord.css"></head>';
-            sub_filter_once on;
         hosts:
           - host: &host qbittorrent.${ROOT_DOMAIN}
             paths:
