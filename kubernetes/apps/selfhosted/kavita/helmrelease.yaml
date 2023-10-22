@@ -27,7 +27,7 @@ spec:
       TZ: ${TIMEZONE}
     image:
       repository: ghcr.io/kareadita/kavita
-      tag: 0.7.9@sha256:14e07b7b81dc7d5967c728deea81eb5e2ec3f55004031b7e0d9eed7db2b6ee2e
+      tag: 0.7.9@sha256:dc0177e51d2b9ef86a16151b9727bff0241068a8b83d493642f37c026e7a60b8
     ingress:
       main:
         enabled: true
