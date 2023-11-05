@@ -29,7 +29,7 @@ spec:
       STUMP_PORT: 10801
     image:
       repository: aaronleopold/stump
-      tag: nightly@sha256:0b0e284ade73ff443bbaba5340796cf712382f0e0c7a8b0303ea04525520ba18
+      tag: nightly@sha256:5eba505a29b9ca1a389112dea6984b00b23b5e150f30acecd96235641adcf9b6
       pullPolicy: IfNotPresent
     persistence:
       data:
