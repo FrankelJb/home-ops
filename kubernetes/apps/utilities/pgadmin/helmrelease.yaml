@@ -29,7 +29,7 @@ spec:
     image:
       registry: docker.io
       repository: dpage/pgadmin4
-      tag: 7.8@sha256:c5a4f844ca9b2ee51fa9929b4b137cd4c9d0e6bd4f50a8d061b26803aef9b653
+      tag: 7.8@sha256:c5a4f844ca9b
     ingress:
       enabled: true
       ingressClassName: nginx
