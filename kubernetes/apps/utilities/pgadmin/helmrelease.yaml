@@ -41,6 +41,8 @@ spec:
       tls:
         - hosts:
             - *host
+    networkPolicy:
+      enabled: false
     persistentVolume:
       enabled: true
       existingClaim: pgadmin-pvc
