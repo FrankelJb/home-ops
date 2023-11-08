@@ -27,12 +27,13 @@ spec:
     controller:
       main:
         containers:
-          envFrom:
-            - secretRef:
-                name: *app
-          image:
-            repository: viktorstrate/photoview
-            tag: 2.3.13
+          main:
+            envFrom:
+              - secretRef:
+                  name: *app
+            image:
+              repository: viktorstrate/photoview
+              tag: 2.3.13
         ingress:
           main:
             enabled: true
