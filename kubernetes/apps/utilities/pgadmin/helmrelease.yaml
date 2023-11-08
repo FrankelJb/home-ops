@@ -26,10 +26,6 @@ spec:
     env:
       email: admin@${ROOT_DOMAIN}
     existingSecret: pgadmin-secrets
-    image:
-      registry: docker.io
-      repository: dpage/pgadmin4
-      tag: 7.8@sha256:c5a4f844ca9b
     ingress:
       enabled: true
       ingressClassName: nginx
