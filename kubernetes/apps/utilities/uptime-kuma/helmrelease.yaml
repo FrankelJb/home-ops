@@ -55,9 +55,10 @@ spec:
               - *host
     persistence:
       data:
-        enabled: true
         mountPath: /app/data
-        existingClaim: uptime-kuma-pvc
+        path: ${NFS_PATH}/uptime-kuma
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:
