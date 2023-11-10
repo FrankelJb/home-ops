@@ -26,10 +26,6 @@ spec:
     env:
       email: admin@${ROOT_DOMAIN}
     existingSecret: pgadmin-secrets
-    image:
-      registry: docker.io
-      repository: dpage/pgadmin4
-      tag: 7.8@sha256:c5a4f844ca9b2ee51fa9929b4b137cd4c9d0e6bd4f50a8d061b26803aef9b653
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -41,6 +37,8 @@ spec:
       tls:
         - hosts:
             - *host
+    networkPolicy:
+      enabled: false
     persistentVolume:
       enabled: true
       existingClaim: pgadmin-pvc

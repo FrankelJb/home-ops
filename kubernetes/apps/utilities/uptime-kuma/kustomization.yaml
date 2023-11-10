@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: utilities
 resources:
   - ./helmrelease.yaml
-  - ./volumes.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: uptime-kuma

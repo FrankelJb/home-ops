@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -23,34 +23,42 @@ spec:
     remediation:
       retries: 5
   values:
-    env:
-      TZ: "${TIMEZONE}"
-    # Waiting on rootless image first:
-    # https://github.com/louislam/uptime-kuma/issues/2113
-    # https://github.com/louislam/uptime-kuma/pull/2086
-    # podSecurityContext:
-    #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
-    #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
-    image:
-      repository: docker.io/louislam/uptime-kuma
-      tag: 1.23.3@sha256:9bb740e48e6941b93ab597fd13087cf5d82a2c183b25f26de53c687a829c77a9
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              TZ: "${TIMEZONE}"
+            # Waiting on rootless image first:
+            # https://github.com/louislam/uptime-kuma/issues/2113
+            # https://github.com/louislam/uptime-kuma/pull/2086
+            # podSecurityContext:
+            #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
+            #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
+            image:
+              repository: docker.io/louislam/uptime-kuma
+              tag: 1.23.3@sha256:9bb740e48e6941b93ab597fd13087cf5d82a2c183b25f26de53c687a829c77a9
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         hosts:
           - host: &host "uptime.${ROOT_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
     persistence:
       data:
-        enabled: true
         mountPath: /app/data
-        existingClaim: uptime-kuma-pvc
+        path: ${NFS_PATH}/uptime-kuma
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:
