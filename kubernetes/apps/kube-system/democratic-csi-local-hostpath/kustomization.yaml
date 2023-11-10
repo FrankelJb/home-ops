@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./helmrelease.yaml
-  - ./vsc.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: democratic-csi-local-hostpath
