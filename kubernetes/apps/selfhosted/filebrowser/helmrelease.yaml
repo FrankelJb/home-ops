@@ -1,61 +1,62 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: &app filebrowser
   namespace: selfhosted
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+      version: 2.0.3
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    image:
-      repository: ghcr.io/onedr0p/filebrowser
-      tag: v2.26.0
-    env:
-      TZ: "${TZ}"
-    service:
+    controllers:
       main:
-        ports:
-          http:
-            port: &port 80
-    probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness: *probes
-      startup:
-        enabled: false
+        containers:
+          main:
+            env:
+              TZ: ${TZ}
+            image:
+              repository: ghcr.io/onedr0p/filebrowser
+              tag: v2.26.0
+            probes: &probes
+              liveness:
+                custom: true
+                enabled: true
+                spec:
+                  failureThreshold: 3
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+              readiness: *probes
+              startup:
+                enabled: false
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
-          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${ROOT_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
@@ -63,41 +64,46 @@ spec:
       config:
         enabled: true
         existingClaim: filebrowser-pvc
-      originals:
-        enabled: true
-        mountPath: /srv/originals
-        server: ${NFS_HOST}
-        type: nfs
       cyberdrop:
         enabled: true
         mountPath: /srv/cyberdrop
         server: ${NFS_HOST}
         type: nfs
+      filebrowser:
+        enabled: true
+        mountPath: /.filebrowser.json
+        name: filebrowser-config
+        readOnly: true
+        subPath: filebrowser.json
+        type: configMap
+      originals:
+        enabled: true
+        mountPath: /srv/originals
+        server: ${NFS_HOST}
+        type: nfs
       qbittorrent:
         enabled: true
         mountPath: /srv/qbittorrent
-        server: ${NFS_HOST}
         path: /mnt/raid/media/qbittorrent/downloads
+        server: ${NFS_HOST}
         type: nfs
-      filebrowser:
-        enabled: true
-        type: configMap
-        name: filebrowser-config
-        subPath: filebrowser.json
-        mountPath: /.filebrowser.json
-        readOnly: true
     resources:
+      limits:
+        memory: 500Mi
       requests:
         cpu: 10m
         memory: 50Mi
-      limits:
-        memory: 500Mi
+    service:
+      main:
+        ports:
+          http:
+            port: &port 80
   valuesFrom:
     - kind: Secret
       name: *app
-      valuesKey: ORIGINALS_PATH
       targetPath: persistence.originals.path
+      valuesKey: ORIGINALS_PATH
     - kind: Secret
       name: *app
-      valuesKey: CYBERDROP_PATH
       targetPath: persistence.cyberdrop.path
+      valuesKey: CYBERDROP_PATH
