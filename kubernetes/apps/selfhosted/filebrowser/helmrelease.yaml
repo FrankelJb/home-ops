@@ -38,7 +38,7 @@ spec:
                   failureThreshold: 3
                   httpGet:
                     path: /health
-                    port: *port
+                    port: 80
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -97,7 +97,7 @@ spec:
       main:
         ports:
           http:
-            port: &port 80
+            port: 80
   valuesFrom:
     - kind: Secret
       name: *app
