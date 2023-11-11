@@ -57,7 +57,9 @@ spec:
       cache:
         enabled: true
         mountPath: /app/cache
-        existingClaim: photoview-cache-pvc
+        path: ${LOCAL_PATH}/photoview-cache-pvc
+        server: ${NFS_HOST}
+        type: nfs
     resources:
       requests:
         cpu: 100m

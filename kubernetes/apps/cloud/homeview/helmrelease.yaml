@@ -64,7 +64,9 @@ spec:
       cache:
         enabled: true
         mountPath: /app/cache
-        existingClaim: homeview-cache-pvc
+        path: ${LOCAL_PATH}/homeview-cache-pvc
+        server: ${NFS_HOST}
+        type: nfs
 
   valuesFrom:
     - kind: Secret

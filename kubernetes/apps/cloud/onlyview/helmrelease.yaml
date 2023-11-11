@@ -61,7 +61,9 @@ spec:
       cache:
         enabled: true
         mountPath: /app/cache
-        existingClaim: onlyview-cache-pvc
+        path: ${LOCAL_PATH}/onlyview-cache-pvc
+        server: ${NFS_HOST}
+        type: nfs
 
   valuesFrom:
     - kind: Secret
