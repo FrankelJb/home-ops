@@ -9,3 +9,5 @@ resources:
   - kube-system
   - kubernetes-dashboard
   - kyverno
+  - media
+  - networking
