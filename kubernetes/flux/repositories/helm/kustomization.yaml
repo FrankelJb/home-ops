@@ -7,6 +7,7 @@ resources:
   - ./angelnu.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./cilium.yaml
   - ./csi-driver-nfs.yaml
   - ./democratic-csi.yaml
   - ./external-dns.yaml
