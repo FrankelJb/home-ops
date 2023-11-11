@@ -1,46 +1,49 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: whoogle
   namespace: selfhosted
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.0.3
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    env:
-      WHOOGLE_DOTENV: 1
-      WHOOGLE_CONFIG_ALTS: 1
-      WHOOGLE_ALT_TW: farside.link/nitter
-      WHOOGLE_ALT_YT: farside.link/invidious
-      WHOOGLE_ALT_IG: farside.link/bibliogram/u
-      WHOOGLE_ALT_RD: farside.link/libreddit
-      WHOOGLE_ALT_MD: farside.link/scribe
-      WHOOGLE_ALT_TL: farside.link/lingva
-      WHOOGLE_ALT_IMG: farside.link/rimgo
-      WHOOGLE_ALT_WIKI: farside.link/wikiless
-      WHOOGLE_ALT_IMDB: farside.link/libremdb
-      WHOOGLE_ALT_QUORA: farside.link/quetre
-      WHOOGLE_CONFIG_THEME: dark
-      WHOOGLE_CONFIG_STYLE: ":root {    /* DARK THEME COLORS */    --whoogle-dark-logo: #cdd6f4;    --whoogle-dark-page-bg: #1e1e2e;    --whoogle-dark-element-bg: #45475a;    --whoogle-dark-text: #cdd6f4;    --whoogle-dark-contrast-text: #bac2de;    --whoogle-dark-secondary-text: #a6adc8;    --whoogle-dark-result-bg: #313244;    --whoogle-dark-result-title: #b4befe;    --whoogle-dark-result-url: #f5e0dc;    --whoogle-dark-result-visited: #eba0ac;}#whoogle-w {    fill: #89b4fa;}#whoogle-h {    fill: #f38ba8;}#whoogle-o-1 {    fill: #f9e2af;}#whoogle-o-2 {    fill: #89b4fa;}#whoogle-g {    fill: #a6e3a1;}#whoogle-l {    fill: #f38ba8;}#whoogle-e {    fill: #f9e2af;}"
-    image:
-      repository: ghcr.io/benbusby/whoogle-search
-      tag: 0.8.4@sha256:93977c3aec8a039df94745a6e960d1b590a897e451b874c90ce484fbdbc3630f
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              WHOOGLE_ALT_IG: farside.link/bibliogram/u
+              WHOOGLE_ALT_IMDB: farside.link/libremdb
+              WHOOGLE_ALT_IMG: farside.link/rimgo
+              WHOOGLE_ALT_MD: farside.link/scribe
+              WHOOGLE_ALT_QUORA: farside.link/quetre
+              WHOOGLE_ALT_RD: farside.link/libreddit
+              WHOOGLE_ALT_TL: farside.link/lingva
+              WHOOGLE_ALT_TW: farside.link/nitter
+              WHOOGLE_ALT_WIKI: farside.link/wikiless
+              WHOOGLE_ALT_YT: farside.link/invidious
+              WHOOGLE_CONFIG_ALTS: 1
+              WHOOGLE_CONFIG_STYLE: ':root {    /* DARK THEME COLORS */    --whoogle-dark-logo: #cdd6f4;    --whoogle-dark-page-bg: #1e1e2e;    --whoogle-dark-element-bg: #45475a;    --whoogle-dark-text: #cdd6f4;    --whoogle-dark-contrast-text: #bac2de;    --whoogle-dark-secondary-text: #a6adc8;    --whoogle-dark-result-bg: #313244;    --whoogle-dark-result-title: #b4befe;    --whoogle-dark-result-url: #f5e0dc;    --whoogle-dark-result-visited: #eba0ac;}#whoogle-w {    fill: #89b4fa;}#whoogle-h {    fill: #f38ba8;}#whoogle-o-1 {    fill: #f9e2af;}#whoogle-o-2 {    fill: #89b4fa;}#whoogle-g {    fill: #a6e3a1;}#whoogle-l {    fill: #f38ba8;}#whoogle-e {    fill: #f9e2af;}'
+              WHOOGLE_CONFIG_THEME: dark
+              WHOOGLE_DOTENV: 1
+            image:
+              repository: ghcr.io/benbusby/whoogle-search
+              tag: 0.8.4@sha256:93977c3aec8a039df94745a6e960d1b590a897e451b874c90ce484fbdbc3630f
     ingress:
       main:
         enabled: true
@@ -49,6 +52,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host

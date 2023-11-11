@@ -1,42 +1,47 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: memos
   namespace: selfhosted
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.0.3
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/usememos/memos
+              tag: 0.17.0@sha256:ad304f649ed86db18c7f4bfd45ba1c574b1e899902e4e1e76306bc6fe0c195e7
     enableServiceLinks: false
-    image:
-      repository: ghcr.io/usememos/memos
-      tag: 0.17.0@sha256:ad304f649ed86db18c7f4bfd45ba1c574b1e899902e4e1e76306bc6fe0c195e7
-
     ingress:
       main:
-        enabled: true
         className: nginx
+        enabled: true
         hosts:
-          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${ROOT_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
