@@ -51,7 +51,8 @@ spec:
     persistence:
       memos:
         enabled: true
-        mountPath: /var/opt/memos
+        globalMounts:
+          - path: /var/opt/memos
         path: ${NFS_PATH}/memos
         server: ${NFS_HOST}
         type: nfs

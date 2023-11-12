@@ -40,7 +40,6 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${ROOT_DOMAIN}
           external-dns.home.arpa/enabled: 'true'
         className: nginx
-        enabled: true
         hosts:
           - host: &host '{{ .Release.Name }}.${ROOT_DOMAIN}'
             paths:
@@ -54,14 +53,12 @@ spec:
               - *host
     persistence:
       config:
-        enabled: true
         globalMounts:
           - path: /opt/sharry.conf
         name: *app
         subPath: sharry.conf
         type: configMap
       data:
-        enabled: true
         path: /mnt/raid/media/sharry
         server: ${NFS_HOST}
         type: nfs
