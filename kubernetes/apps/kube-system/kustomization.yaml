@@ -6,3 +6,4 @@ resources:
   - coredns
   - csi-driver-nfs
   - democratic-csi-local-hostpath
+  - metrics-server

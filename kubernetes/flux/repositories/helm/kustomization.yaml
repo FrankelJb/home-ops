@@ -20,6 +20,7 @@ resources:
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
+  - ./metrics-server.yaml
   - ./nextcloud.yaml
   - ./olivetin.yaml
   - ./pod-gateway.yaml
