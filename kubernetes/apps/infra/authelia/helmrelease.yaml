@@ -27,10 +27,10 @@ spec:
         annotations:
           reloader.stakater.com/auto: 'true'
         containers:
-          args:
-            - --config
-            - /config/configuration.yaml
           main:
+            args:
+              - --config
+              - /config/configuration.yaml
             envFrom:
               - secretRef:
                   name: authelia-secret
