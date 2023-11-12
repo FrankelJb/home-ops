@@ -24,11 +24,11 @@ spec:
   values:
     controllers:
       main:
-        envFrom:
-          - secretRef:
-              name: rxresume
         containers:
           main:
+            envFrom:
+              - secretRef:
+                  name: rxresume
             image:
               repository: amruthpillai/reactive-resume
               tag: server-3.7.2@sha256:5794bfe8729a6660f321b5c3525c7bcd354cc0e80b2bfbc23b566a7aacf055be
