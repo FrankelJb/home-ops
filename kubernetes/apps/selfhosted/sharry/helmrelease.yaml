@@ -58,7 +58,7 @@ spec:
           - hosts:
               - *host
     persistence:
-      config:
+      config-file:
         globalMounts:
           - path: /opt/sharry.conf
             subPath: sharry.conf
