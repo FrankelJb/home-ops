@@ -66,24 +66,27 @@ spec:
         existingClaim: filebrowser-pvc
       cyberdrop:
         enabled: true
-        mountPath: /srv/cyberdrop
+        path: /srv/cyberdrop
         server: ${NFS_HOST}
         type: nfs
       filebrowser:
         enabled: true
-        mountPath: /.filebrowser.json
+        globalMounts:
+          - path: /.filebrowser.json
+            subPath: filebrowser.json
         name: filebrowser-config
         readOnly: true
-        subPath: filebrowser.json
         type: configMap
       originals:
         enabled: true
-        mountPath: /srv/originals
+        globalMounts:
+          - path: /srv/originals
         server: ${NFS_HOST}
         type: nfs
       qbittorrent:
         enabled: true
-        mountPath: /srv/qbittorrent
+        globalMounts:
+          - path: /srv/qbittorrent
         path: /mnt/raid/media/qbittorrent/downloads
         server: ${NFS_HOST}
         type: nfs
