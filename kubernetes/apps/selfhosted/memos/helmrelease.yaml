@@ -26,6 +26,8 @@ spec:
       main:
         containers:
           main:
+            env:
+              MEMOS_METRIC: false
             image:
               repository: ghcr.io/usememos/memos
               tag: 0.17.0@sha256:ad304f649ed86db18c7f4bfd45ba1c574b1e899902e4e1e76306bc6fe0c195e7
