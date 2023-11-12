@@ -3,8 +3,6 @@ kind: CiliumL2AnnouncementPolicy
 metadata:
   name: policy
 spec:
-  loadBalancerIPs: true
-  externalIPs: true
   interfaces:
     - ^enp.*
   nodeSelector:
