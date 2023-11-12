@@ -69,19 +69,19 @@ spec:
     persistence:
       config:
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /opt/adguardhome/conf
         type: emptyDir
       data:
         accessMode: ReadWriteOnce
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /opt/adguardhome/work
         size: 100Mi
         storageClass: local-hostpath
       tmp:
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /tmp/AdGuardHome.yaml
             subPath: AdGuardHome.yaml
         name: adguard-home-config

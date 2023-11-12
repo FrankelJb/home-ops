@@ -47,7 +47,7 @@ spec:
     persistence:
       config:
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /app/config
         path: ${NFS_PATH}/jellyseerr
         server: ${NFS_HOST}

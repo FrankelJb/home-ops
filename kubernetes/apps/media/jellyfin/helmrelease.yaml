@@ -47,7 +47,7 @@ spec:
     persistence:
       audio:
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /mnt/audio
         path: ${NFS_PATH}/navidrome/media
         server: ${NFS_HOST}
@@ -59,7 +59,7 @@ spec:
         type: nfs
       media:
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /media
         path: /mnt/raid/media/qbittorrent/downloads
         readOnly: true
@@ -67,7 +67,7 @@ spec:
         type: nfs
       metube:
         enabled: true
-        globalPaths:
+        globalMounts:
           - path: /mnt/metube
         path: /mnt/raid/media/metube
         server: ${NFS_HOST}
