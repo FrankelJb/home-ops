@@ -28,6 +28,9 @@ spec:
       main:
         containers:
           main:
+            annotations:
+              configMap.reloader.stakater.com/reload: *app
+              secret.reloader.stakater.com/reload: *app
             image:
               repository: eikek0/sharry
               tag: v1.12.1@sha256:a842c68ae215fd3407a33732d9588d56915e2fee2b1fc92cd310fe26e979122c
@@ -61,9 +64,6 @@ spec:
         path: /mnt/raid/media/sharry
         server: ${NFS_HOST}
         type: nfs
-    podAnnotations:
-      configMap.reloader.stakater.com/reload: *app
-      secret.reloader.stakater.com/reload: *app
     resources:
       limits:
         memory: 1Gi
