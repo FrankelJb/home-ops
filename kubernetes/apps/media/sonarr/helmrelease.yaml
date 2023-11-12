@@ -1,44 +1,56 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: sonarr
   namespace: downloads
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    env:
-      TZ: Asia/Singapore
-      PUID: "568"
-      PGID: "568"
-    image:
-      repository: ghcr.io/onedr0p/sonarr
-      tag: 3.0.10.1567@sha256:ea8acd3ec2c212e254c8c8f6d8f748227c0691d90816761d220bd3e4765b21c7
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              PGID: '568'
+              PUID: '568'
+              TZ: Asia/Singapore
+            image:
+              repository: ghcr.io/onedr0p/sonarr
+              tag: 3.0.10.1567@sha256:ea8acd3ec2c212e254c8c8f6d8f748227c0691d90816761d220bd3e4765b21c7
+    defaultPodOptions:
+      podSecurityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsUser: 568
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
           - host: &host sonarr.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
@@ -53,11 +65,6 @@ spec:
         path: /mnt/raid/media/qbittorrent/downloads
         server: ${NFS_HOST}
         type: nfs
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
     service:
       main:
         ports:

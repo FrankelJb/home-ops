@@ -1,69 +1,76 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: metube
   namespace: downloads
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 3
+  interval: 15m
   upgrade:
     remediation:
       retries: 3
   values:
-    env:
-      AUDIO_DOWNLOAD_DIR: /audio
-      TZ: "${TIMEZONE}"
-    image:
-      repository: ghcr.io/alexta69/metube
-      tag: latest@sha256:8fe391c1a2939fc5465af0b7d6316884af5f37ba2d7d7e27a0b108e23e48d779
-      imagePullPolicy: Always
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              AUDIO_DOWNLOAD_DIR: /audio
+              TZ: ${TIMEZONE}
+            image:
+              imagePullPolicy: Always
+              repository: ghcr.io/alexta69/metube
+              tag: latest@sha256:8fe391c1a2939fc5465af0b7d6316884af5f37ba2d7d7e27a0b108e23e48d779
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsUser: 568
+        supplementalGroups:
+          - 100
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
-          - host: &host "metube.${ROOT_DOMAIN}"
+          - host: &host metube.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
+    persistence:
+      audio:
+        enabled: true
+        path: ${NFS_PATH}/navidrome/media/ytdl
+        readOnly: false
+        server: ${NFS_HOST}
+        type: nfs
+      downloads:
+        enabled: true
+        path: /mnt/raid/media/metube
+        readOnly: false
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:
           http:
             port: 8081
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
-    persistence:
-      audio:
-        enabled: true
-        path: ${NFS_PATH}/navidrome/media/ytdl
-        server: ${NFS_HOST}
-        type: nfs
-        readOnly: false
-      downloads:
-        enabled: true
-        path: /mnt/raid/media/metube
-        server: ${NFS_HOST}
-        type: nfs
-        readOnly: false

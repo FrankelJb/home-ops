@@ -1,43 +1,46 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: flaresolverr
   namespace: downloads
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    env:
-      TZ: ${TIMEZONE}
-      PUID: "568"
-      PGID: "568"
-    image:
-      repository: ghcr.io/flaresolverr/flaresolverr
-      tag: v3.3.7@sha256:9c9bfd7a0b509779d4a955ee206b42a9084227d2d3c75cdb3bf1363d29e1923a
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              PGID: '568'
+              PUID: '568'
+              TZ: ${TIMEZONE}
+            image:
+              repository: ghcr.io/flaresolverr/flaresolverr
+              tag: v3.3.7@sha256:9c9bfd7a0b509779d4a955ee206b42a9084227d2d3c75cdb3bf1363d29e1923a
+    resources:
+      limits:
+        memory: 292Mi
+      requests:
+        cpu: 15m
+        memory: 105Mi
     service:
       main:
         ports:
           http:
             port: 8191
-    resources:
-      requests:
-        cpu: 15m
-        memory: 105Mi
-      limits:
-        memory: 292Mi
