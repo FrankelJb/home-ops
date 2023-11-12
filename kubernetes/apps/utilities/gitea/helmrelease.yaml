@@ -55,7 +55,7 @@ spec:
       enabled: false
     persistence:
       enabled: true
-      existingClaim: gitea-pvc
+      claimName: gitea-pvc
     service:
       ssh:
         port: 2222
