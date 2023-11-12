@@ -1,68 +1,74 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app photoview
+  name: photoview
   namespace: cloud
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    envFrom:
-      - secretRef:
-          name: *app
-    image:
-      repository: viktorstrate/photoview
-      tag: 2.3.13
+    controllers:
+      main:
+        containers:
+          main:
+            envFrom:
+              - secretRef:
+                  name: photoview
+            image:
+              repository: viktorstrate/photoview
+              tag: 2.3.13
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
-          - host: &host photoview.${ROOT_DOMAIN}
+          - host: photoview.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
-              - *host
+              - photoview.${ROOT_DOMAIN}
+    persistence:
+      cache:
+        enabled: true
+        globalMounts:
+          - path: /app/cache
+        path: ${LOCAL_PATH}/photoview-cache-pvc
+        server: ${NFS_HOST}
+        type: nfs
+      photos:
+        enabled: true
+        path: ${NFS_PATH}/nextcloud/data
+        readOnly: true
+        server: ${NFS_HOST}
+        type: nfs
+    resources:
+      limits:
+        memory: 2000Mi
+      requests:
+        cpu: 100m
+        memory: 250Mi
     service:
       main:
         ports:
           http:
             port: 80
-    persistence:
-      originals:
-        enabled: true
-        mountPath: /photos
-        readOnly: true
-        path: ${NFS_PATH}/nextcloud/data
-        server: ${NFS_HOST}
-        type: nfs
-      cache:
-        enabled: true
-        mountPath: /app/cache
-        path: ${LOCAL_PATH}/photoview-cache-pvc
-        server: ${NFS_HOST}
-        type: nfs
-    resources:
-      requests:
-        cpu: 100m
-        memory: 250Mi
-      limits:
-        memory: 2000Mi
