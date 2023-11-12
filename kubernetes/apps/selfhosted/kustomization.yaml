@@ -4,3 +4,18 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - libreddit
+  - kavita
+  - matrix-element
+  - matrix-synapse
+  - memos
+  - olivetin
+  - openspeedtest
+  - paperless-ngx
+  - pairdrop
+  - planka
+  - rxresume
+  - sharry
+  - stirling-pdf
+  - stump
+  - vaultwarden
+  - whoogle
