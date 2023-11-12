@@ -31,6 +31,7 @@ spec:
               tag: 0.15.1@sha256:f76df954c8b76ff942bba6c4043530b4280e2b8c256c262cbc0b9f947f53525e
     ingress:
       main:
+        className: nginx
         enabled: true
         hosts:
           - host: &host stirling-pdf.${ROOT_DOMAIN}
