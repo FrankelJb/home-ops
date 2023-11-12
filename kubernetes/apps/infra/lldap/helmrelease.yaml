@@ -30,10 +30,10 @@ spec:
   values:
     controllers:
       main:
+        annotations:
+          reloader.stakater.com/auto: 'true'
         containers:
           main:
-            annotations:
-              reloader.stakater.com/auto: 'true'
             env:
               LLDAP_HTTP_PORT: 80
               LLDAP_HTTP_URL: https://lldap.${ROOT_DOMAIN}

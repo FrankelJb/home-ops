@@ -24,9 +24,9 @@ spec:
   values:
     controllers:
       main:
+        annotations:
+          reloader.stakater.com/auto: 'true'
         containers:
-          annotations:
-            reloader.stakater.com/auto: 'true'
           args:
             - --config
             - /config/configuration.yaml
