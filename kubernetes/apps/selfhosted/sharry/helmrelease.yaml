@@ -55,8 +55,8 @@ spec:
       config:
         globalMounts:
           - path: /opt/sharry.conf
+            subPath: sharry.conf
         name: *app
-        subPath: sharry.conf
         type: configMap
       data:
         path: /mnt/raid/media/sharry
