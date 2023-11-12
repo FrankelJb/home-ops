@@ -37,6 +37,12 @@ spec:
             image:
               repository: ghcr.io/authelia/authelia
               tag: 4.37.5
+            resources:
+              limits:
+                memory: 100Mi
+              requests:
+                cpu: 5m
+                memory: 10Mi
     defaultPodOptions:
       enableServiceLinks: false
     ingress:
@@ -57,18 +63,8 @@ spec:
     persistence:
       config:
         enabled: true
-        globalMounts:
-          - path: /config/configuration.yaml
-            subPath: configuration.yaml
-            readOnly: true
         name: authelia-configmap
         type: configMap
-    resources:
-      limits:
-        memory: 100Mi
-      requests:
-        cpu: 5m
-        memory: 10Mi
     service:
       main:
         ports:
