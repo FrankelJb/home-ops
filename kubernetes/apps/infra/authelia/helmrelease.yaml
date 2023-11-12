@@ -43,8 +43,8 @@ spec:
               requests:
                 cpu: 5m
                 memory: 10Mi
-    defaultPodOptions:
-      enableServiceLinks: false
+        pod:
+          enableServiceLinks: false
     ingress:
       main:
         className: nginx
