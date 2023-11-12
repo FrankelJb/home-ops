@@ -49,6 +49,10 @@ spec:
       extraArgs:
         default-ssl-certificate: |-
           cert-manager/${ROOT_DOMAIN/./-}-tls
+      service:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: external.${ROOT_DOMAIN}
+          io.cilium/lb-ipam-ips: 192.168.2.25
     tcp:
       "2222": "utilities/gitea-ssh:2222"
     defaultBackend:
