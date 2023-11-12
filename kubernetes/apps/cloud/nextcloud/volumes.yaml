@@ -43,7 +43,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: nfs.csi.k8s.io
-  name: nextcloud-previews-pvc
+  name: nextcloud-previews-pv
 spec:
   capacity:
     storage: 1Ti
@@ -61,4 +61,17 @@ spec:
     volumeHandle: "${NFS_HOST}${NFS_PATH}#nextcloud-previews#"
     volumeAttributes:
       server: "${NFS_HOST}"
-      share: "${LOCAL_PATH}/nextcloud-previews-pvc"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-previews-pvc
+  namespace: cloud
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
+  storageClassName: nfs-csi
+  volumeName: nextcloud-previews-pv
