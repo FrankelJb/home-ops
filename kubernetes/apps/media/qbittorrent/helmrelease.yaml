@@ -69,6 +69,7 @@ spec:
         type: nfs
     service:
       bittorrent:
+        controller: main
         enabled: true
         ports:
           bittorrent:
