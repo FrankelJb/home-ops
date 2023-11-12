@@ -48,9 +48,15 @@ spec:
       className: nginx
       hosts:
         - host: &host "matrix.${ROOT_DOMAIN}"
-          paths:
+      paths:
+        - paths:
             - path: /
               pathType: Prefix
+              backend:
+                service:
+                  name: matrix-synapse
+                  port:
+                    number: 8008
       tls:
         - hosts:
             - *host
