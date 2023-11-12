@@ -57,9 +57,9 @@ spec:
         enabled: true
         globalMounts:
           - path: /app/config.json
+            subPath: config.json
         name: *app
         readOnly: true
-        subPath: config.json
         type: configMap
     podAnnotations:
       configmap.reloader.stakater.com/reload: *app
