@@ -47,7 +47,7 @@ spec:
     ingress:
       className: nginx
       hosts:
-        - host: &host "matrix.${ROOT_DOMAIN}"
+        - &host "matrix.${ROOT_DOMAIN}"
       paths:
         - path: /
           pathType: Prefix
