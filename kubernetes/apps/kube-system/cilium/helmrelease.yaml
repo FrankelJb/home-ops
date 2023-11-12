@@ -70,7 +70,7 @@ spec:
         rollOutPods: true
         ingress:
           enabled: true
-          className: internal
+          className: nginx
           hosts:
             - &host hubble.${ROOT_DOMAIN}
           tls:
