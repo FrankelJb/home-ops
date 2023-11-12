@@ -36,12 +36,12 @@ spec:
               SMTP_SECURITY: starttls
               TZ: ${TIMEZONE}
               WEBSOCKET_ENABLED: true
+            envFrom:
+              - secretRef:
+                  name: *app
             image:
               repository: ghcr.io/dani-garcia/vaultwarden
               tag: 1.30.0@sha256:27638a2ae977d66d99891c06562ff9ba78a60869d2e5a94cf2953f1d03fde12f
-    envFrom:
-      - secretRef:
-          name: *app
     ingress:
       main:
         className: nginx
