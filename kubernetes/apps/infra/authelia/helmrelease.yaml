@@ -37,13 +37,14 @@ spec:
             image:
               repository: ghcr.io/authelia/authelia
               tag: 4.37.5
-    enableServiceLinks: false
+    defaultPodOptions:
+      enableServiceLinks: false
     ingress:
       main:
         className: nginx
         enabled: true
         hosts:
-          - host: auth.${ROOT_DOMAIN}
+          - host: &host auth.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -52,7 +53,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - auth.${ROOT_DOMAIN}
+              - *host
     persistence:
       config:
         enabled: true
