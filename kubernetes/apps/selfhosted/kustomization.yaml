@@ -5,8 +5,3 @@ resources:
   - filebrowser
   - libreddit
   - kavita
-  - matrix-element
-  - matrix-synapse
-  - memos
-  - olivetin
-  - openspeedtest
