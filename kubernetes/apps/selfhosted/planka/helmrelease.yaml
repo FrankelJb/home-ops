@@ -25,10 +25,10 @@ spec:
     controllers:
       main:
         containers:
-          envFrom:
-            - secretRef:
-                name: planka
           main:
+            envFrom:
+              - secretRef:
+                  name: planka
             image:
               repository: ghcr.io/plankanban/planka
               tag: 1.14.3@sha256:3aa4eedec7085e918d7043be8bfd8ad5fbe5522f9e839bbcebcbcbaec49d7e0f
