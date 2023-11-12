@@ -61,6 +61,7 @@ spec:
     volumeHandle: "${NFS_HOST}${NFS_PATH}#nextcloud-previews#"
     volumeAttributes:
       server: "${NFS_HOST}"
+      share: "${LOCAL_PATH}/nextcloud-previews-pvc"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
