@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      version: 2.0.3
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
@@ -60,7 +60,8 @@ spec:
     persistence:
       config:
         enabled: true
-        mountPath: /data
+        globalMounts:
+          - path: /data
         path: /mnt/raid/nfs/vaultwarden
         server: ${NFS_HOST}
         type: nfs

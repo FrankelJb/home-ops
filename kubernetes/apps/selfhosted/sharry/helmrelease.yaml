@@ -34,6 +34,12 @@ spec:
             image:
               repository: eikek0/sharry
               tag: v1.12.1@sha256:a842c68ae215fd3407a33732d9588d56915e2fee2b1fc92cd310fe26e979122c
+            resources:
+              limits:
+                memory: 1Gi
+              requests:
+                cpu: 50m
+                memory: 250Mi
     ingress:
       main:
         annotations:
@@ -62,12 +68,6 @@ spec:
         path: /mnt/raid/media/sharry
         server: ${NFS_HOST}
         type: nfs
-    resources:
-      limits:
-        memory: 1Gi
-      requests:
-        cpu: 50m
-        memory: 250Mi
     service:
       main:
         ports:
