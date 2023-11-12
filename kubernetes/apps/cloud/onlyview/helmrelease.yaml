@@ -41,7 +41,7 @@ spec:
         className: nginx
         enabled: true
         hosts:
-          - host: onlyview.${ROOT_DOMAIN}
+          - host: &host onlyview.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -50,7 +50,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - onlyview.${ROOT_DOMAIN}
+              - *host
     persistence:
       cache:
         enabled: true
@@ -72,5 +72,5 @@ spec:
   valuesFrom:
     - kind: Secret
       name: onlyview
-      targetPath: persistence.originals.path
+      targetPath: persistence.photos.path
       valuesKey: ORIGINALS_PATH

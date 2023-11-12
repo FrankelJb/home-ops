@@ -36,7 +36,7 @@ spec:
         className: nginx
         enabled: true
         hosts:
-          - host: collabora.${ROOT_DOMAIN}
+          - host: &host collabora.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -45,7 +45,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - collabora.${ROOT_DOMAIN}
+              - *host
     service:
       main:
         ports:
