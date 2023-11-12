@@ -1,70 +1,78 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: authelia
   namespace: infra
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    args: ["--config", "/config/configuration.yaml"]
-    controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
+    controllers:
+      main:
+        containers:
+          annotations:
+            reloader.stakater.com/auto: 'true'
+          args:
+            - --config
+            - /config/configuration.yaml
+          main:
+            envFrom:
+              - secretRef:
+                  name: authelia-secret
+            image:
+              repository: ghcr.io/authelia/authelia
+              tag: 4.37.5
+    enableServiceLinks: false
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
-          - host: &host auth.${ROOT_DOMAIN}
+          - host: auth.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
-              - *host
-    envFrom:
-      - secretRef:
-          name: authelia-secret
-    enableServiceLinks: false
-    image:
-      repository: ghcr.io/authelia/authelia
-      tag: 4.37.5
+              - auth.${ROOT_DOMAIN}
     persistence:
       config:
         enabled: true
-        type: configMap
+        globalPaths:
+          - path: /config/configuration.yaml
+            subPath: configuration.yaml
         name: authelia-configmap
-        subPath: configuration.yaml
-        mountPath: /config/configuration.yaml
         readOnly: false
+        type: configMap
     resources:
+      limits:
+        memory: 100Mi
       requests:
         cpu: 5m
         memory: 10Mi
-      limits:
-        memory: 100Mi
     service:
       main:
         ports:
           http:
-            port: 9091 # TODO: change this to 80 so that policy looks nicer
+            port: 9091
           metrics:
             enabled: true
             port: 8080

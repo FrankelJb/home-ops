@@ -1,80 +1,82 @@
----
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: lldap
   namespace: infra
 spec:
-  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+      version: 2.2.0
   dependsOn:
     - name: postgresql
       namespace: default
-  maxHistory: 2
   install:
     createNamespace: true
     remediation:
       retries: 3
+  interval: 30m
+  maxHistory: 2
+  uninstall:
+    keepHistory: false
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
-    controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: ghcr.io/lldap/lldap
-      # TODO: Switch to release tag on next release
-      tag: latest-alpine@sha256:d8fb642f2f1134c41ed1655fce0e6b48234d02522d1918b5f37254a1281f4c6f
-    env:
-      TZ: ${TIMEZONE}
-      LLDAP_HTTP_PORT: &port 80
-      LLDAP_HTTP_URL: https://lldap.${ROOT_DOMAIN}
-      LLDAP_LDAP_PORT: &ldapPort 389
-    envFrom:
-      - secretRef:
-          name: lldap-secret
-
+    controllers:
+      main:
+        containers:
+          main:
+            annotations:
+              reloader.stakater.com/auto: 'true'
+            env:
+              LLDAP_HTTP_PORT: 80
+              LLDAP_HTTP_URL: https://lldap.${ROOT_DOMAIN}
+              LLDAP_LDAP_PORT: 389
+              TZ: ${TIMEZONE}
+            envFrom:
+              - secretRef:
+                  name: lldap-secret
+            image:
+              repository: ghcr.io/lldap/lldap
+              tag: latest-alpine@sha256:d8fb642f2f1134c41ed1655fce0e6b48234d02522d1918b5f37254a1281f4c6f
+    ingress:
+      main:
+        className: nginx
+        enabled: true
+        hosts:
+          - host: '{{ .Release.Name }}.${ROOT_DOMAIN}'
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - '{{ .Release.Name }}.${ROOT_DOMAIN}'
+    persistence:
+      data:
+        enabled: true
+        path: ${NFS_PATH}/lldap
+        server: ${NFS_HOST}
+        type: nfs
+    resources:
+      limits:
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
     service:
       main:
         ports:
           http:
-            port: *port
+            port: 80
           ldap:
             enabled: true
-            port: *ldapPort
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-    persistence:
-      data:
-        enabled: true
-        server: ${NFS_HOST}
-        path: ${NFS_PATH}/lldap
-        type: nfs
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
-      limits:
-        memory: 500Mi
+            port: 389
