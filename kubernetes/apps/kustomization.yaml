@@ -12,5 +12,4 @@ resources:
   - kyverno
   - media
   - networking
-  - selfhosted
   - utilities
