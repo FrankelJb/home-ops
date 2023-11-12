@@ -32,7 +32,8 @@ spec:
             image:
               repository: quay.io/invidious/invidious
               tag: latest@sha256:ee8c1c07775d8ad13ee215eba067b94f368db9a66b3c0aa8fd0d53f67169645b
-    enableServiceLinks: false
+    defaultPodOptions:
+      enableServiceLinks: false
     ingress:
       main:
         className: nginx
