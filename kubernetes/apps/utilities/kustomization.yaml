@@ -8,7 +8,6 @@ resources:
   - homepage
   - kube-prometheus-stack
   - loki
-  - mailrise
   - reloader
   - renovate
   - pgadmin
