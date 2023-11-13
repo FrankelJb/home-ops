@@ -47,6 +47,7 @@ spec:
     ingress:
       main:
         className: nginx
+        enabled: true
         hosts:
           - host: &host whoogle.${ROOT_DOMAIN}
             paths:
