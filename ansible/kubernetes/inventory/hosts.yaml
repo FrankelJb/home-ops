@@ -6,5 +6,5 @@ kubernetes:
   children:
     master:
       hosts:
-        uranium:
-          ansible_host: 192.168.122.117
+        hydrogen:
+          ansible_host: 192.168.2.5

@@ -1,69 +1,71 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: immich-typesense
   namespace: cloud
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 3
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 3
+  interval: 15m
+  maxHistory: 3
+  uninstall:
+    keepHistory: false
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     controller:
       type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: docker.io/typesense/typesense
-      tag: 0.25.1@sha256:035ccfbc3fd8fb9085ea205fdcb62de63eaefdbebd710e88e57f978a30f2090d
-    envFrom:
-      - secretRef:
-          name: immich-secret
-      - configMapRef:
-          name: immich-configmap
-    service:
+    controllers:
       main:
-        ports:
-          http:
-            port: &port 8108
-    probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness: *probes
-      startup:
-        enabled: false
+        annotations:
+          reloader.stakater.com/auto: 'true'
+        containers:
+          main:
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-configmap
+            image:
+              repository: docker.io/typesense/typesense
+              tag: 0.25.1@sha256:035ccfbc3fd8fb9085ea205fdcb62de63eaefdbebd710e88e57f978a30f2090d
+            probes:
+              liveness: &probes
+                custom: true
+                enabled: true
+                spec:
+                  failureThreshold: 3
+                  httpGet:
+                    path: /health
+                    port: 8108
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 100m
+                memory: 250Mi
     persistence:
       config:
         enabled: true
         existingClaim: immich-typesense-pvc
-        mountPath: /config
-    resources:
-      requests:
-        cpu: 100m
-        memory: 250Mi
+    service:
+      main:
+        ports:
+          http:
+            port: 8108

@@ -2,13 +2,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - gitea
+  - ./namespace.yaml
   - goldilocks
   - grafana
   - homepage
   - kube-prometheus-stack
   - loki
-  - mailrise
   - reloader
   - renovate
   - pgadmin

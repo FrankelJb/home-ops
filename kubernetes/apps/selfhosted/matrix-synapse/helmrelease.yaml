@@ -45,17 +45,20 @@ spec:
       repository: ghcr.io/matrix-org/synapse
       tag: v1.95.1@sha256:9b6d64057cf0be41370c87523fd9dc9a0b744389aa67cb0462eca4ef34e0c5ec
     ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: &host "matrix.${ROOT_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
+      className: nginx
+      hosts:
+        - &host "matrix.${ROOT_DOMAIN}"
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: matrix-synapse
+              port:
+                number: 8008
+      tls:
+        - hosts:
+            - *host
     persistence:
       enabled: true
       existingClaim: matrix-synapse-pvc

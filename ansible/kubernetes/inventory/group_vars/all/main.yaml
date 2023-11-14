@@ -4,7 +4,7 @@ k3s_release_version: "v1.27.3+k3s1"
 k3s_etcd_datastore: false
 k3s_install_hard_links: true
 k3s_become: true
-k3s_registration_address: 192.168.122.243
+k3s_registration_address: 192.168.2.5
 # /var/lib/rancher/k3s/server/manifests
 k3s_server_manifests_urls:
   # Kube-vip RBAC

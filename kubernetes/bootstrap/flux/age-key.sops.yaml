@@ -5,7 +5,7 @@ metadata:
     name: sops-age
     namespace: flux-system
 stringData:
-    age.agekey: ENC[AES256_GCM,data:jMtBuVFOjkhwT5pxuqVXtLPxkAgy1BgOjaFfVLDNCquFJwgQV3ifgPHX0sW82GnARCWrUXvgbK8R+6fxk8tPuHY0P5fS4LpmhoQelGQkntCi56tBNHfnffB+DasfPn3KQpqFYiTwvwOw7hIVhX5Rzm7hvh5+HXUMpuuer9Ye10tKvpcYfzVoNk8gg6uwyuIyLGjz+uA5g7rG9GTd4rnpdQjQxuBn4YYxhLw69V2v3s98uuhmlzfauXhnqUc=,iv:/nVdqU7fzNpSHSRtHsdk0OksB+JJrKPtmPhktyxLEpM=,tag:lCITkBF90ITKPCysxOlaPQ==,type:str]
+    age.agekey: ENC[AES256_GCM,data:l34JTu9YiBH6AQDoQdmnxt8PtomVTWa1KvMUNIfchDqc19d5H+Jee4VdaZ8hkMihZKsqDw97bnnH1EyF5babgicShjH2o9K07sM=,iv:mmtiBOD7WXTDiaUiSBf9C/fl5XMQhKMIqQ5gfAk7kXo=,tag:r11cCp0FU6pHjg/xQYbZKA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -30,8 +30,8 @@ sops:
             WTh6TlNwM0E2WDNGSUhvYVpzdC96c2sKrX/K00VcsqKFyjzORdz+Ws/oD0sOfQkm
             Rlqg4mzC4j121A4W6hASGQHv4J9YtOYkys7CYMSAKvzSszSAkGDDPw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-07-20T03:44:53Z"
-    mac: ENC[AES256_GCM,data:YcnqjVK2MkuZnQbtIhuRubNX2tKCLkKj5VBFSKrP+r3GVCBrbjIRro4mhDgZvdTgapgAn9WGteG3OeYHqNvukAnnYmnbbKOqp4HQxArBHiQaJZfNkVwQ1uiBmRhepqh0l/rztd8TR/G0ycZLTMqe0JmKP2OBesNVqRi98RhRW68=,iv:cuQDEEq1LYZ5eG3QCE1WYl4kbbHwL9YqYsoXTZmmcpg=,tag:lIJ7BcKWDCRmKMZosP7iqA==,type:str]
+    lastmodified: "2023-11-11T11:42:07Z"
+    mac: ENC[AES256_GCM,data:FP9FZzdexBrIepG6SxevyLQ57ko+OSf5fCaOyiAFmGyzwSrhPDRxQjIGdasedsE29LlRmXJSMQ9iNHKQc4XpgmeOC9TsevC3kt2W2i32cPjZB5Ii5KAhdlV9HudB6J+WLj7f4NUm8QK7mIfwPrWzWPwFsEMOT/QmGhbg1Zzfc/s=,iv:8zFtnXC5q9FLMvJhp3hQpVZUL49d3greZ0gfr4JCjU0=,tag:c4VKVsU/yUQzIVnSibNYKg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
-    version: 3.7.3
+    version: 3.8.1

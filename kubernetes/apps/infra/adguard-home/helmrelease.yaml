@@ -1,88 +1,94 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: adguard-home
   namespace: infra
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    initContainers:
-      #   # -- Configures an initContainer that copies the configmap to the AdGuardHome conf directory
-      #   # It does NOT overwrite when the file already exists.
-      #   # @default -- See values.yaml
-      copy-configmap:
-        image: busybox
-        imagePullPolicy: IfNotPresent
-        command:
-          - "sh"
-          - "-c"
-          - |
-            if [ ! -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
-              mkdir -p /opt/adguardhome/conf
-              cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
-            fi
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-          - name: tmp
-            mountPath: /tmp/AdGuardHome.yaml
-            subPath: AdGuardHome.yaml
-          - name: config
-            mountPath: /opt/adguardhome/conf
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: adguard/adguardhome
+              tag: v0.107.41
+        initContainers:
+          copy-configmap:
+            command:
+              - sh
+              - -c
+              - |
+                if [ ! -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
+                  mkdir -p /opt/adguardhome/conf
+                  cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+                fi
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            securityContext:
+              runAsUser: 0
+            volumeMounts:
+              - globalPaths:
+              - path: /tmp/AdGuardHome.yaml
+                name: tmp
+                subPath: AdGuardHome.yaml
+              - globalPaths:
+              - path: /opt/adguardhome/conf
+                name: config
     ingress:
       main:
+        className: nginx
         enabled: true
         hosts:
-          - host: &host adguard.${ROOT_DOMAIN}
+          - host: adguard.${ROOT_DOMAIN}
             paths:
-              - pathType: Prefix
-                path: /
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
-              - *host
-    image:
-      repository: adguard/adguardhome
-      tag: v0.107.40
+              - adguard.${ROOT_DOMAIN}
     persistence:
-      tmp:
-        enabled: true
-        mountPath: /tmp/AdGuardHome.yaml
-        name: adguard-home-config
-        subPath: AdGuardHome.yaml
-        type: configMap
       config:
         enabled: true
-        mountPath: /opt/adguardhome/conf
+        globalMounts:
+          - path: /opt/adguardhome/conf
         type: emptyDir
       data:
         accessMode: ReadWriteOnce
         enabled: true
-        mountPath: /opt/adguardhome/work
+        globalMounts:
+          - path: /opt/adguardhome/work
         size: 100Mi
         storageClass: local-hostpath
+      tmp:
+        enabled: true
+        globalMounts:
+          - path: /tmp/AdGuardHome.yaml
+            subPath: AdGuardHome.yaml
+        name: adguard-home-config
+        type: configMap
     service:
-      main:
-        ports:
-          http:
-            port: 3000
       dns-tcp:
+        controller: main
         enabled: true
         ports:
           dns-tcp:
@@ -91,6 +97,7 @@ spec:
             protocol: TCP
             targetPort: 53
       dns-udp:
+        controller: main
         enabled: true
         ports:
           dns-udp:
@@ -98,3 +105,7 @@ spec:
             port: 53
             protocol: UDP
             targetPort: 53
+      main:
+        ports:
+          http:
+            port: 3000

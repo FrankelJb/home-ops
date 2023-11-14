@@ -1,70 +1,76 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app onlyview
+  name: onlyview
   namespace: cloud
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
-
   values:
-    envFrom:
-      - secretRef:
-          name: *app
-    image:
-      repository: viktorstrate/photoview
-      tag: 2.3.13
+    controllers:
+      main:
+        containers:
+          main:
+            envFrom:
+              - secretRef:
+                  name: onlyview
+            image:
+              repository: viktorstrate/photoview
+              tag: 2.3.13
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
         annotations:
-          whitelist-source-range.home.arpa/disabled: "true"
-          external-dns.home.arpa/enabled: "true"
           external-dns.alpha.kubernetes.io/target: ${ROOT_DOMAIN}
+          external-dns.home.arpa/enabled: 'true'
+          whitelist-source-range.home.arpa/disabled: 'true'
+        className: nginx
+        enabled: true
         hosts:
           - host: &host onlyview.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
+    persistence:
+      cache:
+        enabled: true
+        globalMounts:
+          - path: /app/cache
+        path: ${LOCAL_PATH}/onlyview-cache-pvc
+        server: ${NFS_HOST}
+        type: nfs
+      photos:
+        enabled: true
+        readOnly: true
+        server: ${NFS_HOST}
+        type: nfs
     service:
       main:
         ports:
           http:
             port: 80
-    persistence:
-      originals:
-        enabled: true
-        mountPath: /photos
-        readOnly: true
-        server: ${NFS_HOST}
-        type: nfs
-      cache:
-        enabled: true
-        mountPath: /app/cache
-        existingClaim: onlyview-cache-pvc
-
   valuesFrom:
     - kind: Secret
-      name: *app
+      name: onlyview
+      targetPath: persistence.photos.path
       valuesKey: ORIGINALS_PATH
-      targetPath: persistence.originals.path

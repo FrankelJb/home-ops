@@ -1,44 +1,49 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: openspeedtest
   namespace: selfhosted
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    image:
-      repository: openspeedtest/latest
-      tag: v2.0.4@sha256:60c1203c5edbec07b293d600203c148160623972fcb2a1fb8ed5e30ee9f8ea8b
-
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: openspeedtest/latest
+              tag: v2.0.4@sha256:60c1203c5edbec07b293d600203c148160623972fcb2a1fb8ed5e30ee9f8ea8b
     ingress:
       main:
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 10240m
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
-        enabled: true
+          nginx.ingress.kubernetes.io/ssl-redirect: 'true'
         className: nginx
+        enabled: true
         hosts:
-          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${ROOT_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host

@@ -1,49 +1,57 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: jellyfin
   namespace: media
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    image:
-      repository: ghcr.io/onedr0p/jellyfin
-      tag: 10.8.11@sha256:926e2a9f6677a0c7b12feba29f36c954154869318d6a52df72f72ff9c74cf494
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/jellyfin
+              tag: 10.8.11@sha256:926e2a9f6677a0c7b12feba29f36c954154869318d6a52df72f72ff9c74cf494
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
           - host: &host jellyfin.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-    service:
-      main:
-        ports:
-          http:
-            port: 8096
     persistence:
+      audio:
+        enabled: true
+        globalMounts:
+          - path: /mnt/audio
+        path: ${NFS_PATH}/navidrome/media
+        server: ${NFS_HOST}
+        type: nfs
       config:
         enabled: true
         path: ${NFS_PATH}/jellyfin/config
@@ -51,20 +59,21 @@ spec:
         type: nfs
       media:
         enabled: true
-        mountPath: /media
-        readOnly: true
+        globalMounts:
+          - path: /media
         path: /mnt/raid/media/qbittorrent/downloads
-        server: ${NFS_HOST}
-        type: nfs
-      audio:
-        enabled: true
-        mountPath: /mnt/audio
-        path: ${NFS_PATH}/navidrome/media
+        readOnly: true
         server: ${NFS_HOST}
         type: nfs
       metube:
         enabled: true
-        mountPath: /mnt/metube
+        globalMounts:
+          - path: /mnt/metube
         path: /mnt/raid/media/metube
         server: ${NFS_HOST}
         type: nfs
+    service:
+      main:
+        ports:
+          http:
+            port: 8096

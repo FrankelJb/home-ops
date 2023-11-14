@@ -37,7 +37,7 @@
         - name: Packages | Install
           ansible.builtin.apt:
             name:
-              apt-transport-https,bat,ca-certificates,conntrack,curl,dirmngr,exa,starship,fd-find,fish,fzf,gdisk,git,
+              apt-transport-https,bat,ca-certificates,conntrack,curl,dirmngr,lsd,fd-find,fish,fzf,gdisk,git,
               gnupg,hdparm,htop,iperf3,iptables,iputils-ping,ipvsadm,
               libseccomp2,lm-sensors,neofetch,net-tools,nfs-common,nvme-cli,open-iscsi,parted,psmisc,python3,
               python3-apt,python3-openshift,python3-kubernetes,python3-yaml,smartmontools,socat,software-properties-common,
@@ -111,10 +111,10 @@
                 abbr --add --global -- ka 'kubectl apply -f'
                 abbr --add --global -- kd 'kubectl delete'
                 abbr --add --global -- ke 'kubectl exec -it'
-                abbr --add --global -- l 'exa'
+                abbr --add --global -- l 'lsd'
                 abbr --add --global -- less 'batcat'
-                abbr --add --global -- lll 'exa -la'
-                abbr --add --global -- ls 'exa'
+                abbr --add --global -- lll 'lsd -la'
+                abbr --add --global -- ls 'lsd'
                 abbr --add --global -- pip 'pip3'
               end
 
@@ -149,10 +149,10 @@
             line: ManageForeignRoutes=no
         - name: Network Configuration | Set NIC
           ansible.builtin.copy:
-            dest: /etc/network/interfaces.d/enp7s0
+            dest: /etc/network/interfaces.d/enp4s0
             content: |
-              auto enp7s0
-              allow-hotplug enp7s0
+              auto enp4s0
+              allow-hotplug enp4s0
               iface enp7s0 inet dhcp
                   post-up ifconfig enp7s0 mtu 9000
             owner: root

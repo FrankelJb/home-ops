@@ -1,52 +1,53 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: navidrome
   namespace: media
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    env:
-      TZ: ${TIMEZONE}
-      ND_DATAFOLDER: /config
-      ND_MUSICFOLDER: /music
-    image:
-      repository: ghcr.io/navidrome/navidrome
-      tag: 0.49.3@sha256:11a24da08977ebfa4a9a71f8c878d822ffaae74a019f274a75dc6386d523da86
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              ND_DATAFOLDER: /config
+              ND_MUSICFOLDER: /music
+              TZ: ${TIMEZONE}
+            image:
+              repository: ghcr.io/navidrome/navidrome
+              tag: 0.49.3@sha256:11a24da08977ebfa4a9a71f8c878d822ffaae74a019f274a75dc6386d523da86
     ingress:
       main:
+        className: nginx
         enabled: true
-        ingressClassName: nginx
         hosts:
           - host: &host navidrome.${ROOT_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-    service:
-      main:
-        ports:
-          http:
-            port: 4533
     persistence:
       config:
         enabled: true
@@ -58,3 +59,8 @@ spec:
         path: ${NFS_PATH}/navidrome/media
         server: ${NFS_HOST}
         type: nfs
+    service:
+      main:
+        ports:
+          http:
+            port: 4533

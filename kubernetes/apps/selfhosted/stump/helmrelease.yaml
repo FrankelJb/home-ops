@@ -1,54 +1,60 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: stump
   namespace: selfhosted
 spec:
-  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 15m
+      version: 2.2.0
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    env:
-      PUID: 1000
-      PGID: 1000
-      STUMP_PORT: 10801
-    image:
-      repository: aaronleopold/stump
-      tag: nightly@sha256:5eba505a29b9ca1a389112dea6984b00b23b5e150f30acecd96235641adcf9b6
-      pullPolicy: IfNotPresent
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              PGID: 1000
+              PUID: 1000
+              STUMP_PORT: 10801
+            image:
+              pullPolicy: IfNotPresent
+              repository: aaronleopold/stump
+              tag: nightly@sha256:018a963ef0becff42689cc51a9c7c68689a4372dcad342e9966eafe0929c0ec5
+    ingress:
+      main:
+        className: nginx
+        enabled: true
+        hosts:
+          - host: &host stump.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
     persistence:
       data:
         enabled: true
         path: /mnt/raid/media/books
         server: ${NFS_HOST}
         type: nfs
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: &host stump.${ROOT_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
     service:
       main:
         ports:

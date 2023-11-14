@@ -23,7 +23,6 @@ spec:
     remediation:
       retries: 5
   values:
-    installCRDs: true
     webhook:
       enabled: true
     extraArgs:

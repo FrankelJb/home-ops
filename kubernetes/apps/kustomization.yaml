@@ -11,5 +11,6 @@ resources:
   - kubernetes-dashboard
   - kyverno
   - media
+  - networking
   - selfhosted
   - utilities
