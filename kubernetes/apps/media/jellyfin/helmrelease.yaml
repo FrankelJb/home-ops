@@ -22,10 +22,10 @@ spec:
     remediation:
       retries: 5
   values:
-    runtimeClassName: nvidia
     controllers:
       main:
         pod:
+          runtimeClassName: nvidia
           securityContext:
             runAsUser: 568
             runAsGroup: 568
