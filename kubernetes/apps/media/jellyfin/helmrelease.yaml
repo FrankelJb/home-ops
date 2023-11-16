@@ -22,6 +22,7 @@ spec:
     remediation:
       retries: 5
   values:
+    runtimeClassName: nvidia
     controllers:
       main:
         containers:
@@ -72,6 +73,17 @@ spec:
         path: /mnt/raid/media/metube
         server: ${NFS_HOST}
         type: nfs
+      transcode:
+        enabled: true
+        type: emptyDir
+    resources:
+      requests:
+        nvidia.com/gpu: 1
+        cpu: 100m
+        memory: 1000Mi
+      limits:
+        nvidia.com/gpu: 1
+        memory: 6000Mi
     service:
       main:
         ports:
