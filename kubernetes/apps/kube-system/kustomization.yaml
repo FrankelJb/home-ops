@@ -7,3 +7,4 @@ resources:
   - csi-driver-nfs
   - democratic-csi-local-hostpath
   - metrics-server
+  - nvidia-device-plugin
