@@ -46,7 +46,8 @@ spec:
       library:
         enabled: true
         existingClaim: immich-pvc
-        mountPath: /usr/src/app/upload
+        globalMount:
+          - path: /usr/src/app/upload
     service:
       main:
         enabled: false
