@@ -35,6 +35,11 @@ spec:
               - 65539
         containers:
           main:
+            env:
+               - name: NVIDIA_VISIBLE_DEVICES
+                 value: all
+               - name: NVIDIA_DRIVER_CAPABILITIES
+                 value: all
             image:
               repository: ghcr.io/onedr0p/jellyfin
               tag: 10.8.11@sha256:926e2a9f6677a0c7b12feba29f36c954154869318d6a52df72f72ff9c74cf494
