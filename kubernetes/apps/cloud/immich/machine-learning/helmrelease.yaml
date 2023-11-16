@@ -52,7 +52,7 @@ spec:
         enabled: true
         existingClaim: immich-pvc
         globalMounts:
-          path: /usr/src/app/upload
+          - path: /usr/src/app/upload
     service:
       main:
         ports:
