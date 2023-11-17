@@ -24,8 +24,22 @@ spec:
   values:
     controllers:
       main:
+        pod:
+          runtimeClassName: nvidia
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 65539
         containers:
           main:
+            env:
+               - name: NVIDIA_VISIBLE_DEVICES
+                 value: all
+               - name: NVIDIA_DRIVER_CAPABILITIES
+                 value: all
             image:
               repository: ghcr.io/onedr0p/jellyfin
               tag: 10.8.11@sha256:926e2a9f6677a0c7b12feba29f36c954154869318d6a52df72f72ff9c74cf494
@@ -72,6 +86,17 @@ spec:
         path: /mnt/raid/media/metube
         server: ${NFS_HOST}
         type: nfs
+      transcode:
+        enabled: true
+        type: emptyDir
+    resources:
+      requests:
+        nvidia.com/gpu: 1
+        cpu: 100m
+        memory: 1000Mi
+      limits:
+        nvidia.com/gpu: 1
+        memory: 6000Mi
     service:
       main:
         ports:
