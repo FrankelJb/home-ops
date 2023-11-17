@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: nextcloud
         namespace: flux-system
-      version: 3.5.22
+      version: 4.5.0
   install:
     createNamespace: true
     remediation:
@@ -83,8 +83,6 @@ spec:
     lifecycle:
       postStart:
         exec: 'command: ["/bin/bash", "-c", "apt update -y && apt install ffmpeg -y"]'
-    livenessProbe:
-      enabled: false
     nextcloud:
       configs:
         auth.config.php: |
@@ -175,8 +173,6 @@ spec:
     persistence:
       enabled: true
       existingClaim: nextcloud-pvc
-    readinessProbe:
-      enabled: false
     replicaCount: 1
     resources:
       limits:
@@ -185,11 +181,3 @@ spec:
       requests:
         cpu: 1000m
         memory: 4Gi
-    # this seems to be required for nextcloud initialization which takes a long time
-    startupProbe:
-      enabled: false
-      failureThreshold: 30
-      initialDelaySeconds: 30
-      periodSeconds: 10
-      successThreshold: 1
-      timeoutSeconds: 5
