@@ -33,8 +33,8 @@ spec:
       schedule: "*/5 * * * *"
       successfulJobsHistoryLimit: 2
     image:
-      repository: nextcloud
-      tag: 27.1.3@sha256:78ce7968ed3dddfa35dc0150f4c1a096278dd17f2fae16ba146b54973f70b070
+      repository: lscr.io/linuxserver/nextcloud
+      tag: 27.1.3@sha256:0bb22f72671497014a7989ce4c0049bc12d785b718df9415d95549a551c08a9a
     internalDatabase:
       enabled: false
     externalDatabase:
