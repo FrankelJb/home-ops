@@ -170,9 +170,10 @@ spec:
           persistentVolumeClaim:
             claimName: nextcloud-previews-pvc
       host: nextcloud.${ROOT_DOMAIN}
-    persistence:
-      enabled: true
-      existingClaim: nextcloud-pvc
+    primary:
+      persistence:
+        enabled: true
+        existingClaim: nextcloud-pvc
     replicaCount: 1
     resources:
       limits:
