@@ -81,8 +81,7 @@ spec:
     internalDatabase:
       enabled: false
     lifecycle:
-      postStart:
-        exec: 'command: ["/bin/bash", "-c", "apt update -y && apt install ffmpeg -y"]'
+      postStartCommand: ["/bin/bash", "-c", "apt update -y && apt install ffmpeg -y"]
     nextcloud:
       configs:
         auth.config.php: |
