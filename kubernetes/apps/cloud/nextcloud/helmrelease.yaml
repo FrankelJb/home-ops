@@ -5,25 +5,24 @@ metadata:
   name: nextcloud
   namespace: cloud
 spec:
-  interval: 15m
   chart:
     spec:
       chart: nextcloud
-      version: 3.5.22
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: nextcloud
         namespace: flux-system
-      interval: 15m
+      version: 3.5.22
   install:
     createNamespace: true
     remediation:
       retries: 5
+  interval: 15m
   upgrade:
     remediation:
       retries: 5
   values:
-    replicaCount: 1
     cronjob:
       annotations: {}
       curlInsecure: false
@@ -32,44 +31,62 @@ spec:
       image: {}
       schedule: "*/5 * * * *"
       successfulJobsHistoryLimit: 2
-    image:
-      repository: lscr.io/linuxserver/nextcloud
-      tag: 27.1.3@sha256:0bb22f72671497014a7989ce4c0049bc12d785b718df9415d95549a551c08a9a
-    internalDatabase:
-      enabled: false
     externalDatabase:
       enabled: true
-      host: ${POSTGRESQL_HOST}
-      type: postgresql
       existingSecret:
         enabled: true
+        passwordKey: DB_PASS
         secretName: nextcloud-secret
         usernameKey: DB_USER
-        passwordKey: DB_PASS
-
+      host: ${POSTGRESQL_HOST}
+      type: postgresql
+    image:
+      repository: nextcloud
+      tag: 27.1.3@sha256:78ce7968ed3dddfa35dc0150f4c1a096278dd17f2fae16ba146b54973f70b070
+    ingress:
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+        nginx.ingress.kubernetes.io/proxy-buffering: "off"
+        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/server-snippet: |-
+          server_tokens off;
+          proxy_hide_header X-Powered-By;
+          rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+          location = /.well-known/carddav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /.well-known/caldav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /robots.txt {
+            allow all;
+            log_not_found off;
+            access_log off;
+          }
+          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+            deny all;
+          }
+          location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+            deny all;
+          }
+      className: nginx
+      enabled: true
+      path: /
+      pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+    internalDatabase:
+      enabled: false
+    lifecycle:
+      postStart:
+        exec: 'command: ["/bin/bash", "-c", "apt update -y && apt install ffmpeg -y"]'
+    livenessProbe:
+      enabled: false
     nextcloud:
       configs:
-        previews.config.php: |
-          <?php
-            $CONFIG = array (
-            'preview_max_x' => 512,
-            'preview_max_y' => 512,
-            'enable_previews' => true,
-            'enabledPreviewProviders' =>
-              array (
-                0 => 'OC\\Preview\\TXT',
-                1 => 'OC\\Preview\\Image',
-                2 => 'OC\\Preview\\Movie',
-                3 => 'OC\\Preview\\MP4',
-                4 => 'OC\\Preview\\HEIC',
-              ),
-            'previewgenerator' =>
-              array (
-                'squareSizes' => 256,
-                'widthSizes' => 512,
-                'heightSizes' => 512,
-              ),
-            );
         auth.config.php: |
           <?php
           $CONFIG = array (
@@ -105,20 +122,40 @@ spec:
               'oidc_login_well_known_caching_time' => 86400,
               'oidc_login_update_avatar' => false,
           );
-
+        previews.config.php: |
+          <?php
+            $CONFIG = array (
+            'preview_max_x' => 512,
+            'preview_max_y' => 512,
+            'enable_previews' => true,
+            'enabledPreviewProviders' =>
+              array (
+                0 => 'OC\\Preview\\TXT',
+                1 => 'OC\\Preview\\Image',
+                2 => 'OC\\Preview\\Movie',
+                3 => 'OC\\Preview\\MP4',
+                4 => 'OC\\Preview\\HEIC',
+              ),
+            'previewgenerator' =>
+              array (
+                'squareSizes' => 256,
+                'widthSizes' => 512,
+                'heightSizes' => 512,
+              ),
+            );
       existingSecret:
         enabled: true
+        passwordKey: ADMIN_PASS
         secretName: nextcloud-secret
         usernameKey: ADMIN_USER
-        passwordKey: ADMIN_PASS
       extraEnv:
         - name: OVERWRITEPROTOCOL
           value: https
         - name: OIDC_LOGIN_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
-              name: nextcloud-secret
               key: OIDC_LOGIN_CLIENT_SECRET
+              name: nextcloud-secret
         - name: PHP_MEMORY_LIMIT
           value: 10G
         - name: REDIS_HOST
@@ -127,14 +164,20 @@ spec:
           value: "6379"
         - name: REDIS_HOST_PASSWORD
           value: ${REDIS_PASSWORD}
+      extraVolumeMounts:
+        - mountPath: "/var/www/html/data/appdata_oc16gnntk93o/preview"
+          name: previews
       extraVolumes:
         - name: previews
           persistentVolumeClaim:
             claimName: nextcloud-previews-pvc
-      extraVolumeMounts:
-        - name: previews
-          mountPath: "/var/www/html/data/appdata_oc16gnntk93o/preview"
       host: &host nextcloud.${ROOT_DOMAIN}
+    persistence:
+      enabled: true
+      existingClaim: nextcloud-pvc
+    readinessProbe:
+      enabled: false
+    replicaCount: 1
     resources:
       limits:
         cpu: 4000m
@@ -145,52 +188,8 @@ spec:
     # this seems to be required for nextcloud initialization which takes a long time
     startupProbe:
       enabled: false
+      failureThreshold: 30
       initialDelaySeconds: 30
       periodSeconds: 10
-      timeoutSeconds: 5
-      failureThreshold: 30
       successThreshold: 1
-    livenessProbe:
-      enabled: false
-    readinessProbe:
-      enabled: false
-
-    persistence:
-      enabled: true
-      existingClaim: nextcloud-pvc
-
-    ingress:
-      enabled: true
-      className: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: "10G"
-        nginx.ingress.kubernetes.io/proxy-buffering: "off"
-        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-        nginx.ingress.kubernetes.io/server-snippet: |-
-          server_tokens off;
-          proxy_hide_header X-Powered-By;
-          rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
-          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
-          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
-          location = /.well-known/carddav {
-            return 301 $scheme://$host/remote.php/dav;
-          }
-          location = /.well-known/caldav {
-            return 301 $scheme://$host/remote.php/dav;
-          }
-          location = /robots.txt {
-            allow all;
-            log_not_found off;
-            access_log off;
-          }
-          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
-            deny all;
-          }
-          location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
-            deny all;
-          }
-      tls:
-        - hosts:
-            - *host
-      path: /
-      pathType: Prefix
+      timeoutSeconds: 5
