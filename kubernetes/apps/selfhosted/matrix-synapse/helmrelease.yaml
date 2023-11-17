@@ -43,7 +43,7 @@ spec:
       existingSecretPasswordKey: postgresql-password
     image:
       repository: ghcr.io/matrix-org/synapse
-      tag: v1.96.0@sha256:ab81241214cf9317b092e89fcce77d488b1f1a5b83223ff2e3e1f4dc1453a1a0
+      tag: v1.96.1@sha256:06f22516cb76993572d553a99797b2b61a91f8389a76dc01f04127596b4f8ca8
     ingress:
       className: nginx
       hosts:
