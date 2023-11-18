@@ -55,7 +55,8 @@ spec:
               - *host
     persistence:
       data:
-        mountPath: /app/data
+        globalMounts:
+          path: /app/data
         path: ${NFS_PATH}/uptime-kuma
         server: ${NFS_HOST}
         type: nfs
