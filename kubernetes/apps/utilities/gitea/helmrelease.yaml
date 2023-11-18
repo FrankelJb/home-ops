@@ -44,6 +44,8 @@ spec:
         session:
           PROVIDER: redis
           PROVIDER_CONFIG: "redis://:${REDIS_PASSWORD}@${REDIS_HOST}:6379"
+    image:
+      rootless: true
     ingress:
       enabled: true
       className: nginx
