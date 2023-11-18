@@ -54,6 +54,7 @@ spec:
     postgresql-ha:
       enabled: false
     persistence:
+      create: false
       enabled: true
       claimName: gitea-pvc
     service:
