@@ -40,8 +40,8 @@ spec:
           ROOT_URL: https://gitea.${ROOT_DOMAIN}
           SSH_DOMAIN: &host gitea.${ROOT_DOMAIN}
         session:
-          ADAPTER: redis
-          HOST: "redis://:${REDIS_PASSWORD}@${REDIS_HOST}:6379"
+          PROVIDER: redis
+          PROVIDER_CONFIG: "redis://:${REDIS_PASSWORD}@${REDIS_HOST}:6379"
     ingress:
       enabled: true
       className: nginx
