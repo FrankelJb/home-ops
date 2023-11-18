@@ -37,7 +37,7 @@ spec:
             #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
             image:
               repository: docker.io/louislam/uptime-kuma
-              tag: 1.23.5@sha256:8de159610e1f7a654bdbd522e94833df912e19d6a9c828be16ab7bf4c2b9c533
+              tag: 1.23.4@sha256:ef5678dfc293b8cb351c26860d702db76a321db41ba140d127e8982626df57b2
     ingress:
       main:
         enabled: true
@@ -56,7 +56,7 @@ spec:
     persistence:
       data:
         globalMounts:
-          path: /app/data
+          - path: /app/data
         path: ${NFS_PATH}/uptime-kuma
         server: ${NFS_HOST}
         type: nfs
