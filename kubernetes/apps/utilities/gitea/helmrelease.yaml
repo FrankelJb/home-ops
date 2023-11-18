@@ -35,6 +35,8 @@ spec:
           HOST: ${POSTGRESQL_HOST}
         migrations:
           ALLOWED_DOMAINS: gitea.carbon.${ROOT_DOMAIN}
+        queue:
+          CONN_STR: "redis://:${REDIS_PASSWORD}@${REDIS_HOST}:6379"
         server:
           LANDING_PAGE: login
           ROOT_URL: https://gitea.${ROOT_DOMAIN}
