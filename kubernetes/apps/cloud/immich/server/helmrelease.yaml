@@ -42,6 +42,29 @@ spec:
               requests:
                 cpu: 10m
                 memory: 100Mi
+    ingress:
+      main:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ${ROOT_DOMAIN}
+          external-dns.home.arpa/enabled: 'true'
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            rewrite /api/(.*) /$1 break;            
+          nginx.ingress.kubernetes.io/proxy-body-size: '0'
+          nignx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+          whitelist-source-range.home.arpa/disabled: 'true'
+        className: nginx
+        enabled: true
+        hosts:
+          - host: &host immich.${ROOT_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
     persistence:
       library:
         enabled: true
